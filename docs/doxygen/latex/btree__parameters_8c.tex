@@ -1,0 +1,104 @@
+\hypertarget{btree__parameters_8c}{}\doxysection{btree\+\_\+parameters.\+c File Reference}
+\label{btree__parameters_8c}\index{btree\_parameters.c@{btree\_parameters.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mainter.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maccess.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+Include dependency graph for btree\+\_\+parameters.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{btree__parameters_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{btree__parameters_8c_a33765e3d844a6b07dc5bca09e7994c9c}{File\+Header\+Size}}~(sizeof(long long)$\ast$3 + sizeof(long long))
+\item 
+\#define \mbox{\hyperlink{btree__parameters_8c_a673980384b047dc9dc09d73ac7b1fee9}{Item\+Overhead}}~sizeof(struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}}) -\/ \mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}}
+\item 
+\#define \mbox{\hyperlink{btree__parameters_8c_aad92f803a6cb1bbaeb9dac33ba1b433a}{Page\+Overhead}}~(sizeof(int)+sizeof(long long))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{btree__parameters_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+void \mbox{\hyperlink{btree__parameters_8c_ae8a889a041ffc7e25e1787054ee90c0d}{Calculate\+Height}} (double Pg\+Size, double Max\+Recs)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{btree__parameters_8c_aa1209bceee002854740a1a4a0beb5084}{Max\+Max\+Height}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{btree__parameters_8c_a33765e3d844a6b07dc5bca09e7994c9c}\label{btree__parameters_8c_a33765e3d844a6b07dc5bca09e7994c9c}} 
+\index{btree\_parameters.c@{btree\_parameters.c}!FileHeaderSize@{FileHeaderSize}}
+\index{FileHeaderSize@{FileHeaderSize}!btree\_parameters.c@{btree\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{FileHeaderSize}{FileHeaderSize}}
+{\footnotesize\ttfamily \#define File\+Header\+Size~(sizeof(long long)$\ast$3 + sizeof(long long))}
+
+
+
+Definition at line 26 of file btree\+\_\+parameters.\+c.
+
+\mbox{\Hypertarget{btree__parameters_8c_a673980384b047dc9dc09d73ac7b1fee9}\label{btree__parameters_8c_a673980384b047dc9dc09d73ac7b1fee9}} 
+\index{btree\_parameters.c@{btree\_parameters.c}!ItemOverhead@{ItemOverhead}}
+\index{ItemOverhead@{ItemOverhead}!btree\_parameters.c@{btree\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{ItemOverhead}{ItemOverhead}}
+{\footnotesize\ttfamily \#define Item\+Overhead~sizeof(struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}}) -\/ \mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}}}
+
+
+
+Definition at line 27 of file btree\+\_\+parameters.\+c.
+
+\mbox{\Hypertarget{btree__parameters_8c_aad92f803a6cb1bbaeb9dac33ba1b433a}\label{btree__parameters_8c_aad92f803a6cb1bbaeb9dac33ba1b433a}} 
+\index{btree\_parameters.c@{btree\_parameters.c}!PageOverhead@{PageOverhead}}
+\index{PageOverhead@{PageOverhead}!btree\_parameters.c@{btree\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{PageOverhead}{PageOverhead}}
+{\footnotesize\ttfamily \#define Page\+Overhead~(sizeof(int)+sizeof(long long))}
+
+
+
+Definition at line 28 of file btree\+\_\+parameters.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{btree__parameters_8c_ae8a889a041ffc7e25e1787054ee90c0d}\label{btree__parameters_8c_ae8a889a041ffc7e25e1787054ee90c0d}} 
+\index{btree\_parameters.c@{btree\_parameters.c}!CalculateHeight@{CalculateHeight}}
+\index{CalculateHeight@{CalculateHeight}!btree\_parameters.c@{btree\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{CalculateHeight()}{CalculateHeight()}}
+{\footnotesize\ttfamily void Calculate\+Height (\begin{DoxyParamCaption}\item[{double}]{Pg\+Size,  }\item[{double}]{Max\+Recs }\end{DoxyParamCaption})}
+
+
+
+Definition at line 122 of file btree\+\_\+parameters.\+c.
+
+\mbox{\Hypertarget{btree__parameters_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{btree__parameters_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{btree\_parameters.c@{btree\_parameters.c}!main@{main}}
+\index{main@{main}!btree\_parameters.c@{btree\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 31 of file btree\+\_\+parameters.\+c.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{btree__parameters_8c_aa1209bceee002854740a1a4a0beb5084}\label{btree__parameters_8c_aa1209bceee002854740a1a4a0beb5084}} 
+\index{btree\_parameters.c@{btree\_parameters.c}!MaxMaxHeight@{MaxMaxHeight}}
+\index{MaxMaxHeight@{MaxMaxHeight}!btree\_parameters.c@{btree\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{MaxMaxHeight}{MaxMaxHeight}}
+{\footnotesize\ttfamily int Max\+Max\+Height}
+
+
+
+Definition at line 17 of file btree\+\_\+parameters.\+c.
+

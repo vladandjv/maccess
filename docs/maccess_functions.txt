@@ -1,0 +1,953 @@
+****************************************************************************
+* PROGRAM: MACCESS_FUNCTIONS.txt                                           *
+* DESCRIPTION: Explanation for using Maccess funcitons.                    *
+* AUTHOR: VLADAN DJORDJEVIC                                                 *
+****************************************************************************
+
+
+
+MACCESS FUNCTIONS (in alphabetical order)
+
+____________________________________________________________________________
+____________________________________________________________________________
+
+AddKey
+____________________________________________________________________________
+
+ 
+void AddKey(IdxF,IdxE,DataRecNum,ProcKey)
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+long int *DataRecNum;
+void *ProcKey;
+   
+
+Parameters  
+
+IdxF and IdxE: index file to which key is to be added.
+DataRecNum: data record number to be associated with the key.
+ProcKey: key string.
+
+Function    
+
+AddKey adds a key string to an index file. DataRecNum is usually
+a data file record number returned by AddRec. On exit, the OKAY flag
+is set to T if the key string was added successfully. OKAY returns
+F if you try to add a duplicate key when such keys are not allowed
+(that is, when S parameter in the call to OpenIndex or MakeIndex is 0). 
+
+Restrictions
+
+Since ProcKey is an untyped parameter, you can pass string variables 
+of any string type to AddKey. It is, however, up to you to ensure that 
+the parameter is the correct string type; constants and string expressions 
+are not allowed. If the ProcKey is longer than the maximum key lenght for
+IdxF, it will be truncated to the maximum lenght.
+
+____________________________________________________________________________
+
+AddRec
+____________________________________________________________________________
+
+ 
+void AddRec(DatF,DatE,R,Buffer)                            
+
+struct DataFile *DatF;
+struct DataExt *DatE;
+long int *R;
+void *Buffer;
+   
+
+Parameters  
+
+DatF and DatE: data file variables to which a record is added.
+R: data record number.
+Buffer: variable containing the data record to be added.
+
+Function    
+
+AddRec adds a new record to a Maccess data file. This function returns
+the data record number of the newly allocated data record using the variable
+parameter R. R should be passed to the AddKey function when you enter a key
+value for the data record.
+
+Remarks
+
+Since Buffer is an untyped parameter, AddRec will accept any variable in its
+place. It is up to you to make sure that the variable passed is of the proper
+type.
+
+AddRec does not return the OKAY status variable. It returnes only if the data 
+record is added successfully. If an I/O error occurs, TAIOCheck will gain
+control and terminate the program.
+
+If any previously deleted records are available, they are automatically     
+reused before the disk file is expanded.
+____________________________________________________________________________
+
+ClearKey
+____________________________________________________________________________
+
+ 
+void ClearKey(IdxE)                                          
+
+struct IndexExt *IdxE;
+   
+
+Parameters  
+
+IdxF: index file that is prepared for sequentil processing starting at the
+      begining or end.
+
+Function    
+
+ClearKey sets the index file pointer to the beginning or end of IdxF.
+
+Remarks
+
+Following a call to ClearKey, a call to NextKey will return the first entry
+in the index file, and a call to PrevKey will return the last entry in the
+index file.
+
+When Maccess index files are processed sequentialy, a circular pattern is 
+followed. When the index file pointer is at the end of the sequence, a
+request to read the next entry will return the first entry in the file.
+Likewise, ehen the index file pointer is at the beginning of the sequnce,
+a request to read the preceding entry will return the last entry in the file.
+____________________________________________________________________________
+
+CloseFile
+____________________________________________________________________________
+
+ 
+void CloseFile(DatF,DatE)                                   
+
+struct DataFile *DatF;
+struct DataExt *DatE;
+
+
+Parameters  
+
+DatF and DatE: data file to be closed.
+
+Function    
+
+CloseFile closes a data file.
+
+Remarks
+
+If you make any changes to a data file, always call CloseFile for that file
+before terminating your program. Failure to do so may cause data to be lost.
+
+It is good practice to close the file even if it has not been modified.
+____________________________________________________________________________
+
+CloseIndex
+____________________________________________________________________________
+
+ 
+void CloseIndex(IdxF,IdxE)
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+
+
+Parameters  
+
+IdxF and IdxE: index file to be closed.
+
+Function    
+
+CloseIndex closes a index file.
+
+Remarks
+
+If you make any changes to an index file, always call CloseIndex for that file
+before terminating your program. Failure to do so may cause data to be lost
+or may corrupt the index file structure.
+
+It is good practice to close the file even if it has not been modified.
+____________________________________________________________________________
+
+DB_Lock_Close
+____________________________________________________________________________
+
+ 
+void DB_Lock_Close (retrna)
+
+long long *retrna;
+
+
+Parameters  
+
+retrna: The address from which the shared memory segment starts.
+
+Function    
+
+Detach from the shared memory segment which locking system use.
+
+Remarks
+
+The SHM_Lock and SHM_UnLock functions cannot be used any more after this
+function is applied.
+____________________________________________________________________________
+
+DB_Lock_Init
+____________________________________________________________________________
+
+ 
+long long * DB_Lock_Init (shm_mem_code, shm_mem_size)
+
+key_t shm_mem_code; 
+size_t shm_mem_size;
+
+
+Parameters  
+
+shm_mem_code: The shared memory segment code. 
+shm_mem_size: The shared memory segment size.
+
+Function    
+
+If a shared memory segment for locking does not exsist this funciton 
+creats it.  If the shared memory for locking already exsists, then attach 
+to it.
+
+Remarks
+
+Must be applied before SHM_Lock and SMH_UnLock are used, otherwise
+Segmentation fault.
+
+Although it is not mandatory, the good practice is to apply it at the
+beginning and before InitAccess.
+____________________________________________________________________________
+
+DeleteKey
+____________________________________________________________________________
+
+ 
+void DeleteKey(IdxF,IdxE,DataRecNum,ProcKey)
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+long int *DataRecNum;
+void *ProcKey;
+
+
+Parameters  
+
+IdxF and IdxE: index file the key is removed from.
+DataRecNum: data record number associated with the key to be deleted.
+ProcKey: key to be deleted.
+
+Function    
+
+DeleteKey removes a key form a Maccess index file. On exit, OKAY is set to T
+if the key was removed successfully. OKAY returns F if the key was not found.
+If duplicate keys are allowed, OKAY will be F if a matching data record 
+number was not found, even though the key string existed.
+
+Remarks
+
+If duplicate keys are not allowed in the index file, DataRecNum need not be
+initialized. If duplicate keys are allowed, however, DeleteKey needs the data
+record to distinguish the keys form each other. To determine the data record
+number, you may, for example, use SearchKey in conjuction with NexKey and 
+PrevKey. DataRecNum always returns the data record Number of the deleted
+key.
+
+Restrictions 
+
+The ProcKey parameter must be a string variable. If it is longer than the
+maximum key lenght for IdxF, ti will be truncated to the maximum lenght.
+____________________________________________________________________________
+
+DeleteRec
+____________________________________________________________________________
+
+ 
+void DeleteRec(DatF,DatE,R)
+
+struct DataFile *DatF;
+struct DataExt *DatE;
+long int R;
+
+
+Parameters  
+
+DatF and DatE: data file the record will be deleted from
+R: data record number.
+
+Function    
+
+DeleteRec removes a data record from a Maccess data file.
+
+Remarks
+
+The record number, R, should be obtained from one of the following functions:
+DeleteKey, NextKey, PrevKey, SearchKey, or FindKey.
+
+The record is entered into the deleted data record list, so it may be reused
+by AddRec before the data file is expanded.
+
+Warning!
+
+Do not attempt to delete an already deleted record, or you may corrupt the 
+linked list of deleted records.
+____________________________________________________________________________
+
+Destroy_SHM
+____________________________________________________________________________
+
+ 
+int Destroy_SHM (key_t shm_mem_code, size_t shm_mem_size)
+
+
+key_t shm_mem_code; 
+size_t shm_mem_size;
+
+
+Parameters  
+
+shm_mem_code: The shared memory segment code. 
+shm_mem_size: The shared memory segment size.
+
+Function    
+
+Delete a shared memory segment which locking system use.
+
+Remarks
+
+None.
+____________________________________________________________________________
+
+EraSM
+____________________________________________________________________________
+
+ 
+void EraSM(shmid)
+
+int shmid;
+
+
+Parameters  
+
+shmid: operating system indentifier of shared memory segment.
+
+Function    
+
+EraSM deletes shared memory segment.
+
+Remarks
+
+Function InitAccess define global variable int MemId[MemNum] which gets the value
+of operating sytem indentifier of shared memory segment (parameter shmid),
+where MemNum is number of shared memory used by process.
+____________________________________________________________________________
+
+FileLen
+____________________________________________________________________________
+
+ 
+long int FileLen(DatF,DatE)
+
+struct DataFile *DatF;
+
+
+Parameters  
+
+DatF and DatE: data file form which the number of records is found.
+
+Function    
+
+FileLen returns the number of data records allocated to the data file given
+by DatF.
+
+Remarks
+
+The lenght returned  by FileLen includes the reserved record a the beginning
+of the file (redord 0), as well as all deleted records that will be 
+reallocated.
+____________________________________________________________________________
+
+FindKey
+____________________________________________________________________________
+
+ 
+void FindKey(IdxF,IdxE,DataRecNum,ProcKey)               
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+long int *DataRecNum;
+void *ProcKey;
+
+
+Parameters  
+
+IdxF and IdxE: index file to be searched.
+DataRecNum: data reference associated with found key.
+ProcKey: key string to searech for.
+
+Function    
+
+FindKey returns the data record number associated with a key.
+
+Remarks
+
+FindKey locates the entry in the index file taht exactly matches the string
+passed as the ProcKey parameter. If the index file contains duplicate keys,
+FindKey always locates the first key.
+
+On exit, OKAY is set to T if a matching key is found. Otherwise, OKAY is
+set to F.
+
+The key field of FindKey is a variable parameter. If you search for a   
+customer named Smith, and the index is not found, the global variable OKAY
+is set to F, and the value of Name is destroyed (it is actually set to the
+value of the last key read form the index file). Always use a scratch 
+variable in your search routine if you don't want it changed.
+
+Restrictions  
+
+The ProcKey parameter must be a string variable. If it is longer than the
+maximum key lenght for IdxF, it will be truncated to the MaxKeyLen.
+____________________________________________________________________________
+
+FlushFile 
+____________________________________________________________________________
+
+ 
+void FlushFile(DatF,DatE)
+
+struct DataFile *DatF;
+struct DataExt *DatE;
+
+
+Parameters  
+
+DatF and DatE: data file to be flushed.
+
+Function    
+
+Writes out recent changes to a Maccess data file to disk.
+
+Remarks
+
+Typically, the most recent changes to a Maccess data file are kept in
+memory for speed, and only written out to disk when the file is closed.
+If your programm halts abnormally due to a run-time error, system reboot,
+or power failure, for example, before you have a chance to close your
+files, some changes to the file may not be written out to disk. To overcome
+this problem, you should call FlushFile after making any changes to the data
+file. You may want to do a flush after each change, after a certain number
+of changes, or on a timed interval, depending on the performance and security
+requirements of your application. You should use FlushFile after calls to
+the following Maccess functions: AddRec, DeleteRec, MakeFile, PutRec.
+
+____________________________________________________________________________
+
+FlushIndex
+____________________________________________________________________________
+
+ 
+void FlushIndex(IdxF,IdxE)                                
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+
+
+Parameters  
+
+IdxF and IdxE: index file to be flushed.
+
+Function    
+
+Writes out recent changes to a Maccess index file to disk.
+
+Remarks
+
+Typically, the most recent changes to a Maccess index file are kept in
+memory for speed, and only written out to disk when the file is closed.
+If your programm halts abnormally due to a run-time error, system reboot,
+or power failure, for example, before you have a chance to close your
+files, some changes to the file may not be written out to disk. To overcome
+this problem, you should call FlushIndex after making any changes to the 
+index file. You may want to do a flush after each change, after a certain 
+number of changes, or on a timed interval, depending on the performance and 
+security requirements of your application. You should use FlushIndex after 
+calls to the following Maccess functions: AddKey, DeleteKey, MakeIndex.
+
+Warning!
+
+FlushIndex must not stand between lock and unlock becouese it destroies   
+lock during closing a clone file.
+____________________________________________________________________________
+
+GetRec
+____________________________________________________________________________
+
+ 
+void GetRec(DatF,DatE,R,Buffer)  
+
+struct DataFile *DatF;
+struct DataExt *DatE;
+long int R;
+void *Buffer;
+
+
+Parameters  
+
+DatF and DatE: data file the record is read from.
+R: data record number.
+Buffer: variable to read the data into.
+
+Function    
+
+GetRec reads s specifed data record into memory.
+
+Remarks
+
+Since Buffer is an untyped parameter, GetRec will accept any variable in
+its place. It si up to you to make sure that the variable passed is of the
+proper type.
+
+
+Warning!
+
+If Buffer is of a type smaller than the record size of DatF, other variables
+or code could be overwritten.
+____________________________________________________________________________
+
+InitAccess
+____________________________________________________________________________
+
+ 
+void InitAccess(MemNum,MemCode)
+
+int MemNum;
+key_t MemCode;    /* key_t is defined as long int in /sys/types.h */
+
+
+Parameters  
+
+MemNum: number of shared memory segment.
+MemCode: code of shared memory segment.
+
+Function    
+
+InitAccess makes if it does not exsist the shared memory segment, otherwise
+it attachs the shared memory segment.
+
+Restrictions
+
+MemCode must be number with three digits.
+
+Total number of shared memory segment depends on system kernel configuration.
+____________________________________________________________________________
+
+MakeFile
+____________________________________________________________________________
+
+ 
+void MakeFile(DatF,DatE,FName,RecLen,MemNum,FileNum)                    
+
+DataFilePtr *DatF;
+struct DataExt *DatE;
+FileName FName;
+unsigned int RecLen;
+int MemNum;
+int FileNum;
+
+
+Parameters  
+
+DatF and DatE: data file to be prepared for access.
+FName: string expression specifying the name of the new disk file.
+RecLen: record lenght in bytes. 
+MemNum: shared memory segment number in which the date file is placed.
+FileNum: data file number in shared memory segment in which it is palaced.
+
+Function    
+
+MakeFile creates a new data file and prepares it for processing.
+
+On exit, OKAY is T if the file was successfully created. If OKAY is F,
+there is not enough space on the disk or in the directory for a new data
+file, or the disk is locked.
+
+Restrictions
+
+The minimum record lenght for RecLen is 18 bytes. Use sizeof(your recod
+variabile) when passing to the RecLen parameter.
+
+Total number of shared memory segment depends on system kernel configuration.
+
+Two diferent data files in the same shared memory segment must not have
+the same FileNum parameter.
+
+This function must be used only in the single user mode.
+____________________________________________________________________________
+
+MakeIndex
+____________________________________________________________________________
+
+ 
+void MakeIndex(IdxF,IdxE,FName,KeyLen,S,MemNum,FileNum)
+
+DataFilePtr *IdxF;
+struct IndexExt *IdxE;
+FileName FName;
+unsigned short KeyLen;
+int S;
+int MemNum;
+int FileNum;
+
+
+Parameters  
+
+IdxF and IdxE: index file to be prepared for access.
+FName: string expression specifying the name of the new disk file.
+KeyLen: maximum lenght of key strings to be sored int this file.
+S: NoDuplicates (Maccess constant) indicates that duplicate keys are not 
+   allowed; Duplicates means that duplicate keys are allowed.
+MemNum: shared memory segment number in which the date file is placed.
+FileNum: data file number in shared memory segment in which it is palaced.
+
+Function    
+
+MakeIndex creates a new index file and prepares it for processing.
+
+On exit, OKAY is T fi the file was successfully created. If OKAY is F,
+there is not enough space on the disk or in the directory for a new data
+file, or the disk is locked.
+
+Restrictions
+
+Total number of shared memory segment depends on system kernel configuration.
+
+Two diferent data files in the same shared memory segment must not have
+the same FileNum parameter.
+
+This function must be used only in the single user mode.
+____________________________________________________________________________
+
+
+NextKey
+____________________________________________________________________________
+
+ 
+void NextKey(IdxF,IdxE,DataRecNum,ProcKey)               
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+long int *DataRecNum;
+void *ProcKey;
+
+
+Parameters  
+
+IdxF and IdxE: index file that has been prepared for sequental processing
+               by call to FindKey, SearchKey, or ClearKey.
+DataRecNum: data reference associated with the key.
+ProcKey: key read from the next index entry.
+
+Function    
+
+NextKey returns the data reference associated with the next key in an 
+index file. NextKey also returns the key value in the ProcKey parameter.
+
+On exit, OKAY is set to T unless the next index entry does not exist.
+In that case, OKAY is set to F. When OKAY returns F (that is, when the
+pointer is at the end of the index), NextKey returns the first entry
+in the index if it is called again.
+
+Restrictions
+
+Before the first call to NextKey for a given index file or after the
+index file is updated with AddKey or DeleteKey, one of the other index 
+search  funcitons (except PrevKey) must be called. The search functions
+establish the internal pointer used by NextKey and PrevKey for sequential
+processing.
+____________________________________________________________________________
+
+OpenFile
+____________________________________________________________________________
+
+ 
+void OpenFile(DatF,DatE,FName,RecLen,MemNum,FileNum)
+
+DataFilePtr *DatF;
+struct DataExt *DatE;
+FileName FName;
+unsigned int RecLen;
+int MemNum;
+int FileNum;
+
+
+Parameters  
+
+DatF and DatE: data file to be prepared to access.
+FName: string expression specifying the name of an existing disk file.
+RecLen: record lenght in bytes.
+MemNum: shared memory segment number in which the date file is placed.
+FileNum: date file number in shared memory segment in which it is palaced.
+
+Function    
+
+OpenFile opens an existing data file and prepares it for processing by 
+Maccess functions.
+
+On exit, OKAY is T if the file was found and opend successfully. Otherwise,
+OKAY is F.
+
+Restrictions
+
+RecLen must be the same lenght as when the file was created.
+
+Total number of shared memory segment depends on system kernel configuration.
+
+Two diferent data files in the same shared memory segment must not have
+the same FileNum parameter.
+____________________________________________________________________________
+
+OpenIndex
+____________________________________________________________________________
+
+ 
+void OpenIndex(IdxF,IdxE,FName,KeyLen,S,MemNum,FileNum)
+
+DataFilePtr *IdxF;
+struct IndexExt *IdxE;
+FileName FName;
+unsigned short KeyLen;
+int S;
+int MemNum;
+int FileNum;
+
+
+Parameters  
+
+IdxF and IdxE: index file to be prepared to access.
+FName: string expression specifying the name of an existing disk file.
+KeyLen: maximum lenght of key strings to be stored in this file.
+S: NoDuplicates (Maccess constant) indicates that duplicate keys are not 
+   allowed; Duplicates means that duplicate keys are allowed.
+MemNum: shared memory segment number in which the date file is placed.
+FileNum: date file number in shared memory segment in which it is palaced.
+
+Function    
+
+OpenIndex opens an existing index file and prepares it for processing.
+Maccess functions.
+
+On exit, OKAY is T if the file was found and opend successfully. Otherwise,
+OKAY is F.
+
+Restrictions
+
+KeyLen must be the same lenght as when the file was created.
+
+Total number of shared memory segment depends on system kernel configuration.
+
+Two diferent data files in the same shared memory segment must not have
+the same FileNum parameter.
+____________________________________________________________________________
+
+PrevKey
+____________________________________________________________________________
+
+ 
+void PrevKey(IdxF,IdxE,DataRecNum,ProcKey)               
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+long int *DataRecNum;
+void *ProcKey;
+
+
+Parameters  
+
+IdxF and IdxE: index file that has been prpared for sequental processing
+               by call to FindKey, SearchKey, or ClearKey.
+DataRecNum: returns data reference associated with the key.
+ProcKey: returns the key from the preceding index entry.
+
+Function    
+
+PrevKey returns the data reference associated with the preceding entry in 
+an index file. NextKey also returns the key value in the ProcKey parameter.
+
+On exit, OKAY is set to T unless no preceding index entry exist.
+In that case, OKAY is set to F. When OKAY returns F (i.e., when the
+pointer is at the beginning of the index), PrevKey returns the last entry
+in the index if it is called again.
+
+Restrictions
+
+Before the first call to PrevKey for a given index file or after the
+index file is updated with AddKey or DeleteKey, one of the other index 
+search  funcitons (except NextKey) must be called. The search functions
+establish the internal pointer used by NextKey and PrevKey for sequential
+processing.
+____________________________________________________________________________
+
+PutRec
+____________________________________________________________________________
+
+ 
+void PutRec(DatF,DatE,R,Buffer) 
+
+struct DataFile *DatF;
+struct DataExt *DatE;
+long int R;
+void *Buffer;
+
+
+Parameters  
+
+DatF and DatE: data file to which record is written.
+R: data record number.
+Buffer: variable data is written from.
+
+Function    
+
+PutRec writes a data record to a specified position in a data file.
+
+Remarks
+
+Since Buffer is an untyped parameter, PutRec will accept any variable in
+its place. It si up to you to make sure that the variable passed is of the
+proper type. Buffer is passed as a variable parameter to save memory.
+____________________________________________________________________________
+
+SearchKey
+____________________________________________________________________________
+
+ 
+void SearchKey(IdxF,IdxE,DataRecNum,ProcKey) 
+
+struct DataFile *IdxF;
+struct IndexExt *IdxE;
+long int *DataRecNum;
+void *ProcKey;
+
+
+Parameters  
+
+IdxF and IdxE: index file in which to searched.
+DataRecNum: data reference associated with found key.
+ProcKey: key string to searech for.
+
+Function    
+
+SearchKey returns the data record number associated with the first entry
+in an index file that is equal to or greater than a specific key value.
+
+OKAY is always set to T on exit, unless no keys are greater than or equal
+to the search key. In that case, OKAY is set to F.
+
+Remarks
+
+SearchKey can be used to locate an entry in an index file when only the
+first part of the key value is known. If the index file contains duplicate
+keys, SearchKey always locates the first key.
+
+The key field of SearchKey is a variable parameter. If you search for a 
+customer named Smith
+
+             SearchKey(IdxF,IdxE,DataRecNum,Name);
+and the key si not found, the global variable parameter OKAY is set to F,
+and the value to Name is destroyed (it is actually set to the value of the
+last key read form the index file). Always use a scratch variable (or 
+parameter) in your search routine if you don't want the variable changed.
+
+Restrictions  
+
+The ProcKey parameter must be a string variable. If it is longer than the
+maximum key lenght for IdxF, it will be truncated to the maximum lenght.
+____________________________________________________________________________
+
+SHM_Lock
+____________________________________________________________________________
+
+ 
+void SHM_Lock (shm_lock) 
+
+long long *shm_lock
+
+
+Parameters  
+
+shm_lock: Extern variable that locks something.
+
+Function    
+
+Locks
+
+Remarks
+
+Don't forget to unlock
+____________________________________________________________________________
+
+SHM_UnLock
+____________________________________________________________________________
+
+ 
+void SHM_UnLock (shm_lock) 
+
+long long *shm_lock
+
+
+Parameters  
+
+shm_lock: Extern variable that locks something.
+
+Function    
+
+Unlocks
+
+Remarks
+
+There is no harm if done without previous locking.
+____________________________________________________________________________
+TermAccess
+____________________________________________________________________________
+
+ 
+void TermAccess(MemNum)
+
+int MemNum;
+
+
+Parameters  
+
+MemNum: number of shared memory segment.
+
+Function    
+
+TermAccess detachs the shared memory segment.
+____________________________________________________________________________
+
+UsedRecs
+____________________________________________________________________________
+
+ 
+long int UsedRecs(DatF,DatE)
+
+struct DataFile *DatF;
+
+
+Parameters  
+
+DatF: data file form which the number of records is found.
+
+Function    
+
+UsedRecs returns the number of records in DatF that contain valid data.
+
+Remarks
+
+In contrast to FileLen, this funciton does not include reserved and 
+deleted records.
+____________________________________________________________________________

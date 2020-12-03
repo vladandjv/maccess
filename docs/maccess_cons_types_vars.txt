@@ -1,0 +1,240 @@
+****************************************************************************
+* PROGRAM: MACCESS_CONS_TYPES_VARS.txt                                     *
+* DESCRIPTION: Explanation for main constants and variables defined in 
+* maccess.h file and used in maccess databese filesystem.                  *
+* AUTHOR: VLADAN DJORDJEVIC                                                 *
+****************************************************************************
+ 
+
+
+MACCESS CONSTANTS, TYPES AND VARIABLES
+
+____________________________________________________________________________
+____________________________________________________________________________
+       
+MaxDataRecSize
+
+Type: unsigned int
+minimum: 16  (FileHeaderSize for 32 bits machine)
+maximum: 4294967295 (maximum range of unsigned int for 32 bits machine)
+
+MaxDataRecSize spedifies the maximum record lenght and should be set to
+the size (in bytes) of the largest data record the program will process. 
+For example, if the program precesses two data files with record sizes
+of 72 and 140 bytes, MazDataRecSize should be set to 140.
+
+The surest way to deterimne the size of your data records is to write a 
+small program to print out the sizeof each data record. For example,
+
+struct MyRec {
+	     long int Delated;
+	     char Field1[41];
+	     char Field2[81];
+             };		
+struct MyRec *record;
+
+printf("The size of MyRec is %d\n",sizeof(struct MyRec));
+
+
+Note that the string Field mast be lenght + 1 becouse  of '\0' character
+which means the end of string. For writing in file it is not necessary 
+bat it is for memory menangement in operating memory, such as 
+strcpy(record->Field1,"01234567890123456789012345678901234567890") where
+the array must have at least one more cell (byte) than the number of 
+caracteres between the two quote signs ("").
+
+When you apply the sizeof operator to a structure or union type name, or
+to an identifier of structure or union type, the resault is the acutal size
+of the structure or union. This size may include internal and trailing
+padding used to align the members of the structure or union on memory
+boundaries. Thus, the result may not correspond to the size calculated by
+adding up the storage requirements of the individual members.
+
+For writing in file it is correct to calculate storage requirements by
+adding up the sotrage requirements of individual members, bat for 
+using "calloc" or "malloc" you must think of previous and use sizeof
+operator to provide enough space in operating memory.
+ 
+In the upper case the record size is 126, but the number written by
+sizeof operator is 128.
+ 
+Conclusion:
+When creating or opening a data file, you can use sizeof(struct YourRecord)
+as the parameter to the routines that need this information or you can 
+calculate size by adding up the storage requirements of the individual 
+members but you must think of the actual size of structure in memory if
+you do something with it. So the first way is the better way.
+
+The same thing is with size of strings in structure or union. It is better
+to take one byte more then necessary for '\0' character and work directly
+with members of structure.
+
+MaxKeyLen and MaxDataRecSize are set to the largest possible values for  
+each type becouse the same internal structures are used to process each of 
+the different index and data files. Thus, the internal structure must be
+large enough for the biggest key and record. This does not mean that all
+files will have the same size as the largest; every file have only the size 
+which is necessary for its key or record lenght.
+____________________________________________________________________________
+
+MaxHeight
+Type: unsigned int
+minimum,maximum: depends; See text.
+
+MaxHeight determines the maximum heitht of the B+ tree structure. This
+constant applies to all index files to be processed by your program. It
+does not affect the actual B+ tree structure but applies to each index
+file variable. MaxHeight is primarly used for sequential (forward and 
+backward) searches of the B+ tree. For calculation of MaxHeight, see 
+bellow.
+
+There are several equations that allow you to predict the size and 
+efficiency of a particular B+ tree; you can also estimate the disk space 
+that will be used by an index file.
+
+The maximum number of pages, K, to be searched to find a specific key in 
+an index file with E keys is approximately:
+
+		K = log(E) / log(PageSize * 0.5); (C-language syntax)
+
+Thus,as PageSize gets larger, the number of searches (K) gets samller.
+Large pages require fewer disk accesses, and therefore less time. The
+time required to perform a search within the page,once it has been read 
+into memory, is of no significance compared to the time it takes to read   
+the page from the disk.
+
+The MaxHeight parametar required by Maccess coressponds to the integer 
+part of K plus 1 (that is,trunc(K)+1). Therefore, when you have  
+establish the PageSize and the maximum number of data records in your
+database, compute MaxHeight as follows:
+
+		MaxHeight = ((int)(log(E)/log(PageSize*0.5)) + 1
+		(C-language syntax)
+
+Note that larger values of MaxHeight require very little extra memory
+(4 bytes for each increment of MaxHeight). It is therefore recommended 
+that you add 2 or 3, instead of 1, to be on the safe side.
+____________________________________________________________________________
+
+MaxKeyLen
+
+Type: unsigned short (Used in program maccess.c, bat can be unsigned int)
+minimum: 1
+maximum: 
+teoreticaly: 65535 (maximum range of unsigned short for 32 bits machine)
+practicaly:    255 (unsigned implementations of cahr for 32 bits machine)
+
+MaxKeyLen determines maximum key lenght. MaxKeyLen should be set to the
+largest maximum key lenght of the index file your program is going to
+process. For example, fi your program will process three index files
+with maximum key lengths of 16,10, and 25, MaxKeyLen should be set to 25.
+(Note that if a string is declared as string[25], its maximum lenght is
+25 not 26 since we are concerned with lenght rather than size.)
+
+MaxKeyLen and MaxDataRecSize are set to the largest possible values for  
+each type becouse the same internal structures are used to process each of 
+the different index and data files. Thus, the internal structure must be
+large enough for the biggest key and record. This does not mean that all
+files will have the same size as the largest; every file have only the size 
+which is necessary for its key or record lenght.
+____________________________________________________________________________
+
+Order
+Type: unsigned int
+minimum,maximum: alwayes PageSize/2
+
+Order is half the value of PageSize and represents the minimum number of
+items permissible on a B+ tree page.
+____________________________________________________________________________
+
+Order
+Type: unsigned int
+minimum: 4
+maximum: 254
+Must be even number!
+
+PageSize determines the maximum number to key entries allowed in each B+
+tree page. PageSize must be the same for all index files processed by 
+your program, and must be an even number between 4 and 254.
+
+The nuber of bytes, N, occupied by each page in an index file is found as
+follows:
+
+		N = (KeySize + 9) * PageSize + 3;
+
+where KeySize is the key lenght for the index file.
+
+
+
+The maximum number of bytes, D, occupied by an index file is
+
+		D = N * E / (PageSize * 0.5);
+
+where E is the number of index entries.
+
+
+
+By combining the above two equations, it can be seen that the major
+deternubabt of index file size is the KeySize:
+
+		D = 2 * E * (KeySize + 9) + ((6 * E)/PageSize);
+
+The above equations shows that an index file will be about       
+(2 * KeySize) * number of records that are indexed.
+
+The previous two equations apply to a case in which all pages are only
+half full. In the average case, PageSize would have a multiplication 
+factor of 0.75 (that is, tree-quaters full). This yields the following:
+		 
+		D = 1.5 * E * (KeySize + 9) + ((4 * E)/PageSize);
+____________________________________________________________________________
+
+PageStackSize
+Type: unsigned int
+minimum: 3
+maximum: 255
+ 
+PageStackSize determines the page buffer size - the maximum number of B+
+tree pages that can be kept within memory at one time; the minimum number
+is three.
+
+In general, increasing PageStackSize speed up the system becouse the    
+probability that a needed page will be in memory increases. Usually,
+PageStackSize should be between 16 and 32; however, your system recources
+may require other values.
+
+The number of bytes M, occupied in memory by the Maccess page buffer is
+
+		M = ((MaxKeyLen + 9) * PageSize + 5) * PageStackSize;
+
+where MaxKeyLen is the largest key lenght used by the index file to be
+processed, and PageStackSize is the maximum number of pages that may be     
+kept within memory at the same time. (Note that this must be at least
+three.)
+____________________________________________________________________________
+
+GENERAL REMARKS:
+
+It is difficult to devise a general emthod for calculating the optimum 
+values for PageSize and PageStackSize. PageSize usually lies between 16
+and 32, depending on maximum key size and the number of keys in the index.
+Smaller values will result in poor performance due to slow search times,
+and larger values will require to much memory for the page buffer stack.
+
+The minimum reasonable value for PageStackSize is the value of MaxHeight.
+If PageStackSize is less than MaxHeight, the same page vill need to be
+read several times to traveres the B+ tree sequentially. In general,
+PageStackSize should be as large as possible (that is, as memory resources
+permit). Specifically, if PageStackSize is much larger than MaxHeight,
+Maccess may store the root page and the entire first level of the B+
+tree within memory, thus reducing by at least one the disk accesses   
+required to look up a key.
+
+The values for PageSize and PageStackSize depend on the value of E,
+the total number of items in the tree. If there are E items in the tree,
+there will be K pages to be searched, where K = log(E)/log(PageSize * 0.5).
+For example, if E is equal to 100000 and PageSize equals 16, K equals 5.
+This means that, when searching, a maximum of 5 pages will be read into
+memory. During insertion, additional pages may be needed due to page
+splitting, and a value grater than K is needed.
+____________________________________________________________________________

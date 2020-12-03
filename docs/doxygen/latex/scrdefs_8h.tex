@@ -1,0 +1,557 @@
+\hypertarget{scrdefs_8h}{}\doxysection{scrdefs.\+h File Reference}
+\label{scrdefs_8h}\index{scrdefs.h@{scrdefs.h}}
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$curses.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for scrdefs.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{scrdefs_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{scrdefs_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_acb4e819f7b1587dca1137c5fe7441e2a}{\+\_\+\+M\+\_\+\+T\+E\+R\+M\+I\+N\+FO}}
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_aaf3eb8696cddd400fdce68aaf0e0a2b4}{\+\_\+\+N\+O\+T\+\_\+\+F\+C\+GI}}
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a082bdc48d564d0a93a13cde394c0f567}{P\+A\+I\+R1}}~1
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_adcd092b3f5045f746cece86199f3961f}{P\+A\+I\+R2}}~2
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_af92b6cf800b23e022be4d4e988f1b9dc}{P\+A\+I\+R3}}~3
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a8e787b85827411821658dc4c16014509}{P\+A\+I\+R4}}~4
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a76c3579ddab89697320422520db2314a}{P\+A\+I\+R5}}~5
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a83851d42ce22e9d742bcd2341f67cd81}{P\+A\+I\+R6}}~6
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a214d39cb8471f9de0c322f035eac9966}{Delete\+\_\+\+Screen}}(a,  b,  c,  d)~\mbox{\hyperlink{screen_8c_ad4f7b025ff1938092af4472e9653c956}{w\+Delete\+\_\+\+Screen}}(stdscr,a,b,c,d)
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_ae2fc65d28287efc9d4a40785a0e88f23}{Frame}}(a,  b,  c,  d)~\mbox{\hyperlink{scrframe_8c_acfaa04e0ecfbd8921d346b2fab23a5ac}{w\+Frame}}(stdscr,a,b,c,d)
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a9b5767a0cb7aefe1a00c301c5213eb9a}{Line}}(x,  y,  z)~\mbox{\hyperlink{scrline_8c_a6c649731abedf5a414336a7c05362787}{w\+Line}}(stdscr,x,y,z)
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a1b9f6e485782ec4b8f7b4540500f6832}{Vertical\+\_\+\+Line}}(x,  y,  z)~\mbox{\hyperlink{scrline_8c_a732710a95da2c04688b32daecb1bdc23}{w\+Vertical\+\_\+\+Line}}(stdscr,x,y,z)
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_a868b10757a187b6e6a40fcf8d558426d}{savescreen}}()~(\mbox{\hyperlink{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}{Wsav}} = \mbox{\hyperlink{screen_8c_afa22b31535f34e2ca6a4bf33b64d1514}{save\+\_\+on\+\_\+screen}}())
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_ad3c1f4731c20bf3af707a17983b3d365}{restscreen}}()~\mbox{\hyperlink{screen_8c_a3cda5ed8a585178131801c148e78243f}{rest\+\_\+from\+\_\+screen}}(\mbox{\hyperlink{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}{Wsav}})
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_abe52a93845d9a9a501338760db334061}{settext}}()~; ;
+\item 
+\#define \mbox{\hyperlink{scrdefs_8h_adfa44ac403d5c6da68945c1e67f35cc2}{setgraf}}()~; ;
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{scrdefs_8h_afb712ac53edc2a882d956714d6ca4b42}{Sw\+Ins}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a5522b96ec520e059e3bd2899ec6a8b56}{Get\+Field}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_ad5c281ce0c3f550e591559f7b1860796}{w\+Kutija}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a54d17a6d0bb758f26b9dda4c6d8e8da8}{Help}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a80c3c10c1a54ec4800812cc39c8c3124}{Get\+Square}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_ac1ebe2607761beb60ae7e5acdc6d3b5e}{Init\+Ekran}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a255a40cadaec465091bde3d2061e91dd}{Term\+Ekran}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_aa07f6e3ab85b8eaa2d6b74a0b1b17514}{w\+Frame}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a7446aa158639bba7197c57afe7c3ef43}{w\+Line}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a1fd6cf656d6e566d4c85ae1ed3349b86}{w\+Delete\+\_\+\+Screen}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_ad99f98446d77bb3670abed89c4b49c5a}{w\+Vertical\+\_\+\+Line}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a68aa5eac9f683f4ab8df46cfb001cdce}{Show\+Symbols}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a408ade4b98bb56e388f39e9433732360}{Get\+Datum}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a32f3b836d5bbd14271cd63fa9f1b3c69}{Setpr}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a01653214196366953e1a286e68084f7f}{Resetpr}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a137d78a01e63d3b66d1b2ed0de0f4c4c}{message}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_a6fc818e2cea7bf93d13f8dd89cc30a6b}{cpyoblik}} ()
+\item 
+void \mbox{\hyperlink{scrdefs_8h_aa2898b15ae2fb70679d2b998055c8181}{rest\+\_\+from\+\_\+screen}} ()
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{scrdefs_8h_afa22b31535f34e2ca6a4bf33b64d1514}{save\+\_\+on\+\_\+screen}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{scrdefs_8h_ad58450259850ca0d453a95797896d217}{my\+\_\+time}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{scrdefs_8h_a7767762bec3da6e559f9f70462a7d8ff}{time\+\_\+difference}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{scrdefs_8h_a28aef6cf551ded9c4e00a9069e9b00ae}{vrmuredi}} ()
+\item 
+long long \mbox{\hyperlink{scrdefs_8h_a9b571f058913bfff86123c94ebbf868f}{timesecond}} ()
+\item 
+int \mbox{\hyperlink{scrdefs_8h_aed8c2acf86bdf01f058a03bcd7f1c092}{ev\+Key\+\_\+pressed}} ()
+\item 
+int \mbox{\hyperlink{scrdefs_8h_abd6f09ef78b4b00743d1cace57da85b4}{Key\+\_\+pressed}} ()
+\item 
+int \mbox{\hyperlink{scrdefs_8h_a2875ccf51548705ac255e363686e70ee}{Achoice}} ()
+\item 
+int \mbox{\hyperlink{scrdefs_8h_ac2fbf951dbfd6d6411a3b80a15ebf2a1}{Read}} ()
+\item 
+int \mbox{\hyperlink{scrdefs_8h_ab47a6b1f5bfc4e3e802c44c3ca5f7aaa}{Look}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a09527a18557d84fda3a3463d821e2b35}{answer}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a6e541cf90d7cfb0e8f95045ed55c21f1}{datprov}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a7a9c773fa72b070e641d620ba26315fe}{datprpr}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_aee99c77bdbae56e26efd57fb9cb16095}{check\+\_\+number}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a4c577281da1a5e80dd7780e5e98a135c}{check\+\_\+number\+\_\+empty}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a63697a762e6b786a48532c134418a8d9}{check\+\_\+character}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a03ebadbcc21672e9d7adf8c6ac276547}{check\+\_\+dot\+\_\+empty}} ()
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a954c93176800d0d5b26d8c3b5e186c50}{check\+\_\+dot}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a1647f704f8c783587889021aa17b1ec5}{vtterm}}
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{scrdefs_8h_a3a2fd2435cea2c8b1895005f9c528350}{Wsav}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{scrdefs_8h_acb4e819f7b1587dca1137c5fe7441e2a}\label{scrdefs_8h_acb4e819f7b1587dca1137c5fe7441e2a}} 
+\index{scrdefs.h@{scrdefs.h}!\_M\_TERMINFO@{\_M\_TERMINFO}}
+\index{\_M\_TERMINFO@{\_M\_TERMINFO}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{\_M\_TERMINFO}{\_M\_TERMINFO}}
+{\footnotesize\ttfamily \#define \+\_\+\+M\+\_\+\+T\+E\+R\+M\+I\+N\+FO}
+
+
+
+Definition at line 11 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_aaf3eb8696cddd400fdce68aaf0e0a2b4}\label{scrdefs_8h_aaf3eb8696cddd400fdce68aaf0e0a2b4}} 
+\index{scrdefs.h@{scrdefs.h}!\_NOT\_FCGI@{\_NOT\_FCGI}}
+\index{\_NOT\_FCGI@{\_NOT\_FCGI}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{\_NOT\_FCGI}{\_NOT\_FCGI}}
+{\footnotesize\ttfamily \#define \+\_\+\+N\+O\+T\+\_\+\+F\+C\+GI}
+
+
+
+Definition at line 33 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a214d39cb8471f9de0c322f035eac9966}\label{scrdefs_8h_a214d39cb8471f9de0c322f035eac9966}} 
+\index{scrdefs.h@{scrdefs.h}!Delete\_Screen@{Delete\_Screen}}
+\index{Delete\_Screen@{Delete\_Screen}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Delete\_Screen}{Delete\_Screen}}
+{\footnotesize\ttfamily \#define Delete\+\_\+\+Screen(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b,  }\item[{}]{c,  }\item[{}]{d }\end{DoxyParamCaption})~\mbox{\hyperlink{screen_8c_ad4f7b025ff1938092af4472e9653c956}{w\+Delete\+\_\+\+Screen}}(stdscr,a,b,c,d)}
+
+
+
+Definition at line 55 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_ae2fc65d28287efc9d4a40785a0e88f23}\label{scrdefs_8h_ae2fc65d28287efc9d4a40785a0e88f23}} 
+\index{scrdefs.h@{scrdefs.h}!Frame@{Frame}}
+\index{Frame@{Frame}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Frame}{Frame}}
+{\footnotesize\ttfamily \#define Frame(\begin{DoxyParamCaption}\item[{}]{a,  }\item[{}]{b,  }\item[{}]{c,  }\item[{}]{d }\end{DoxyParamCaption})~\mbox{\hyperlink{scrframe_8c_acfaa04e0ecfbd8921d346b2fab23a5ac}{w\+Frame}}(stdscr,a,b,c,d)}
+
+
+
+Definition at line 56 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a9b5767a0cb7aefe1a00c301c5213eb9a}\label{scrdefs_8h_a9b5767a0cb7aefe1a00c301c5213eb9a}} 
+\index{scrdefs.h@{scrdefs.h}!Line@{Line}}
+\index{Line@{Line}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Line}{Line}}
+{\footnotesize\ttfamily \#define Line(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~\mbox{\hyperlink{scrline_8c_a6c649731abedf5a414336a7c05362787}{w\+Line}}(stdscr,x,y,z)}
+
+
+
+Definition at line 57 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a082bdc48d564d0a93a13cde394c0f567}\label{scrdefs_8h_a082bdc48d564d0a93a13cde394c0f567}} 
+\index{scrdefs.h@{scrdefs.h}!PAIR1@{PAIR1}}
+\index{PAIR1@{PAIR1}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{PAIR1}{PAIR1}}
+{\footnotesize\ttfamily \#define P\+A\+I\+R1~1}
+
+
+
+Definition at line 43 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_adcd092b3f5045f746cece86199f3961f}\label{scrdefs_8h_adcd092b3f5045f746cece86199f3961f}} 
+\index{scrdefs.h@{scrdefs.h}!PAIR2@{PAIR2}}
+\index{PAIR2@{PAIR2}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{PAIR2}{PAIR2}}
+{\footnotesize\ttfamily \#define P\+A\+I\+R2~2}
+
+
+
+Definition at line 44 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_af92b6cf800b23e022be4d4e988f1b9dc}\label{scrdefs_8h_af92b6cf800b23e022be4d4e988f1b9dc}} 
+\index{scrdefs.h@{scrdefs.h}!PAIR3@{PAIR3}}
+\index{PAIR3@{PAIR3}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{PAIR3}{PAIR3}}
+{\footnotesize\ttfamily \#define P\+A\+I\+R3~3}
+
+
+
+Definition at line 45 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a8e787b85827411821658dc4c16014509}\label{scrdefs_8h_a8e787b85827411821658dc4c16014509}} 
+\index{scrdefs.h@{scrdefs.h}!PAIR4@{PAIR4}}
+\index{PAIR4@{PAIR4}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{PAIR4}{PAIR4}}
+{\footnotesize\ttfamily \#define P\+A\+I\+R4~4}
+
+
+
+Definition at line 46 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a76c3579ddab89697320422520db2314a}\label{scrdefs_8h_a76c3579ddab89697320422520db2314a}} 
+\index{scrdefs.h@{scrdefs.h}!PAIR5@{PAIR5}}
+\index{PAIR5@{PAIR5}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{PAIR5}{PAIR5}}
+{\footnotesize\ttfamily \#define P\+A\+I\+R5~5}
+
+
+
+Definition at line 47 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a83851d42ce22e9d742bcd2341f67cd81}\label{scrdefs_8h_a83851d42ce22e9d742bcd2341f67cd81}} 
+\index{scrdefs.h@{scrdefs.h}!PAIR6@{PAIR6}}
+\index{PAIR6@{PAIR6}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{PAIR6}{PAIR6}}
+{\footnotesize\ttfamily \#define P\+A\+I\+R6~6}
+
+
+
+Definition at line 48 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_ad3c1f4731c20bf3af707a17983b3d365}\label{scrdefs_8h_ad3c1f4731c20bf3af707a17983b3d365}} 
+\index{scrdefs.h@{scrdefs.h}!restscreen@{restscreen}}
+\index{restscreen@{restscreen}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{restscreen}{restscreen}}
+{\footnotesize\ttfamily \#define restscreen(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~\mbox{\hyperlink{screen_8c_a3cda5ed8a585178131801c148e78243f}{rest\+\_\+from\+\_\+screen}}(\mbox{\hyperlink{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}{Wsav}})}
+
+
+
+Definition at line 61 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a868b10757a187b6e6a40fcf8d558426d}\label{scrdefs_8h_a868b10757a187b6e6a40fcf8d558426d}} 
+\index{scrdefs.h@{scrdefs.h}!savescreen@{savescreen}}
+\index{savescreen@{savescreen}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{savescreen}{savescreen}}
+{\footnotesize\ttfamily \#define savescreen(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~(\mbox{\hyperlink{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}{Wsav}} = \mbox{\hyperlink{screen_8c_afa22b31535f34e2ca6a4bf33b64d1514}{save\+\_\+on\+\_\+screen}}())}
+
+
+
+Definition at line 60 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_adfa44ac403d5c6da68945c1e67f35cc2}\label{scrdefs_8h_adfa44ac403d5c6da68945c1e67f35cc2}} 
+\index{scrdefs.h@{scrdefs.h}!setgraf@{setgraf}}
+\index{setgraf@{setgraf}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{setgraf}{setgraf}}
+{\footnotesize\ttfamily \#define setgraf(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~; ;}
+
+
+
+Definition at line 65 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_abe52a93845d9a9a501338760db334061}\label{scrdefs_8h_abe52a93845d9a9a501338760db334061}} 
+\index{scrdefs.h@{scrdefs.h}!settext@{settext}}
+\index{settext@{settext}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{settext}{settext}}
+{\footnotesize\ttfamily \#define settext(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~; ;}
+
+
+
+Definition at line 64 of file scrdefs.\+h.
+
+\mbox{\Hypertarget{scrdefs_8h_a1b9f6e485782ec4b8f7b4540500f6832}\label{scrdefs_8h_a1b9f6e485782ec4b8f7b4540500f6832}} 
+\index{scrdefs.h@{scrdefs.h}!Vertical\_Line@{Vertical\_Line}}
+\index{Vertical\_Line@{Vertical\_Line}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Vertical\_Line}{Vertical\_Line}}
+{\footnotesize\ttfamily \#define Vertical\+\_\+\+Line(\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~\mbox{\hyperlink{scrline_8c_a732710a95da2c04688b32daecb1bdc23}{w\+Vertical\+\_\+\+Line}}(stdscr,x,y,z)}
+
+
+
+Definition at line 58 of file scrdefs.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{scrdefs_8h_a2875ccf51548705ac255e363686e70ee}\label{scrdefs_8h_a2875ccf51548705ac255e363686e70ee}} 
+\index{scrdefs.h@{scrdefs.h}!Achoice@{Achoice}}
+\index{Achoice@{Achoice}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Achoice()}{Achoice()}}
+{\footnotesize\ttfamily int Achoice (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a09527a18557d84fda3a3463d821e2b35}\label{scrdefs_8h_a09527a18557d84fda3a3463d821e2b35}} 
+\index{scrdefs.h@{scrdefs.h}!answer@{answer}}
+\index{answer@{answer}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{answer()}{answer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} answer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a63697a762e6b786a48532c134418a8d9}\label{scrdefs_8h_a63697a762e6b786a48532c134418a8d9}} 
+\index{scrdefs.h@{scrdefs.h}!check\_character@{check\_character}}
+\index{check\_character@{check\_character}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{check\_character()}{check\_character()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} check\+\_\+character (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a954c93176800d0d5b26d8c3b5e186c50}\label{scrdefs_8h_a954c93176800d0d5b26d8c3b5e186c50}} 
+\index{scrdefs.h@{scrdefs.h}!check\_dot@{check\_dot}}
+\index{check\_dot@{check\_dot}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{check\_dot()}{check\_dot()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} check\+\_\+dot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a03ebadbcc21672e9d7adf8c6ac276547}\label{scrdefs_8h_a03ebadbcc21672e9d7adf8c6ac276547}} 
+\index{scrdefs.h@{scrdefs.h}!check\_dot\_empty@{check\_dot\_empty}}
+\index{check\_dot\_empty@{check\_dot\_empty}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{check\_dot\_empty()}{check\_dot\_empty()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} check\+\_\+dot\+\_\+empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_aee99c77bdbae56e26efd57fb9cb16095}\label{scrdefs_8h_aee99c77bdbae56e26efd57fb9cb16095}} 
+\index{scrdefs.h@{scrdefs.h}!check\_number@{check\_number}}
+\index{check\_number@{check\_number}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{check\_number()}{check\_number()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} check\+\_\+number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a4c577281da1a5e80dd7780e5e98a135c}\label{scrdefs_8h_a4c577281da1a5e80dd7780e5e98a135c}} 
+\index{scrdefs.h@{scrdefs.h}!check\_number\_empty@{check\_number\_empty}}
+\index{check\_number\_empty@{check\_number\_empty}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{check\_number\_empty()}{check\_number\_empty()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} check\+\_\+number\+\_\+empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a6fc818e2cea7bf93d13f8dd89cc30a6b}\label{scrdefs_8h_a6fc818e2cea7bf93d13f8dd89cc30a6b}} 
+\index{scrdefs.h@{scrdefs.h}!cpyoblik@{cpyoblik}}
+\index{cpyoblik@{cpyoblik}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{cpyoblik()}{cpyoblik()}}
+{\footnotesize\ttfamily void cpyoblik (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a6e541cf90d7cfb0e8f95045ed55c21f1}\label{scrdefs_8h_a6e541cf90d7cfb0e8f95045ed55c21f1}} 
+\index{scrdefs.h@{scrdefs.h}!datprov@{datprov}}
+\index{datprov@{datprov}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{datprov()}{datprov()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} datprov (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a7a9c773fa72b070e641d620ba26315fe}\label{scrdefs_8h_a7a9c773fa72b070e641d620ba26315fe}} 
+\index{scrdefs.h@{scrdefs.h}!datprpr@{datprpr}}
+\index{datprpr@{datprpr}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{datprpr()}{datprpr()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} datprpr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_aed8c2acf86bdf01f058a03bcd7f1c092}\label{scrdefs_8h_aed8c2acf86bdf01f058a03bcd7f1c092}} 
+\index{scrdefs.h@{scrdefs.h}!evKey\_pressed@{evKey\_pressed}}
+\index{evKey\_pressed@{evKey\_pressed}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{evKey\_pressed()}{evKey\_pressed()}}
+{\footnotesize\ttfamily int ev\+Key\+\_\+pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a408ade4b98bb56e388f39e9433732360}\label{scrdefs_8h_a408ade4b98bb56e388f39e9433732360}} 
+\index{scrdefs.h@{scrdefs.h}!GetDatum@{GetDatum}}
+\index{GetDatum@{GetDatum}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{GetDatum()}{GetDatum()}}
+{\footnotesize\ttfamily void Get\+Datum (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a5522b96ec520e059e3bd2899ec6a8b56}\label{scrdefs_8h_a5522b96ec520e059e3bd2899ec6a8b56}} 
+\index{scrdefs.h@{scrdefs.h}!GetField@{GetField}}
+\index{GetField@{GetField}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{GetField()}{GetField()}}
+{\footnotesize\ttfamily void Get\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a80c3c10c1a54ec4800812cc39c8c3124}\label{scrdefs_8h_a80c3c10c1a54ec4800812cc39c8c3124}} 
+\index{scrdefs.h@{scrdefs.h}!GetSquare@{GetSquare}}
+\index{GetSquare@{GetSquare}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{GetSquare()}{GetSquare()}}
+{\footnotesize\ttfamily void Get\+Square (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a54d17a6d0bb758f26b9dda4c6d8e8da8}\label{scrdefs_8h_a54d17a6d0bb758f26b9dda4c6d8e8da8}} 
+\index{scrdefs.h@{scrdefs.h}!Help@{Help}}
+\index{Help@{Help}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Help()}{Help()}}
+{\footnotesize\ttfamily void Help (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_ac1ebe2607761beb60ae7e5acdc6d3b5e}\label{scrdefs_8h_ac1ebe2607761beb60ae7e5acdc6d3b5e}} 
+\index{scrdefs.h@{scrdefs.h}!InitEkran@{InitEkran}}
+\index{InitEkran@{InitEkran}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{InitEkran()}{InitEkran()}}
+{\footnotesize\ttfamily void Init\+Ekran (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_abd6f09ef78b4b00743d1cace57da85b4}\label{scrdefs_8h_abd6f09ef78b4b00743d1cace57da85b4}} 
+\index{scrdefs.h@{scrdefs.h}!Key\_pressed@{Key\_pressed}}
+\index{Key\_pressed@{Key\_pressed}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Key\_pressed()}{Key\_pressed()}}
+{\footnotesize\ttfamily int Key\+\_\+pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_ab47a6b1f5bfc4e3e802c44c3ca5f7aaa}\label{scrdefs_8h_ab47a6b1f5bfc4e3e802c44c3ca5f7aaa}} 
+\index{scrdefs.h@{scrdefs.h}!Look@{Look}}
+\index{Look@{Look}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Look()}{Look()}}
+{\footnotesize\ttfamily int Look (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1245 of file screen.\+c.
+
+\mbox{\Hypertarget{scrdefs_8h_a137d78a01e63d3b66d1b2ed0de0f4c4c}\label{scrdefs_8h_a137d78a01e63d3b66d1b2ed0de0f4c4c}} 
+\index{scrdefs.h@{scrdefs.h}!message@{message}}
+\index{message@{message}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{message()}{message()}}
+{\footnotesize\ttfamily void message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_ad58450259850ca0d453a95797896d217}\label{scrdefs_8h_ad58450259850ca0d453a95797896d217}} 
+\index{scrdefs.h@{scrdefs.h}!my\_time@{my\_time}}
+\index{my\_time@{my\_time}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{my\_time()}{my\_time()}}
+{\footnotesize\ttfamily char$\ast$ my\+\_\+time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_ac2fbf951dbfd6d6411a3b80a15ebf2a1}\label{scrdefs_8h_ac2fbf951dbfd6d6411a3b80a15ebf2a1}} 
+\index{scrdefs.h@{scrdefs.h}!Read@{Read}}
+\index{Read@{Read}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily int Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a01653214196366953e1a286e68084f7f}\label{scrdefs_8h_a01653214196366953e1a286e68084f7f}} 
+\index{scrdefs.h@{scrdefs.h}!Resetpr@{Resetpr}}
+\index{Resetpr@{Resetpr}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Resetpr()}{Resetpr()}}
+{\footnotesize\ttfamily void Resetpr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_aa2898b15ae2fb70679d2b998055c8181}\label{scrdefs_8h_aa2898b15ae2fb70679d2b998055c8181}} 
+\index{scrdefs.h@{scrdefs.h}!rest\_from\_screen@{rest\_from\_screen}}
+\index{rest\_from\_screen@{rest\_from\_screen}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{rest\_from\_screen()}{rest\_from\_screen()}}
+{\footnotesize\ttfamily void rest\+\_\+from\+\_\+screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_afa22b31535f34e2ca6a4bf33b64d1514}\label{scrdefs_8h_afa22b31535f34e2ca6a4bf33b64d1514}} 
+\index{scrdefs.h@{scrdefs.h}!save\_on\_screen@{save\_on\_screen}}
+\index{save\_on\_screen@{save\_on\_screen}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{save\_on\_screen()}{save\_on\_screen()}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ save\+\_\+on\+\_\+screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1715 of file screen.\+c.
+
+\mbox{\Hypertarget{scrdefs_8h_a32f3b836d5bbd14271cd63fa9f1b3c69}\label{scrdefs_8h_a32f3b836d5bbd14271cd63fa9f1b3c69}} 
+\index{scrdefs.h@{scrdefs.h}!Setpr@{Setpr}}
+\index{Setpr@{Setpr}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Setpr()}{Setpr()}}
+{\footnotesize\ttfamily void Setpr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a68aa5eac9f683f4ab8df46cfb001cdce}\label{scrdefs_8h_a68aa5eac9f683f4ab8df46cfb001cdce}} 
+\index{scrdefs.h@{scrdefs.h}!ShowSymbols@{ShowSymbols}}
+\index{ShowSymbols@{ShowSymbols}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{ShowSymbols()}{ShowSymbols()}}
+{\footnotesize\ttfamily void Show\+Symbols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_afb712ac53edc2a882d956714d6ca4b42}\label{scrdefs_8h_afb712ac53edc2a882d956714d6ca4b42}} 
+\index{scrdefs.h@{scrdefs.h}!SwIns@{SwIns}}
+\index{SwIns@{SwIns}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{SwIns()}{SwIns()}}
+{\footnotesize\ttfamily void Sw\+Ins (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a255a40cadaec465091bde3d2061e91dd}\label{scrdefs_8h_a255a40cadaec465091bde3d2061e91dd}} 
+\index{scrdefs.h@{scrdefs.h}!TermEkran@{TermEkran}}
+\index{TermEkran@{TermEkran}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{TermEkran()}{TermEkran()}}
+{\footnotesize\ttfamily void Term\+Ekran (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 101 of file key.\+c.
+
+\mbox{\Hypertarget{scrdefs_8h_a7767762bec3da6e559f9f70462a7d8ff}\label{scrdefs_8h_a7767762bec3da6e559f9f70462a7d8ff}} 
+\index{scrdefs.h@{scrdefs.h}!time\_difference@{time\_difference}}
+\index{time\_difference@{time\_difference}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{time\_difference()}{time\_difference()}}
+{\footnotesize\ttfamily char $\ast$ time\+\_\+difference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a9b571f058913bfff86123c94ebbf868f}\label{scrdefs_8h_a9b571f058913bfff86123c94ebbf868f}} 
+\index{scrdefs.h@{scrdefs.h}!timesecond@{timesecond}}
+\index{timesecond@{timesecond}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{timesecond()}{timesecond()}}
+{\footnotesize\ttfamily long long timesecond (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a28aef6cf551ded9c4e00a9069e9b00ae}\label{scrdefs_8h_a28aef6cf551ded9c4e00a9069e9b00ae}} 
+\index{scrdefs.h@{scrdefs.h}!vrmuredi@{vrmuredi}}
+\index{vrmuredi@{vrmuredi}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{vrmuredi()}{vrmuredi()}}
+{\footnotesize\ttfamily char $\ast$ vrmuredi (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a1fd6cf656d6e566d4c85ae1ed3349b86}\label{scrdefs_8h_a1fd6cf656d6e566d4c85ae1ed3349b86}} 
+\index{scrdefs.h@{scrdefs.h}!wDelete\_Screen@{wDelete\_Screen}}
+\index{wDelete\_Screen@{wDelete\_Screen}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{wDelete\_Screen()}{wDelete\_Screen()}}
+{\footnotesize\ttfamily void w\+Delete\+\_\+\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_aa07f6e3ab85b8eaa2d6b74a0b1b17514}\label{scrdefs_8h_aa07f6e3ab85b8eaa2d6b74a0b1b17514}} 
+\index{scrdefs.h@{scrdefs.h}!wFrame@{wFrame}}
+\index{wFrame@{wFrame}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{wFrame()}{wFrame()}}
+{\footnotesize\ttfamily void w\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_ad5c281ce0c3f550e591559f7b1860796}\label{scrdefs_8h_ad5c281ce0c3f550e591559f7b1860796}} 
+\index{scrdefs.h@{scrdefs.h}!wKutija@{wKutija}}
+\index{wKutija@{wKutija}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{wKutija()}{wKutija()}}
+{\footnotesize\ttfamily void w\+Kutija (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_a7446aa158639bba7197c57afe7c3ef43}\label{scrdefs_8h_a7446aa158639bba7197c57afe7c3ef43}} 
+\index{scrdefs.h@{scrdefs.h}!wLine@{wLine}}
+\index{wLine@{wLine}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{wLine()}{wLine()}}
+{\footnotesize\ttfamily void w\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{scrdefs_8h_ad99f98446d77bb3670abed89c4b49c5a}\label{scrdefs_8h_ad99f98446d77bb3670abed89c4b49c5a}} 
+\index{scrdefs.h@{scrdefs.h}!wVertical\_Line@{wVertical\_Line}}
+\index{wVertical\_Line@{wVertical\_Line}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{wVertical\_Line()}{wVertical\_Line()}}
+{\footnotesize\ttfamily void w\+Vertical\+\_\+\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{scrdefs_8h_a1647f704f8c783587889021aa17b1ec5}\label{scrdefs_8h_a1647f704f8c783587889021aa17b1ec5}} 
+\index{scrdefs.h@{scrdefs.h}!vtterm@{vtterm}}
+\index{vtterm@{vtterm}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{vtterm}{vtterm}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} vtterm}
+
+
+
+Definition at line 15 of file screen.\+c.
+
+\mbox{\Hypertarget{scrdefs_8h_a3a2fd2435cea2c8b1895005f9c528350}\label{scrdefs_8h_a3a2fd2435cea2c8b1895005f9c528350}} 
+\index{scrdefs.h@{scrdefs.h}!Wsav@{Wsav}}
+\index{Wsav@{Wsav}!scrdefs.h@{scrdefs.h}}
+\doxysubsubsection{\texorpdfstring{Wsav}{Wsav}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ Wsav}
+
+
+
+Definition at line 17 of file screen.\+c.
+

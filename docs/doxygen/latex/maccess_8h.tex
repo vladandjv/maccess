@@ -1,0 +1,488 @@
+\hypertarget{maccess_8h}{}\doxysection{maccess.\+h File Reference}
+\label{maccess_8h}\index{maccess.h@{maccess.h}}
+{\ttfamily \#include \char`\"{}defs.\+h\char`\"{}}\newline
+Include dependency graph for maccess.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maccess_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maccess_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_heder_fajla}{Heder\+Fajla}}
+\item 
+struct \mbox{\hyperlink{struct_data_file}{Data\+File}}
+\item 
+struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}}
+\item 
+struct \mbox{\hyperlink{struct_ta_search_step}{Ta\+Search\+Step}}
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}}~65 /$\ast$ \mbox{\hyperlink{screen_8c_ac2fbf951dbfd6d6411a3b80a15ebf2a1}{Read}} the above! $\ast$/
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a25fe6c9816d1f84cecd50a0503825bf2}{Page\+Size}}~250
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}{Page\+Stack\+Size}}~250
+\item 
+\#define \mbox{\hyperlink{maccess_8h_aa73b5444d0a89f0d2d6653bef391f4ac}{Order}}~125
+\item 
+\#define \mbox{\hyperlink{maccess_8h_ac14538f8d17e7890198b5b0279cdc25b}{Max\+Height}}~6
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a33765e3d844a6b07dc5bca09e7994c9c}{File\+Header\+Size}}~32 /$\ast$ (sizeof(long long)$\ast$3 + sizeof(long long))  $\ast$/
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a61d0c350900de07db4e1cec95d1e799e}{Min\+Data\+Rec\+Size}}~\mbox{\hyperlink{maccess_8h_a33765e3d844a6b07dc5bca09e7994c9c}{File\+Header\+Size}}
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a673980384b047dc9dc09d73ac7b1fee9}{Item\+Overhead}}~23 /$\ast$ sizeof(struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}}) -\/ \mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}} $\ast$/
+\item 
+\#define \mbox{\hyperlink{maccess_8h_aad92f803a6cb1bbaeb9dac33ba1b433a}{Page\+Overhead}}~16 /$\ast$ (sizeof(int)+sizeof(long long)) $\ast$/
+\item 
+\#define \mbox{\hyperlink{maccess_8h_af97e7e4fb8ee2562840ac445fbb1bb6e}{Max\+Data\+Rec\+Size}}~512
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a1a513dcca38cdd7c06d87d83052376f2}{No\+Duplicates}}~(long long)0
+\item 
+\#define \mbox{\hyperlink{maccess_8h_af84242e7294e16832a4964d9a29e745f}{Duplicates}}~(long long)1
+\item 
+\#define \mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}~30 /$\ast$ Maximum number of shared memory segments $\ast$/
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}}\mbox{[}\mbox{\hyperlink{defs_8h_a6789ebc0df71a8ef76bfbb4fb5f74aad}{M\+A\+X\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+E\+N\+G\+TH}}\mbox{]}
+\item 
+typedef struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$ \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}}
+\item 
+typedef char \mbox{\hyperlink{maccess_8h_a783083bcecb3089e2277f31e85cbb6a0}{Ta\+Key\+Str}}\mbox{[}\mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}}\mbox{]}
+\item 
+typedef struct \mbox{\hyperlink{struct_ta_search_step}{Ta\+Search\+Step}} \mbox{\hyperlink{maccess_8h_a356b013c22703feac1d9d2f7c18ee88e}{Ta\+Path}}\mbox{[}\mbox{\hyperlink{maccess_8h_ac14538f8d17e7890198b5b0279cdc25b}{Max\+Height}}\mbox{]}
+\item 
+typedef struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$ \mbox{\hyperlink{maccess_8h_a2664893ee9178955008cdfb621e47633}{Index\+Ext\+Ptr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{maccess_8h_a9b12cb9ab889cb4082562460296ed9d0}{Get\+Rec}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_ac9a4e62fcc76e80c014a902edf4c50e8}{Put\+Rec}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a88e05719b0ab6a7c481b45a9d99a21f9}{Make\+File}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a6aa13ac03a7a93a6b7ad73eaf2ed6ed1}{Make\+Index}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a2fe25d11fd1a823cfcc8ee4038b4a170}{Open\+File}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a74408c59011e1bf37cbeb3af3fada149}{Open\+Index}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_ab77192d218568481c203d6ecae543d5e}{Close\+File}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a882e5ec037407fae9990ca6bfa46ca57}{Close\+Index}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a74606bfd246cf93d7b49656f7f038b4e}{Flush\+File}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a27bf7ad02ffb06a577fc740425c3a957}{Flush\+Index}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_ac799598dfbe1020793fcf1242e9df168}{Add\+Rec}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_ad21e814430eb1f38caba6dced79ec2d5}{Add\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_af685b2d89e1e0f57875a83a0e4d796d3}{Delete\+Rec}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a08470dde0248145e4b9ce628e6a304ab}{Delete\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a9b2edd4a4c638af66470d6a16e54ee76}{Search\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_abc0cc37b8d4bbb93dbd38c60e0b297c1}{Find\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a8a606380d5b5e6e430d498047a508121}{Next\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_ac7d0985d4e6e7c6192ae7d9000cc455e}{Prev\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a9c52bf7850348afd6f94a1f2864bba46}{Clear\+Key}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_ac300b06a19d5169c1830733f63d05924}{Init\+Access}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_a6f6ee2acb0efb196d2522faa7360278e}{Term\+Access}} ()
+\item 
+void \mbox{\hyperlink{maccess_8h_add157e3a6895607a2e8d7666ac58e4bd}{Era\+SM}} ()
+\item 
+long long \mbox{\hyperlink{maccess_8h_ae0947dc66de5ee2f73bca2bb05526dc6}{File\+Len}} ()
+\item 
+long long \mbox{\hyperlink{maccess_8h_ac65cbab06e85007e5531f3633c521cd4}{Used\+Recs}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{maccess_8h_a5f3ac04868de2ccadf88c8062096b2a6}{O\+K\+AY}}
+\item 
+long long \mbox{\hyperlink{maccess_8h_a111f3fb518ee5d592d13a09075ffec64}{Mem\+Id}} \mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{maccess_8h_af84242e7294e16832a4964d9a29e745f}\label{maccess_8h_af84242e7294e16832a4964d9a29e745f}} 
+\index{maccess.h@{maccess.h}!Duplicates@{Duplicates}}
+\index{Duplicates@{Duplicates}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{Duplicates}{Duplicates}}
+{\footnotesize\ttfamily \#define Duplicates~(long long)1}
+
+
+
+Definition at line 26 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a33765e3d844a6b07dc5bca09e7994c9c}\label{maccess_8h_a33765e3d844a6b07dc5bca09e7994c9c}} 
+\index{maccess.h@{maccess.h}!FileHeaderSize@{FileHeaderSize}}
+\index{FileHeaderSize@{FileHeaderSize}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{FileHeaderSize}{FileHeaderSize}}
+{\footnotesize\ttfamily \#define File\+Header\+Size~32 /$\ast$ (sizeof(long long)$\ast$3 + sizeof(long long))  $\ast$/}
+
+
+
+Definition at line 18 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a89084bfd22362bc28d0395007382b1a5}\label{maccess_8h_a89084bfd22362bc28d0395007382b1a5}} 
+\index{maccess.h@{maccess.h}!HasMemories@{HasMemories}}
+\index{HasMemories@{HasMemories}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{HasMemories}{HasMemories}}
+{\footnotesize\ttfamily \#define Has\+Memories~30 /$\ast$ Maximum number of shared memory segments $\ast$/}
+
+
+
+Definition at line 27 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a673980384b047dc9dc09d73ac7b1fee9}\label{maccess_8h_a673980384b047dc9dc09d73ac7b1fee9}} 
+\index{maccess.h@{maccess.h}!ItemOverhead@{ItemOverhead}}
+\index{ItemOverhead@{ItemOverhead}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{ItemOverhead}{ItemOverhead}}
+{\footnotesize\ttfamily \#define Item\+Overhead~23 /$\ast$ sizeof(struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}}) -\/ \mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}} $\ast$/}
+
+
+
+Definition at line 20 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_af97e7e4fb8ee2562840ac445fbb1bb6e}\label{maccess_8h_af97e7e4fb8ee2562840ac445fbb1bb6e}} 
+\index{maccess.h@{maccess.h}!MaxDataRecSize@{MaxDataRecSize}}
+\index{MaxDataRecSize@{MaxDataRecSize}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MaxDataRecSize}{MaxDataRecSize}}
+{\footnotesize\ttfamily \#define Max\+Data\+Rec\+Size~512}
+
+
+
+Definition at line 23 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_ac14538f8d17e7890198b5b0279cdc25b}\label{maccess_8h_ac14538f8d17e7890198b5b0279cdc25b}} 
+\index{maccess.h@{maccess.h}!MaxHeight@{MaxHeight}}
+\index{MaxHeight@{MaxHeight}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MaxHeight}{MaxHeight}}
+{\footnotesize\ttfamily \#define Max\+Height~6}
+
+
+
+Definition at line 17 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}\label{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}} 
+\index{maccess.h@{maccess.h}!MaxKeyLen@{MaxKeyLen}}
+\index{MaxKeyLen@{MaxKeyLen}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MaxKeyLen}{MaxKeyLen}}
+{\footnotesize\ttfamily \#define Max\+Key\+Len~65 /$\ast$ \mbox{\hyperlink{screen_8c_ac2fbf951dbfd6d6411a3b80a15ebf2a1}{Read}} the above! $\ast$/}
+
+
+
+Definition at line 13 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a61d0c350900de07db4e1cec95d1e799e}\label{maccess_8h_a61d0c350900de07db4e1cec95d1e799e}} 
+\index{maccess.h@{maccess.h}!MinDataRecSize@{MinDataRecSize}}
+\index{MinDataRecSize@{MinDataRecSize}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MinDataRecSize}{MinDataRecSize}}
+{\footnotesize\ttfamily \#define Min\+Data\+Rec\+Size~\mbox{\hyperlink{maccess_8h_a33765e3d844a6b07dc5bca09e7994c9c}{File\+Header\+Size}}}
+
+
+
+Definition at line 19 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a1a513dcca38cdd7c06d87d83052376f2}\label{maccess_8h_a1a513dcca38cdd7c06d87d83052376f2}} 
+\index{maccess.h@{maccess.h}!NoDuplicates@{NoDuplicates}}
+\index{NoDuplicates@{NoDuplicates}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{NoDuplicates}{NoDuplicates}}
+{\footnotesize\ttfamily \#define No\+Duplicates~(long long)0}
+
+
+
+Definition at line 25 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_aa73b5444d0a89f0d2d6653bef391f4ac}\label{maccess_8h_aa73b5444d0a89f0d2d6653bef391f4ac}} 
+\index{maccess.h@{maccess.h}!Order@{Order}}
+\index{Order@{Order}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{Order}{Order}}
+{\footnotesize\ttfamily \#define Order~125}
+
+
+
+Definition at line 16 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_aad92f803a6cb1bbaeb9dac33ba1b433a}\label{maccess_8h_aad92f803a6cb1bbaeb9dac33ba1b433a}} 
+\index{maccess.h@{maccess.h}!PageOverhead@{PageOverhead}}
+\index{PageOverhead@{PageOverhead}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{PageOverhead}{PageOverhead}}
+{\footnotesize\ttfamily \#define Page\+Overhead~16 /$\ast$ (sizeof(int)+sizeof(long long)) $\ast$/}
+
+
+
+Definition at line 21 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a25fe6c9816d1f84cecd50a0503825bf2}\label{maccess_8h_a25fe6c9816d1f84cecd50a0503825bf2}} 
+\index{maccess.h@{maccess.h}!PageSize@{PageSize}}
+\index{PageSize@{PageSize}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{PageSize}{PageSize}}
+{\footnotesize\ttfamily \#define Page\+Size~250}
+
+
+
+Definition at line 14 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}\label{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}} 
+\index{maccess.h@{maccess.h}!PageStackSize@{PageStackSize}}
+\index{PageStackSize@{PageStackSize}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{PageStackSize}{PageStackSize}}
+{\footnotesize\ttfamily \#define Page\+Stack\+Size~250}
+
+
+
+Definition at line 15 of file maccess.\+h.
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}\label{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}} 
+\index{maccess.h@{maccess.h}!DataFilePtr@{DataFilePtr}}
+\index{DataFilePtr@{DataFilePtr}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{DataFilePtr}{DataFilePtr}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_data_file}{Data\+File}}$\ast$ \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}}}
+
+
+
+Definition at line 47 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_acf659157da92111218d3a0712cff7832}\label{maccess_8h_acf659157da92111218d3a0712cff7832}} 
+\index{maccess.h@{maccess.h}!FileName@{FileName}}
+\index{FileName@{FileName}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{FileName}{FileName}}
+{\footnotesize\ttfamily typedef char File\+Name\mbox{[}\mbox{\hyperlink{defs_8h_a6789ebc0df71a8ef76bfbb4fb5f74aad}{M\+A\+X\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+E\+N\+G\+TH}}\mbox{]}}
+
+
+
+Definition at line 29 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a2664893ee9178955008cdfb621e47633}\label{maccess_8h_a2664893ee9178955008cdfb621e47633}} 
+\index{maccess.h@{maccess.h}!IndexExtPtr@{IndexExtPtr}}
+\index{IndexExtPtr@{IndexExtPtr}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{IndexExtPtr}{IndexExtPtr}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}}$\ast$ \mbox{\hyperlink{maccess_8h_a2664893ee9178955008cdfb621e47633}{Index\+Ext\+Ptr}}}
+
+
+
+Definition at line 75 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a783083bcecb3089e2277f31e85cbb6a0}\label{maccess_8h_a783083bcecb3089e2277f31e85cbb6a0}} 
+\index{maccess.h@{maccess.h}!TaKeyStr@{TaKeyStr}}
+\index{TaKeyStr@{TaKeyStr}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{TaKeyStr}{TaKeyStr}}
+{\footnotesize\ttfamily typedef char Ta\+Key\+Str\mbox{[}\mbox{\hyperlink{maccess_8h_a5d9f201a686c4ad685270ae04d6f932c}{Max\+Key\+Len}}\mbox{]}}
+
+
+
+Definition at line 56 of file maccess.\+h.
+
+\mbox{\Hypertarget{maccess_8h_a356b013c22703feac1d9d2f7c18ee88e}\label{maccess_8h_a356b013c22703feac1d9d2f7c18ee88e}} 
+\index{maccess.h@{maccess.h}!TaPath@{TaPath}}
+\index{TaPath@{TaPath}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{TaPath}{TaPath}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_ta_search_step}{Ta\+Search\+Step}} Ta\+Path\mbox{[}\mbox{\hyperlink{maccess_8h_ac14538f8d17e7890198b5b0279cdc25b}{Max\+Height}}\mbox{]}}
+
+
+
+Definition at line 64 of file maccess.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{maccess_8h_ad21e814430eb1f38caba6dced79ec2d5}\label{maccess_8h_ad21e814430eb1f38caba6dced79ec2d5}} 
+\index{maccess.h@{maccess.h}!AddKey@{AddKey}}
+\index{AddKey@{AddKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{AddKey()}{AddKey()}}
+{\footnotesize\ttfamily void Add\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ac799598dfbe1020793fcf1242e9df168}\label{maccess_8h_ac799598dfbe1020793fcf1242e9df168}} 
+\index{maccess.h@{maccess.h}!AddRec@{AddRec}}
+\index{AddRec@{AddRec}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{AddRec()}{AddRec()}}
+{\footnotesize\ttfamily void Add\+Rec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a9c52bf7850348afd6f94a1f2864bba46}\label{maccess_8h_a9c52bf7850348afd6f94a1f2864bba46}} 
+\index{maccess.h@{maccess.h}!ClearKey@{ClearKey}}
+\index{ClearKey@{ClearKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{ClearKey()}{ClearKey()}}
+{\footnotesize\ttfamily void Clear\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ab77192d218568481c203d6ecae543d5e}\label{maccess_8h_ab77192d218568481c203d6ecae543d5e}} 
+\index{maccess.h@{maccess.h}!CloseFile@{CloseFile}}
+\index{CloseFile@{CloseFile}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{CloseFile()}{CloseFile()}}
+{\footnotesize\ttfamily void Close\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a882e5ec037407fae9990ca6bfa46ca57}\label{maccess_8h_a882e5ec037407fae9990ca6bfa46ca57}} 
+\index{maccess.h@{maccess.h}!CloseIndex@{CloseIndex}}
+\index{CloseIndex@{CloseIndex}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{CloseIndex()}{CloseIndex()}}
+{\footnotesize\ttfamily void Close\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a08470dde0248145e4b9ce628e6a304ab}\label{maccess_8h_a08470dde0248145e4b9ce628e6a304ab}} 
+\index{maccess.h@{maccess.h}!DeleteKey@{DeleteKey}}
+\index{DeleteKey@{DeleteKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{DeleteKey()}{DeleteKey()}}
+{\footnotesize\ttfamily void Delete\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_af685b2d89e1e0f57875a83a0e4d796d3}\label{maccess_8h_af685b2d89e1e0f57875a83a0e4d796d3}} 
+\index{maccess.h@{maccess.h}!DeleteRec@{DeleteRec}}
+\index{DeleteRec@{DeleteRec}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{DeleteRec()}{DeleteRec()}}
+{\footnotesize\ttfamily void Delete\+Rec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_add157e3a6895607a2e8d7666ac58e4bd}\label{maccess_8h_add157e3a6895607a2e8d7666ac58e4bd}} 
+\index{maccess.h@{maccess.h}!EraSM@{EraSM}}
+\index{EraSM@{EraSM}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{EraSM()}{EraSM()}}
+{\footnotesize\ttfamily void Era\+SM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ae0947dc66de5ee2f73bca2bb05526dc6}\label{maccess_8h_ae0947dc66de5ee2f73bca2bb05526dc6}} 
+\index{maccess.h@{maccess.h}!FileLen@{FileLen}}
+\index{FileLen@{FileLen}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{FileLen()}{FileLen()}}
+{\footnotesize\ttfamily long long File\+Len (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_abc0cc37b8d4bbb93dbd38c60e0b297c1}\label{maccess_8h_abc0cc37b8d4bbb93dbd38c60e0b297c1}} 
+\index{maccess.h@{maccess.h}!FindKey@{FindKey}}
+\index{FindKey@{FindKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{FindKey()}{FindKey()}}
+{\footnotesize\ttfamily void Find\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a74606bfd246cf93d7b49656f7f038b4e}\label{maccess_8h_a74606bfd246cf93d7b49656f7f038b4e}} 
+\index{maccess.h@{maccess.h}!FlushFile@{FlushFile}}
+\index{FlushFile@{FlushFile}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{FlushFile()}{FlushFile()}}
+{\footnotesize\ttfamily void Flush\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a27bf7ad02ffb06a577fc740425c3a957}\label{maccess_8h_a27bf7ad02ffb06a577fc740425c3a957}} 
+\index{maccess.h@{maccess.h}!FlushIndex@{FlushIndex}}
+\index{FlushIndex@{FlushIndex}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{FlushIndex()}{FlushIndex()}}
+{\footnotesize\ttfamily void Flush\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a9b12cb9ab889cb4082562460296ed9d0}\label{maccess_8h_a9b12cb9ab889cb4082562460296ed9d0}} 
+\index{maccess.h@{maccess.h}!GetRec@{GetRec}}
+\index{GetRec@{GetRec}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{GetRec()}{GetRec()}}
+{\footnotesize\ttfamily void Get\+Rec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ac300b06a19d5169c1830733f63d05924}\label{maccess_8h_ac300b06a19d5169c1830733f63d05924}} 
+\index{maccess.h@{maccess.h}!InitAccess@{InitAccess}}
+\index{InitAccess@{InitAccess}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{InitAccess()}{InitAccess()}}
+{\footnotesize\ttfamily void Init\+Access (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a88e05719b0ab6a7c481b45a9d99a21f9}\label{maccess_8h_a88e05719b0ab6a7c481b45a9d99a21f9}} 
+\index{maccess.h@{maccess.h}!MakeFile@{MakeFile}}
+\index{MakeFile@{MakeFile}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MakeFile()}{MakeFile()}}
+{\footnotesize\ttfamily void Make\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a6aa13ac03a7a93a6b7ad73eaf2ed6ed1}\label{maccess_8h_a6aa13ac03a7a93a6b7ad73eaf2ed6ed1}} 
+\index{maccess.h@{maccess.h}!MakeIndex@{MakeIndex}}
+\index{MakeIndex@{MakeIndex}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MakeIndex()}{MakeIndex()}}
+{\footnotesize\ttfamily void Make\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a8a606380d5b5e6e430d498047a508121}\label{maccess_8h_a8a606380d5b5e6e430d498047a508121}} 
+\index{maccess.h@{maccess.h}!NextKey@{NextKey}}
+\index{NextKey@{NextKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{NextKey()}{NextKey()}}
+{\footnotesize\ttfamily void Next\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a2fe25d11fd1a823cfcc8ee4038b4a170}\label{maccess_8h_a2fe25d11fd1a823cfcc8ee4038b4a170}} 
+\index{maccess.h@{maccess.h}!OpenFile@{OpenFile}}
+\index{OpenFile@{OpenFile}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{OpenFile()}{OpenFile()}}
+{\footnotesize\ttfamily void Open\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a74408c59011e1bf37cbeb3af3fada149}\label{maccess_8h_a74408c59011e1bf37cbeb3af3fada149}} 
+\index{maccess.h@{maccess.h}!OpenIndex@{OpenIndex}}
+\index{OpenIndex@{OpenIndex}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{OpenIndex()}{OpenIndex()}}
+{\footnotesize\ttfamily void Open\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ac7d0985d4e6e7c6192ae7d9000cc455e}\label{maccess_8h_ac7d0985d4e6e7c6192ae7d9000cc455e}} 
+\index{maccess.h@{maccess.h}!PrevKey@{PrevKey}}
+\index{PrevKey@{PrevKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{PrevKey()}{PrevKey()}}
+{\footnotesize\ttfamily void Prev\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ac9a4e62fcc76e80c014a902edf4c50e8}\label{maccess_8h_ac9a4e62fcc76e80c014a902edf4c50e8}} 
+\index{maccess.h@{maccess.h}!PutRec@{PutRec}}
+\index{PutRec@{PutRec}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{PutRec()}{PutRec()}}
+{\footnotesize\ttfamily void Put\+Rec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a9b2edd4a4c638af66470d6a16e54ee76}\label{maccess_8h_a9b2edd4a4c638af66470d6a16e54ee76}} 
+\index{maccess.h@{maccess.h}!SearchKey@{SearchKey}}
+\index{SearchKey@{SearchKey}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{SearchKey()}{SearchKey()}}
+{\footnotesize\ttfamily void Search\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_a6f6ee2acb0efb196d2522faa7360278e}\label{maccess_8h_a6f6ee2acb0efb196d2522faa7360278e}} 
+\index{maccess.h@{maccess.h}!TermAccess@{TermAccess}}
+\index{TermAccess@{TermAccess}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{TermAccess()}{TermAccess()}}
+{\footnotesize\ttfamily void Term\+Access (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{maccess_8h_ac65cbab06e85007e5531f3633c521cd4}\label{maccess_8h_ac65cbab06e85007e5531f3633c521cd4}} 
+\index{maccess.h@{maccess.h}!UsedRecs@{UsedRecs}}
+\index{UsedRecs@{UsedRecs}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{UsedRecs()}{UsedRecs()}}
+{\footnotesize\ttfamily long long Used\+Recs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{maccess_8h_a111f3fb518ee5d592d13a09075ffec64}\label{maccess_8h_a111f3fb518ee5d592d13a09075ffec64}} 
+\index{maccess.h@{maccess.h}!MemId@{MemId}}
+\index{MemId@{MemId}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{MemId}{MemId}}
+{\footnotesize\ttfamily long long Mem\+Id\mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}}
+
+
+
+Definition at line 14 of file mamemory.\+c.
+
+\mbox{\Hypertarget{maccess_8h_a5f3ac04868de2ccadf88c8062096b2a6}\label{maccess_8h_a5f3ac04868de2ccadf88c8062096b2a6}} 
+\index{maccess.h@{maccess.h}!OKAY@{OKAY}}
+\index{OKAY@{OKAY}!maccess.h@{maccess.h}}
+\doxysubsubsection{\texorpdfstring{OKAY}{OKAY}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} O\+K\+AY}
+
+
+
+Definition at line 22 of file maccess.\+c.
+

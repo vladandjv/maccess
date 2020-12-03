@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['tacompkeys_600',['TaCompKeys',['../maccess_8c.html#ac895100a1210fbd94f2217c7f531e886',1,'maccess.c']]],
+  ['tafindkey_601',['TaFindKey',['../maccess_8c.html#a2db56b82fc3734bcf721fb7ea2bfaa26',1,'maccess.c']]],
+  ['tagetpage_602',['TaGetPage',['../maccess_8c.html#a49b2eb7b673f7bd4d4aaef8601f910f4',1,'maccess.c']]],
+  ['tagetrec_603',['TaGetRec',['../maccess_8c.html#a9b99879387e30e0a3bffc4995f0caf8d',1,'TaGetRec(struct DataFile *DatF, struct DataExt *DatE, long long R, void *Buffer):&#160;maccess.c'],['../mainter_8h.html#a554cd698fdafd6b5a50b0c04476465f1',1,'TaGetRec():&#160;mainter.h']]],
+  ['taiocheck_604',['TAIOCheck',['../maccess_8c.html#afbe202c2ba722094732621f069331111',1,'TAIOCheck():&#160;maccess.c'],['../mainter_8h.html#afbe202c2ba722094732621f069331111',1,'TAIOCheck():&#160;mainter.h']]],
+  ['takesymbol_605',['TakeSymbol',['../key_8c.html#a634fd21e4f7aae1a7db194b5ef4c3d6d',1,'TakeSymbol():&#160;key.c'],['../scrkey_8c.html#ab690b6c90b4e4714d64e43be0b7b73e2',1,'TakeSymbol(Boolean WAIT):&#160;scrkey.c']]],
+  ['talast_606',['TaLast',['../maccess_8c.html#aa5cd08f60d570337a023d7d33639f3f8',1,'maccess.c']]],
+  ['tanewpage_607',['TaNewPage',['../maccess_8c.html#a2f864ae59c2ff7f24f5a6c3e594b0db1',1,'maccess.c']]],
+  ['tapack_608',['TaPack',['../maccess_8c.html#a0647cb974dfce464333f6c805512b11d',1,'maccess.c']]],
+  ['taputrec_609',['TaPutRec',['../maccess_8c.html#ad0b9988b87c49895ed85d13b011106db',1,'TaPutRec(struct DataFile *DatF, struct DataExt *DatE, long long R, void *Buffer):&#160;maccess.c'],['../mainter_8h.html#a58574e01077ba62fcc51f01a80006081',1,'TaPutRec():&#160;mainter.h']]],
+  ['tareadpage_610',['TaReadPage',['../maccess_8c.html#a59ce4f06b71d09ba34b97a7c398cd5de',1,'maccess.c']]],
+  ['tareturnpage_611',['TaReturnPage',['../madelete_8c.html#a1f4f377fa983de7edfa8f0aac96910e5',1,'TaReturnPage(TaPagePtr PagPtr):&#160;madelete.c'],['../mainter_8h.html#a9e0af7b3584ebf5ddab00e08e099bdcf',1,'TaReturnPage():&#160;mainter.h']]],
+  ['taunpack_612',['TaUnPack',['../maccess_8c.html#afd7d40b35a351074348ac14c0bcce43c',1,'maccess.c']]],
+  ['taupdatepage_613',['TaUpdatePage',['../maccess_8c.html#a5aaf94f24e21fcf886ecae75fc89c48d',1,'maccess.c']]],
+  ['tawriterec_614',['TaWriteRec',['../maccess_8c.html#a56dbf723c8716c64efb0c8bf8b17eac4',1,'maccess.c']]],
+  ['term_5fchange_5fsymbol_615',['Term_Change_Symbol',['../scrkey_8c.html#aac71c6e975d76b60d45816980edcdc3a',1,'scrkey.c']]],
+  ['termaccess_616',['TermAccess',['../maccess_8h.html#a6f6ee2acb0efb196d2522faa7360278e',1,'TermAccess():&#160;maccess.h'],['../mamemory_8c.html#a2322e30dcce5fd9d16eb8f6f25b397bc',1,'TermAccess(long long MemNum):&#160;mamemory.c']]],
+  ['termekran_617',['TermEkran',['../key_8c.html#a255a40cadaec465091bde3d2061e91dd',1,'TermEkran():&#160;key.c'],['../scrdefs_8h.html#a255a40cadaec465091bde3d2061e91dd',1,'TermEkran():&#160;key.c'],['../screen_8c.html#a255a40cadaec465091bde3d2061e91dd',1,'TermEkran():&#160;screen.c']]],
+  ['time_5fand_5fdate_618',['time_and_date',['../defs_8h.html#ad661fb6f7a7b8aee0b91b9c02ad4f64a',1,'time_and_date():&#160;time.c'],['../time_8c.html#a1c54d1f97340143504abff9df110d54a',1,'time_and_date():&#160;time.c']]],
+  ['time_5fdifference_619',['time_difference',['../defs_8h.html#a366dae69bea4bf91b8a593a1d4e5e4a6',1,'time_difference(char *InField1, char *InField2):&#160;defs.h'],['../scrdefs_8h.html#a7767762bec3da6e559f9f70462a7d8ff',1,'time_difference():&#160;scrdefs.h'],['../time_8c.html#a366dae69bea4bf91b8a593a1d4e5e4a6',1,'time_difference(char *InField1, char *InField2):&#160;time.c']]],
+  ['timesecond_620',['timesecond',['../scrdefs_8h.html#a9b571f058913bfff86123c94ebbf868f',1,'timesecond():&#160;scrdefs.h'],['../time_8c.html#ab779714f39f8d9854f3a4b7ad555493b',1,'timesecond(char *InField):&#160;time.c']]],
+  ['to_5fleft_621',['to_left',['../defs_8h.html#a093a4f5d573ac3c48b3b252c63817e8e',1,'to_left(char *InField, int Vel):&#160;string.c'],['../string_8c.html#a093a4f5d573ac3c48b3b252c63817e8e',1,'to_left(char *InField, int Vel):&#160;string.c']]],
+  ['to_5fright_622',['to_right',['../defs_8h.html#ad3aa2daaa4c4850b2c1a2f2d92f2bd60',1,'to_right(char *InField, int Vel):&#160;string.c'],['../string_8c.html#ad3aa2daaa4c4850b2c1a2f2d92f2bd60',1,'to_right(char *InField, int Vel):&#160;string.c']]],
+  ['trim_623',['trim',['../defs_8h.html#a68d0adf5b084e02695502f7442eb93b0',1,'trim(char *InField):&#160;string.c'],['../string_8c.html#a68d0adf5b084e02695502f7442eb93b0',1,'trim(char *InField):&#160;string.c']]],
+  ['trim_5fstr_624',['trim_str',['../e1__load_8c.html#ab50c8d0934f7960c1efbd07131e0d292',1,'trim_str(char *str):&#160;e1_load.c'],['../example1_8c.html#ab50c8d0934f7960c1efbd07131e0d292',1,'trim_str(char *str):&#160;example1.c'],['../example1_8h.html#ab50c8d0934f7960c1efbd07131e0d292',1,'trim_str(char *str):&#160;e1_load.c']]]
+];

@@ -1,0 +1,50 @@
+
+
+\doxysubsection*{M\+A\+C\+C\+E\+SS -\/ B+ tree database file system with shared memory caching }
+
+Author\+: Vladan Djordjevic \href{mailto:vladandjv@gmail.com}{\texttt{ vladandjv@gmail.\+com}} ~\newline
+
+
+\DoxyHorRuler{0}
+ D\+E\+S\+C\+R\+I\+P\+T\+I\+ON
+
+M\+A\+C\+C\+E\+SS is a B+ binary tree implementation in C. It is a relation database file system that can work in a multiuser environment. It uses memory cashing based on a least-\/recently-\/used (L\+RU) strategy. Cache is stored in a shared memory segment for inter process communication and has a high percentage of hits in R\+AM memory (usually over 60\% on 100 million records), which makes it very fast.
+
+Locking system is a simple one, based on shared memory too and it doesn\textquotesingle{}t touch a hard disk. It is extremely fast and don\textquotesingle{}t leave any possibility for dead lock, so there is no need for Edsger Dijkstra\textquotesingle{}s banker\textquotesingle{}s algorithm.
+
+It is tested on 100 million record for each data file with its index files, but there is no reason why it couldn\textquotesingle{}t work with billions of records.
+
+\DoxyHorRuler{0}
+ E\+X\+A\+M\+P\+LE P\+R\+O\+G\+R\+A\+MS
+
+The program for adjusting the parameters and database efficiency is called calculate.
+
+The parameters obtained by using the calculate program are located in file \mbox{\hyperlink{maccess_8h}{maccess.\+h}} and there they can be changed.
+
+The program for displaying current parameters, calculating parameters which are interdependent and calculating shared memory segment size is called btree\+\_\+parameters.
+
+Testing programs are example, example1, example2 ... They can run simultaneously. example2 is in the separate folder.
+
+Records with keys used in testing programs are described in /docs as Record\+\_\+example.\+txt, Record\+\_\+example1.\+txt and Records\+\_\+example2.\+txt (it has 4 records).
+
+E\+X\+A\+M\+P\+LE is a very simple sample and template for using maccess. It has only one key. example -\/ Character based UI (garbage collector is a must, otherwise there will be memory leak). \mbox{\hyperlink{e__load_8c}{e\+\_\+load.\+c}}, \mbox{\hyperlink{e__print_8c}{e\+\_\+print.\+c}} and \mbox{\hyperlink{e__rebuild_8c}{e\+\_\+rebuild.\+c}} -\/ command line programs for testing massive number of records. Don\textquotesingle{}t require garbage collector and also can be used for testing memory leak with valgrind or similar tool.
+
+E\+X\+A\+M\+P\+L\+E1 is a more complex sample and template for using maccess. It has four keys. \mbox{\hyperlink{example1_8c}{example1.\+c}} -\/ Character based UI (garbage collector is must, otherwise there will be memory leak). \mbox{\hyperlink{e1__load_8c}{e1\+\_\+load.\+c}}, \mbox{\hyperlink{e1__print_8c}{e1\+\_\+print.\+c}} and \mbox{\hyperlink{e1__rebuild_8c}{e1\+\_\+rebuild.\+c}} -\/ command line programs for testing massive number of records. Don\textquotesingle{}t require garbage collector and also can be used for testing memory leak with valgrind or similar tool.
+
+E\+X\+A\+M\+P\+L\+E2 is even more complex sample and template for using maccess. It has only command line programs. It is in the folder example2. Read the R\+E\+A\+D\+ME file there.
+
+Deleting shared memory, made specifically for the testing programs, is with example\+\_\+shmrm (for example) example1\+\_\+shmrm (for example1) and example2\+\_\+shmrm (for example2). They deletes shared memory segments for testing programs respectively and their special codes are defined in \mbox{\hyperlink{conf__lib_8h}{conf\+\_\+lib.\+h}}.
+
+A detailed description of the constants and the ways of their calculation can be read in ./docs/maccess\+\_\+cons\+\_\+types\+\_\+vars.txt. Detailed description of all functions of the maccess package is in ./docs/maccess\+\_\+functions.txt.
+
+The theory of the binary tree and the version B+ (the inventors are Rudolf Bayer and Edward Meyers Mc\+Creight) which is applied in this package, can be read in the B+tree\+\_\+theory.txt file.
+
+\DoxyHorRuler{0}
+ N\+O\+T\+ES\+:
+
+UI libraries (scr$\ast$.c \& \mbox{\hyperlink{string_8c}{string.\+c}}, \mbox{\hyperlink{time_8c}{time.\+c}}, \mbox{\hyperlink{date_8c}{date.\+c}}) are made to work with garbage collector (we use The Boehm–\+Demers–\+Weiser garbage collector). On the other hand, database library (ma$\ast$.c) does N\+OT depend on garbage collector, but of course, can be used with it as additional security against potential memory leak. Usage of garbage collector is defined as a macro in \mbox{\hyperlink{conf__lib_8h}{conf\+\_\+lib.\+h}}
+
+scr$\ast$.c, \mbox{\hyperlink{example_8c}{example.\+c}}, \mbox{\hyperlink{example1_8c}{example1.\+c}} requires ncurses libraries, but command line programs can work without it. They can be compiled with\+: ~\newline
+ make -\/f Makefile\+\_\+only\+\_\+command\+\_\+line
+
+Program for testing key codes and example how to function keys, E\+SC and the like are called key. 

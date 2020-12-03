@@ -1,0 +1,265 @@
+\hypertarget{mainter_8h}{}\doxysection{mainter.\+h File Reference}
+\label{mainter_8h}\index{mainter.h@{mainter.h}}
+{\ttfamily \#include \char`\"{}maccess.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maccerr.\+h\char`\"{}}\newline
+Include dependency graph for mainter.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mainter_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mainter_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}}
+\item 
+struct \mbox{\hyperlink{struct_ta_page}{Ta\+Page}}
+\item 
+struct \mbox{\hyperlink{struct_ta_stack_rec}{Ta\+Stack\+Rec}}
+\item 
+union \mbox{\hyperlink{union_ta_record_buffer}{Ta\+Record\+Buffer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}} \mbox{\hyperlink{mainter_8h_aa29a067a82387627fc6d34040b469a62}{Arr\+Item}}\mbox{[}\mbox{\hyperlink{maccess_8h_a25fe6c9816d1f84cecd50a0503825bf2}{Page\+Size}}\mbox{]}
+\item 
+typedef struct \mbox{\hyperlink{struct_ta_page}{Ta\+Page}} $\ast$ \mbox{\hyperlink{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}{Ta\+Page\+Ptr}}
+\item 
+typedef struct \mbox{\hyperlink{struct_ta_stack_rec}{Ta\+Stack\+Rec}} $\ast$ \mbox{\hyperlink{mainter_8h_adf286bbf712f53d336eb7b790e620996}{Ta\+Stack\+Rec\+Ptr}}
+\item 
+typedef struct \mbox{\hyperlink{struct_ta_stack_rec}{Ta\+Stack\+Rec}} \mbox{\hyperlink{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}{Ta\+Page\+Stack}}\mbox{[}\mbox{\hyperlink{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}{Page\+Stack\+Size}}\mbox{]}
+\item 
+typedef \mbox{\hyperlink{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}{Ta\+Page\+Stack}} $\ast$ \mbox{\hyperlink{mainter_8h_a2dba77c54503a51da4ac13f0712363d7}{Ta\+Page\+Stack\+Ptr}}
+\item 
+typedef long long \mbox{\hyperlink{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}{Ta\+Page\+Map}}\mbox{[}\mbox{\hyperlink{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}{Page\+Stack\+Size}}\mbox{]}
+\item 
+typedef \mbox{\hyperlink{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}{Ta\+Page\+Map}} $\ast$ \mbox{\hyperlink{mainter_8h_af62a289abaa16a9eb0a3eb1dddbc9493}{Ta\+Page\+Map\+Ptr}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{mainter_8h_a554cd698fdafd6b5a50b0c04476465f1}{Ta\+Get\+Rec}} ()
+\item 
+void \mbox{\hyperlink{mainter_8h_a58574e01077ba62fcc51f01a80006081}{Ta\+Put\+Rec}} ()
+\item 
+void \mbox{\hyperlink{mainter_8h_afbe202c2ba722094732621f069331111}{T\+A\+I\+O\+Check}} ()
+\item 
+void \mbox{\hyperlink{mainter_8h_a9e0af7b3584ebf5ddab00e08e099bdcf}{Ta\+Return\+Page}} ()
+\item 
+void \mbox{\hyperlink{mainter_8h_ae1a1d33306ac2d5ec4bbe47e775a5106}{Leave\+SM}} ()
+\item 
+long long \mbox{\hyperlink{mainter_8h_a4d06402a249b8b06d47a44f2cafa8636}{Start\+SM}} ()
+\item 
+long long \mbox{\hyperlink{mainter_8h_a61166c43a7e21e85bece01defa44ef53}{Approach\+SM}} ()
+\item 
+long long \mbox{\hyperlink{mainter_8h_a625ae2a6562c9b30f9cf4f40bda6635b}{Find\+Your\+Place}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{mainter_8h_a075cb78b9e7ad8dcc3a5745477ece8ca}{U\+SM}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+union \mbox{\hyperlink{union_ta_record_buffer}{Ta\+Record\+Buffer}} \mbox{\hyperlink{mainter_8h_af6774d85d35bd350c3e31d3d4643d527}{Buffer}}
+\item 
+union \mbox{\hyperlink{union_ta_record_buffer}{Ta\+Record\+Buffer}} $\ast$ \mbox{\hyperlink{mainter_8h_a5a6bf25dd57660baa4e8427d71220f03}{Ta\+Rec\+Buf}}
+\item 
+\mbox{\hyperlink{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}{Ta\+Page\+Stack}} $\ast$ \mbox{\hyperlink{mainter_8h_a75fdc80a7b73810a2b439fbda1c1de80}{Ta\+Page\+Stk}} \mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}
+\item 
+\mbox{\hyperlink{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}{Ta\+Page\+Map}} $\ast$ \mbox{\hyperlink{mainter_8h_abcf24eb2ef9889d1d378ad7cc274fe9b}{Ta\+Pg\+Map}} \mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}
+\item 
+char $\ast$ \mbox{\hyperlink{mainter_8h_af3ce5f50dbd49c0bf1b275e026d877c2}{Mem\+Sh}} \mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{mainter_8h_aa29a067a82387627fc6d34040b469a62}\label{mainter_8h_aa29a067a82387627fc6d34040b469a62}} 
+\index{mainter.h@{mainter.h}!ArrItem@{ArrItem}}
+\index{ArrItem@{ArrItem}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{ArrItem}{ArrItem}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}} Arr\+Item\mbox{[}\mbox{\hyperlink{maccess_8h_a25fe6c9816d1f84cecd50a0503825bf2}{Page\+Size}}\mbox{]}}
+
+
+
+Definition at line 19 of file mainter.\+h.
+
+\mbox{\Hypertarget{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}\label{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}} 
+\index{mainter.h@{mainter.h}!TaPageMap@{TaPageMap}}
+\index{TaPageMap@{TaPageMap}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPageMap}{TaPageMap}}
+{\footnotesize\ttfamily typedef long long Ta\+Page\+Map\mbox{[}\mbox{\hyperlink{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}{Page\+Stack\+Size}}\mbox{]}}
+
+
+
+Definition at line 43 of file mainter.\+h.
+
+\mbox{\Hypertarget{mainter_8h_af62a289abaa16a9eb0a3eb1dddbc9493}\label{mainter_8h_af62a289abaa16a9eb0a3eb1dddbc9493}} 
+\index{mainter.h@{mainter.h}!TaPageMapPtr@{TaPageMapPtr}}
+\index{TaPageMapPtr@{TaPageMapPtr}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPageMapPtr}{TaPageMapPtr}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}{Ta\+Page\+Map}}$\ast$ \mbox{\hyperlink{mainter_8h_af62a289abaa16a9eb0a3eb1dddbc9493}{Ta\+Page\+Map\+Ptr}}}
+
+
+
+Definition at line 45 of file mainter.\+h.
+
+\mbox{\Hypertarget{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}\label{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}} 
+\index{mainter.h@{mainter.h}!TaPagePtr@{TaPagePtr}}
+\index{TaPagePtr@{TaPagePtr}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPagePtr}{TaPagePtr}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_ta_page}{Ta\+Page}}$\ast$ \mbox{\hyperlink{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}{Ta\+Page\+Ptr}}}
+
+
+
+Definition at line 27 of file mainter.\+h.
+
+\mbox{\Hypertarget{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}\label{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}} 
+\index{mainter.h@{mainter.h}!TaPageStack@{TaPageStack}}
+\index{TaPageStack@{TaPageStack}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPageStack}{TaPageStack}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_ta_stack_rec}{Ta\+Stack\+Rec}} Ta\+Page\+Stack\mbox{[}\mbox{\hyperlink{maccess_8h_a7f2cca91e9fe2f3310704b14717f7f72}{Page\+Stack\+Size}}\mbox{]}}
+
+
+
+Definition at line 39 of file mainter.\+h.
+
+\mbox{\Hypertarget{mainter_8h_a2dba77c54503a51da4ac13f0712363d7}\label{mainter_8h_a2dba77c54503a51da4ac13f0712363d7}} 
+\index{mainter.h@{mainter.h}!TaPageStackPtr@{TaPageStackPtr}}
+\index{TaPageStackPtr@{TaPageStackPtr}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPageStackPtr}{TaPageStackPtr}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}{Ta\+Page\+Stack}}$\ast$ \mbox{\hyperlink{mainter_8h_a2dba77c54503a51da4ac13f0712363d7}{Ta\+Page\+Stack\+Ptr}}}
+
+
+
+Definition at line 41 of file mainter.\+h.
+
+\mbox{\Hypertarget{mainter_8h_adf286bbf712f53d336eb7b790e620996}\label{mainter_8h_adf286bbf712f53d336eb7b790e620996}} 
+\index{mainter.h@{mainter.h}!TaStackRecPtr@{TaStackRecPtr}}
+\index{TaStackRecPtr@{TaStackRecPtr}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaStackRecPtr}{TaStackRecPtr}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_ta_stack_rec}{Ta\+Stack\+Rec}}$\ast$ \mbox{\hyperlink{mainter_8h_adf286bbf712f53d336eb7b790e620996}{Ta\+Stack\+Rec\+Ptr}}}
+
+
+
+Definition at line 37 of file mainter.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mainter_8h_a61166c43a7e21e85bece01defa44ef53}\label{mainter_8h_a61166c43a7e21e85bece01defa44ef53}} 
+\index{mainter.h@{mainter.h}!ApproachSM@{ApproachSM}}
+\index{ApproachSM@{ApproachSM}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{ApproachSM()}{ApproachSM()}}
+{\footnotesize\ttfamily long long Approach\+SM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_a625ae2a6562c9b30f9cf4f40bda6635b}\label{mainter_8h_a625ae2a6562c9b30f9cf4f40bda6635b}} 
+\index{mainter.h@{mainter.h}!FindYourPlace@{FindYourPlace}}
+\index{FindYourPlace@{FindYourPlace}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{FindYourPlace()}{FindYourPlace()}}
+{\footnotesize\ttfamily long long Find\+Your\+Place (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_ae1a1d33306ac2d5ec4bbe47e775a5106}\label{mainter_8h_ae1a1d33306ac2d5ec4bbe47e775a5106}} 
+\index{mainter.h@{mainter.h}!LeaveSM@{LeaveSM}}
+\index{LeaveSM@{LeaveSM}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{LeaveSM()}{LeaveSM()}}
+{\footnotesize\ttfamily void Leave\+SM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_a4d06402a249b8b06d47a44f2cafa8636}\label{mainter_8h_a4d06402a249b8b06d47a44f2cafa8636}} 
+\index{mainter.h@{mainter.h}!StartSM@{StartSM}}
+\index{StartSM@{StartSM}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{StartSM()}{StartSM()}}
+{\footnotesize\ttfamily long long Start\+SM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_a554cd698fdafd6b5a50b0c04476465f1}\label{mainter_8h_a554cd698fdafd6b5a50b0c04476465f1}} 
+\index{mainter.h@{mainter.h}!TaGetRec@{TaGetRec}}
+\index{TaGetRec@{TaGetRec}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaGetRec()}{TaGetRec()}}
+{\footnotesize\ttfamily void Ta\+Get\+Rec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_afbe202c2ba722094732621f069331111}\label{mainter_8h_afbe202c2ba722094732621f069331111}} 
+\index{mainter.h@{mainter.h}!TAIOCheck@{TAIOCheck}}
+\index{TAIOCheck@{TAIOCheck}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TAIOCheck()}{TAIOCheck()}}
+{\footnotesize\ttfamily void T\+A\+I\+O\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_a58574e01077ba62fcc51f01a80006081}\label{mainter_8h_a58574e01077ba62fcc51f01a80006081}} 
+\index{mainter.h@{mainter.h}!TaPutRec@{TaPutRec}}
+\index{TaPutRec@{TaPutRec}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPutRec()}{TaPutRec()}}
+{\footnotesize\ttfamily void Ta\+Put\+Rec (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_a9e0af7b3584ebf5ddab00e08e099bdcf}\label{mainter_8h_a9e0af7b3584ebf5ddab00e08e099bdcf}} 
+\index{mainter.h@{mainter.h}!TaReturnPage@{TaReturnPage}}
+\index{TaReturnPage@{TaReturnPage}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaReturnPage()}{TaReturnPage()}}
+{\footnotesize\ttfamily void Ta\+Return\+Page (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{mainter_8h_a075cb78b9e7ad8dcc3a5745477ece8ca}\label{mainter_8h_a075cb78b9e7ad8dcc3a5745477ece8ca}} 
+\index{mainter.h@{mainter.h}!USM@{USM}}
+\index{USM@{USM}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{USM()}{USM()}}
+{\footnotesize\ttfamily char$\ast$ U\+SM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{mainter_8h_af6774d85d35bd350c3e31d3d4643d527}\label{mainter_8h_af6774d85d35bd350c3e31d3d4643d527}} 
+\index{mainter.h@{mainter.h}!Buffer@{Buffer}}
+\index{Buffer@{Buffer}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{Buffer}{Buffer}}
+{\footnotesize\ttfamily union \mbox{\hyperlink{union_ta_record_buffer}{Ta\+Record\+Buffer}} Buffer}
+
+
+
+Definition at line 20 of file maccess.\+c.
+
+\mbox{\Hypertarget{mainter_8h_af3ce5f50dbd49c0bf1b275e026d877c2}\label{mainter_8h_af3ce5f50dbd49c0bf1b275e026d877c2}} 
+\index{mainter.h@{mainter.h}!MemSh@{MemSh}}
+\index{MemSh@{MemSh}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{MemSh}{MemSh}}
+{\footnotesize\ttfamily char$\ast$ Mem\+Sh\mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}}
+
+
+
+Definition at line 15 of file mamemory.\+c.
+
+\mbox{\Hypertarget{mainter_8h_a75fdc80a7b73810a2b439fbda1c1de80}\label{mainter_8h_a75fdc80a7b73810a2b439fbda1c1de80}} 
+\index{mainter.h@{mainter.h}!TaPageStk@{TaPageStk}}
+\index{TaPageStk@{TaPageStk}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPageStk}{TaPageStk}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mainter_8h_a63978a3bffd7a2cf93353971f077b8b7}{Ta\+Page\+Stack}}$\ast$ Ta\+Page\+Stk\mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}}
+
+
+
+Definition at line 17 of file maccess.\+c.
+
+\mbox{\Hypertarget{mainter_8h_abcf24eb2ef9889d1d378ad7cc274fe9b}\label{mainter_8h_abcf24eb2ef9889d1d378ad7cc274fe9b}} 
+\index{mainter.h@{mainter.h}!TaPgMap@{TaPgMap}}
+\index{TaPgMap@{TaPgMap}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaPgMap}{TaPgMap}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mainter_8h_aaebcc6f921e5a33ae5d69e83e4e5e795}{Ta\+Page\+Map}}$\ast$ Ta\+Pg\+Map\mbox{[}\mbox{\hyperlink{maccess_8h_a89084bfd22362bc28d0395007382b1a5}{Has\+Memories}}\mbox{]}}
+
+
+
+Definition at line 18 of file maccess.\+c.
+
+\mbox{\Hypertarget{mainter_8h_a5a6bf25dd57660baa4e8427d71220f03}\label{mainter_8h_a5a6bf25dd57660baa4e8427d71220f03}} 
+\index{mainter.h@{mainter.h}!TaRecBuf@{TaRecBuf}}
+\index{TaRecBuf@{TaRecBuf}!mainter.h@{mainter.h}}
+\doxysubsubsection{\texorpdfstring{TaRecBuf}{TaRecBuf}}
+{\footnotesize\ttfamily union \mbox{\hyperlink{union_ta_record_buffer}{Ta\+Record\+Buffer}}$\ast$ Ta\+Rec\+Buf}
+
+
+
+Definition at line 21 of file maccess.\+c.
+

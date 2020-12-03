@@ -1,0 +1,14 @@
+Client Record Specification
+
+
+	Data Field		Data Type		Indexed		Unique
+	--------------------	--------------------	---------	-----------
+    -a- client_id		32byte			Yes		Yes
+    -b- group_id		32byte			Yes		No
+    -c- resource_id		32byte			Yes		No
+    -d- auth_id			32byte			Yes		No
+    -e- socket_id		xxbyte			No		Yes
+    -f- status			01byte			Yes		No
+    -g- timestamp, login	04byte			No		No
+    -h- timestamp, heartbeat	04byte			No		No
+	--------------------	--------------------	---------	-----------

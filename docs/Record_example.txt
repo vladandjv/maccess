@@ -1,0 +1,5 @@
+﻿
+1. Key:     String, 10 charachers long. Indexed. Duplicate keys allowed.
+2. Surname: String, 25 characters long.
+3. Name:    String, 20 characters long.
+4. Remark:  String, 45 characters long.

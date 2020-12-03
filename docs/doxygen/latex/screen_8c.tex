@@ -1,0 +1,485 @@
+\hypertarget{screen_8c}{}\doxysection{screen.\+c File Reference}
+\label{screen_8c}\index{screen.c@{screen.c}}
+{\ttfamily \#include \char`\"{}conf\+\_\+lib.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}screen.\+h\char`\"{}}\newline
+Include dependency graph for screen.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{screen_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_take_field}{Take\+Field}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}{Max\+Get}}~60
+\item 
+\#define \mbox{\hyperlink{screen_8c_a71af8b22fd0739ae018ed24949c48ac6}{Max\+Look}}~L\+I\+N\+ES-\/7       /$\ast$ Must be less or equal \mbox{\hyperlink{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}{Max\+Get}}-\/u. $\ast$/
+\item 
+\#define \mbox{\hyperlink{screen_8c_a296ec5d851ad2140495e6b147f41a7d6}{Max\+Get\+Len}}~\mbox{\hyperlink{defs_8h_a6789ebc0df71a8ef76bfbb4fb5f74aad}{M\+A\+X\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+E\+N\+G\+TH}}
+\item 
+\#define \mbox{\hyperlink{screen_8c_aae912dbad7023425bfe78984f82f2db5}{Max\+Headline\+Len}}~80
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \mbox{\hyperlink{screen_8c_a44f74919c37f359451379f53c27ba062}{Get\+Str}}\mbox{[}\mbox{\hyperlink{screen_8c_a296ec5d851ad2140495e6b147f41a7d6}{Max\+Get\+Len}}\mbox{]}
+\item 
+typedef char \mbox{\hyperlink{screen_8c_aa85bacdb6cbe2b2f4c1d8ef8b892c403}{Headline\+Str}}\mbox{[}\mbox{\hyperlink{screen_8c_aae912dbad7023425bfe78984f82f2db5}{Max\+Headline\+Len}}\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{screen_8c_ac1ebe2607761beb60ae7e5acdc6d3b5e}{Init\+Ekran}} ()
+\item 
+void \mbox{\hyperlink{screen_8c_a255a40cadaec465091bde3d2061e91dd}{Term\+Ekran}} ()
+\item 
+int \mbox{\hyperlink{screen_8c_a78ed8cf3e3c604f0ee848d94b01dcdc8}{Achoice}} (char $\ast$Headline, \mbox{\hyperlink{screen_8h_a8d0853c6a0beebd4bfc8d83929347562}{Ach\+Mat\+Ptr}} Matrica, int Rows, int Sirina, int w\+Up, int w\+Left, int Elements, int $\ast$Last\+Choice, \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} SlovoI)
+\item 
+void \mbox{\hyperlink{screen_8c_ae337c4e9a95f09e2cf5fa51283c244ff}{w\+Crtica}} (W\+I\+N\+D\+OW $\ast$My\+Window, int w\+Up, int w\+Left)
+\item 
+void \mbox{\hyperlink{screen_8c_a1eb9a1f35ac1279450cb20da2a10dde0}{w\+Kutija}} (W\+I\+N\+D\+OW $\ast$My\+Window, int Rows, int Sirina, \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{scrdefs_8h_a214d39cb8471f9de0c322f035eac9966}{Delete\+\_\+\+Screen}})
+\item 
+void \mbox{\hyperlink{screen_8c_a0d1ca89585a5c3a20abe5726f41322e1}{Get\+Field}} (void $\ast$Headline, int RowN, int KolN, void $\ast$Input\+Field, int Row\+Up, int Vel\+Polja, int Row\+Length, \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} Firstev\+Key\+\_\+pressed, \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}($\ast$F\+Ptr)(), \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}($\ast$L\+Ptr)())
+\item 
+void \mbox{\hyperlink{screen_8c_aa341bc99157c34c24ca16438ed3cac7f}{Get\+Datum}} (void $\ast$Headline, int RowN, int KolN, void $\ast$Input\+Field, int Row\+Up, \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} Firstev\+Key\+\_\+pressed, \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}($\ast$F\+Ptr)(), \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}($\ast$L\+Ptr)())
+\item 
+int \mbox{\hyperlink{screen_8c_ac2fbf951dbfd6d6411a3b80a15ebf2a1}{Read}} ()
+\item 
+void \mbox{\hyperlink{screen_8c_af21368dec8b03898a284d06f27901144}{Process\+Get}} (W\+I\+N\+D\+OW $\ast$Wget, int Row, int Poc, struct \mbox{\hyperlink{struct_take_field}{Take\+Field}} $\ast$P\+Ptr)
+\item 
+void \mbox{\hyperlink{screen_8c_a49974f50accd3d0a586bc07d2d808e3b}{Get\+Square}} (int RowN, int KolN, void $\ast$Input\+Field, int Vel\+Polja, int Row\+Length)
+\item 
+int \mbox{\hyperlink{screen_8c_ab47a6b1f5bfc4e3e802c44c3ca5f7aaa}{Look}} ()
+\item 
+void \mbox{\hyperlink{screen_8c_a24067d02b381608bd6bd6cad6011e8fb}{Process\+Look}} (W\+I\+N\+D\+OW $\ast$Wget, int Row, int Poc, struct \mbox{\hyperlink{struct_take_field}{Take\+Field}} $\ast$P\+Ptr)
+\item 
+void \mbox{\hyperlink{screen_8c_afb712ac53edc2a882d956714d6ca4b42}{Sw\+Ins}} ()
+\item 
+void \mbox{\hyperlink{screen_8c_a7272da8658ff8b52d491872af76b35a1}{message}} (char $\ast$Text)
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{screen_8c_a893e03f2c1e6efefd97b68b5c822cb99}{answer}} (char $\ast$Text)
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{screen_8c_afa22b31535f34e2ca6a4bf33b64d1514}{save\+\_\+on\+\_\+screen}} ()
+\item 
+void \mbox{\hyperlink{screen_8c_a3cda5ed8a585178131801c148e78243f}{rest\+\_\+from\+\_\+screen}} (W\+I\+N\+D\+OW $\ast$Wcuv)
+\item 
+void \mbox{\hyperlink{screen_8c_ad4f7b025ff1938092af4472e9653c956}{w\+Delete\+\_\+\+Screen}} (W\+I\+N\+D\+OW $\ast$My\+Window, int w\+Up, int w\+Left, int w\+Down, int w\+Right)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{screen_8c_a1647f704f8c783587889021aa17b1ec5}{vtterm}} = \mbox{\hyperlink{defs_8h_a39db6982619d623273fad8a383489309af382a63cc3d6491bf26b59e66f46826d}{F}}
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{screen_8c_acf71b11928e738e6bf40ac3a065e508e}{Direct\+\_\+\+Exit}} = \mbox{\hyperlink{defs_8h_a39db6982619d623273fad8a383489309af382a63cc3d6491bf26b59e66f46826d}{F}}
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}{Wsav}} = N\+U\+LL
+\item 
+int \mbox{\hyperlink{screen_8c_adf96f96c368b60276c4e36bbe9b3f717}{Insert\+Mod}}
+\item 
+int \mbox{\hyperlink{screen_8c_af1712c042f739339248295ff976b5018}{X\+Ins}}
+\item 
+int \mbox{\hyperlink{screen_8c_a61ec1653a0f0da74a3fadd01aa8421aa}{Y\+Ins}}
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{screen_8c_a533c331b5d5831558f30f7a6064e7404}{Winf}}
+\item 
+struct \mbox{\hyperlink{struct_take_field}{Take\+Field}} $\ast$ \mbox{\hyperlink{screen_8c_a655da5bce337870cd493551859cd59a3}{In\+Field\+Ptr}} \mbox{[}\mbox{\hyperlink{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}{Max\+Get}}\mbox{]}
+\item 
+int \mbox{\hyperlink{screen_8c_a17d3dbc7f395bb2619f169f651fcd9eb}{Start\+PositionW}}
+\item 
+int \mbox{\hyperlink{screen_8c_aa94d89ca531b7518b9fdd27fce2eefc5}{How\+MuchW}}
+\item 
+long long \mbox{\hyperlink{screen_8c_a721781a36826e57e8e92a18465ad15df}{Read\+PositionW}}
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{screen_8c_a8a52bddc731967aac4bfc45918e60f72}{Zorica}}
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{screen_8c_a5962eaad63fb03f7ed2f1cecaf7328b0}{Wkur}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}\label{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}} 
+\index{screen.c@{screen.c}!MaxGet@{MaxGet}}
+\index{MaxGet@{MaxGet}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{MaxGet}{MaxGet}}
+{\footnotesize\ttfamily \#define Max\+Get~60}
+
+
+
+Definition at line 10 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a296ec5d851ad2140495e6b147f41a7d6}\label{screen_8c_a296ec5d851ad2140495e6b147f41a7d6}} 
+\index{screen.c@{screen.c}!MaxGetLen@{MaxGetLen}}
+\index{MaxGetLen@{MaxGetLen}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{MaxGetLen}{MaxGetLen}}
+{\footnotesize\ttfamily \#define Max\+Get\+Len~\mbox{\hyperlink{defs_8h_a6789ebc0df71a8ef76bfbb4fb5f74aad}{M\+A\+X\+\_\+\+S\+T\+R\+I\+N\+G\+\_\+\+L\+E\+N\+G\+TH}}}
+
+
+
+Definition at line 12 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_aae912dbad7023425bfe78984f82f2db5}\label{screen_8c_aae912dbad7023425bfe78984f82f2db5}} 
+\index{screen.c@{screen.c}!MaxHeadlineLen@{MaxHeadlineLen}}
+\index{MaxHeadlineLen@{MaxHeadlineLen}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{MaxHeadlineLen}{MaxHeadlineLen}}
+{\footnotesize\ttfamily \#define Max\+Headline\+Len~80}
+
+
+
+Definition at line 13 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a71af8b22fd0739ae018ed24949c48ac6}\label{screen_8c_a71af8b22fd0739ae018ed24949c48ac6}} 
+\index{screen.c@{screen.c}!MaxLook@{MaxLook}}
+\index{MaxLook@{MaxLook}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{MaxLook}{MaxLook}}
+{\footnotesize\ttfamily \#define Max\+Look~L\+I\+N\+ES-\/7       /$\ast$ Must be less or equal \mbox{\hyperlink{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}{Max\+Get}}-\/u. $\ast$/}
+
+
+
+Definition at line 11 of file screen.\+c.
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{screen_8c_a44f74919c37f359451379f53c27ba062}\label{screen_8c_a44f74919c37f359451379f53c27ba062}} 
+\index{screen.c@{screen.c}!GetStr@{GetStr}}
+\index{GetStr@{GetStr}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{GetStr}{GetStr}}
+{\footnotesize\ttfamily typedef char Get\+Str\mbox{[}\mbox{\hyperlink{screen_8c_a296ec5d851ad2140495e6b147f41a7d6}{Max\+Get\+Len}}\mbox{]}}
+
+
+
+Definition at line 19 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_aa85bacdb6cbe2b2f4c1d8ef8b892c403}\label{screen_8c_aa85bacdb6cbe2b2f4c1d8ef8b892c403}} 
+\index{screen.c@{screen.c}!HeadlineStr@{HeadlineStr}}
+\index{HeadlineStr@{HeadlineStr}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{HeadlineStr}{HeadlineStr}}
+{\footnotesize\ttfamily typedef char Headline\+Str\mbox{[}\mbox{\hyperlink{screen_8c_aae912dbad7023425bfe78984f82f2db5}{Max\+Headline\+Len}}\mbox{]}}
+
+
+
+Definition at line 20 of file screen.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{screen_8c_a78ed8cf3e3c604f0ee848d94b01dcdc8}\label{screen_8c_a78ed8cf3e3c604f0ee848d94b01dcdc8}} 
+\index{screen.c@{screen.c}!Achoice@{Achoice}}
+\index{Achoice@{Achoice}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Achoice()}{Achoice()}}
+{\footnotesize\ttfamily int Achoice (\begin{DoxyParamCaption}\item[{char $\ast$}]{Headline,  }\item[{\mbox{\hyperlink{screen_8h_a8d0853c6a0beebd4bfc8d83929347562}{Ach\+Mat\+Ptr}}}]{Matrica,  }\item[{int}]{Rows,  }\item[{int}]{Sirina,  }\item[{int}]{w\+Up,  }\item[{int}]{w\+Left,  }\item[{int}]{Elements,  }\item[{int $\ast$}]{Last\+Choice,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}}]{SlovoI }\end{DoxyParamCaption})}
+
+
+
+Definition at line 149 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a893e03f2c1e6efefd97b68b5c822cb99}\label{screen_8c_a893e03f2c1e6efefd97b68b5c822cb99}} 
+\index{screen.c@{screen.c}!answer@{answer}}
+\index{answer@{answer}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{answer()}{answer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} answer (\begin{DoxyParamCaption}\item[{char $\ast$}]{Text }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1646 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_aa341bc99157c34c24ca16438ed3cac7f}\label{screen_8c_aa341bc99157c34c24ca16438ed3cac7f}} 
+\index{screen.c@{screen.c}!GetDatum@{GetDatum}}
+\index{GetDatum@{GetDatum}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{GetDatum()}{GetDatum()}}
+{\footnotesize\ttfamily void Get\+Datum (\begin{DoxyParamCaption}\item[{void $\ast$}]{Headline,  }\item[{int}]{RowN,  }\item[{int}]{KolN,  }\item[{void $\ast$}]{Input\+Field,  }\item[{int}]{Row\+Up,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}}]{Firstev\+Key\+\_\+pressed,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} ($\ast$)()}]{F\+Ptr,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} ($\ast$)()}]{L\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Definition at line 622 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a0d1ca89585a5c3a20abe5726f41322e1}\label{screen_8c_a0d1ca89585a5c3a20abe5726f41322e1}} 
+\index{screen.c@{screen.c}!GetField@{GetField}}
+\index{GetField@{GetField}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{GetField()}{GetField()}}
+{\footnotesize\ttfamily void Get\+Field (\begin{DoxyParamCaption}\item[{void $\ast$}]{Headline,  }\item[{int}]{RowN,  }\item[{int}]{KolN,  }\item[{void $\ast$}]{Input\+Field,  }\item[{int}]{Row\+Up,  }\item[{int}]{Vel\+Polja,  }\item[{int}]{Row\+Length,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}}]{Firstev\+Key\+\_\+pressed,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} ($\ast$)()}]{F\+Ptr,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} ($\ast$)()}]{L\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Definition at line 584 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a49974f50accd3d0a586bc07d2d808e3b}\label{screen_8c_a49974f50accd3d0a586bc07d2d808e3b}} 
+\index{screen.c@{screen.c}!GetSquare@{GetSquare}}
+\index{GetSquare@{GetSquare}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{GetSquare()}{GetSquare()}}
+{\footnotesize\ttfamily void Get\+Square (\begin{DoxyParamCaption}\item[{int}]{RowN,  }\item[{int}]{KolN,  }\item[{void $\ast$}]{Input\+Field,  }\item[{int}]{Vel\+Polja,  }\item[{int}]{Row\+Length }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1218 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_ac1ebe2607761beb60ae7e5acdc6d3b5e}\label{screen_8c_ac1ebe2607761beb60ae7e5acdc6d3b5e}} 
+\index{screen.c@{screen.c}!InitEkran@{InitEkran}}
+\index{InitEkran@{InitEkran}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{InitEkran()}{InitEkran()}}
+{\footnotesize\ttfamily void Init\+Ekran (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 59 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_ab47a6b1f5bfc4e3e802c44c3ca5f7aaa}\label{screen_8c_ab47a6b1f5bfc4e3e802c44c3ca5f7aaa}} 
+\index{screen.c@{screen.c}!Look@{Look}}
+\index{Look@{Look}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Look()}{Look()}}
+{\footnotesize\ttfamily int Look (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1245 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a7272da8658ff8b52d491872af76b35a1}\label{screen_8c_a7272da8658ff8b52d491872af76b35a1}} 
+\index{screen.c@{screen.c}!message@{message}}
+\index{message@{message}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{message()}{message()}}
+{\footnotesize\ttfamily void message (\begin{DoxyParamCaption}\item[{char $\ast$}]{Text }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1575 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_af21368dec8b03898a284d06f27901144}\label{screen_8c_af21368dec8b03898a284d06f27901144}} 
+\index{screen.c@{screen.c}!ProcessGet@{ProcessGet}}
+\index{ProcessGet@{ProcessGet}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{ProcessGet()}{ProcessGet()}}
+{\footnotesize\ttfamily void Process\+Get (\begin{DoxyParamCaption}\item[{W\+I\+N\+D\+OW $\ast$}]{Wget,  }\item[{int}]{Row,  }\item[{int}]{Poc,  }\item[{struct \mbox{\hyperlink{struct_take_field}{Take\+Field}} $\ast$}]{P\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Definition at line 836 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a24067d02b381608bd6bd6cad6011e8fb}\label{screen_8c_a24067d02b381608bd6bd6cad6011e8fb}} 
+\index{screen.c@{screen.c}!ProcessLook@{ProcessLook}}
+\index{ProcessLook@{ProcessLook}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{ProcessLook()}{ProcessLook()}}
+{\footnotesize\ttfamily void Process\+Look (\begin{DoxyParamCaption}\item[{W\+I\+N\+D\+OW $\ast$}]{Wget,  }\item[{int}]{Row,  }\item[{int}]{Poc,  }\item[{struct \mbox{\hyperlink{struct_take_field}{Take\+Field}} $\ast$}]{P\+Ptr }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1389 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_ac2fbf951dbfd6d6411a3b80a15ebf2a1}\label{screen_8c_ac2fbf951dbfd6d6411a3b80a15ebf2a1}} 
+\index{screen.c@{screen.c}!Read@{Read}}
+\index{Read@{Read}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily int Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 660 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a3cda5ed8a585178131801c148e78243f}\label{screen_8c_a3cda5ed8a585178131801c148e78243f}} 
+\index{screen.c@{screen.c}!rest\_from\_screen@{rest\_from\_screen}}
+\index{rest\_from\_screen@{rest\_from\_screen}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{rest\_from\_screen()}{rest\_from\_screen()}}
+{\footnotesize\ttfamily void rest\+\_\+from\+\_\+screen (\begin{DoxyParamCaption}\item[{W\+I\+N\+D\+OW $\ast$}]{Wcuv }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1731 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_afa22b31535f34e2ca6a4bf33b64d1514}\label{screen_8c_afa22b31535f34e2ca6a4bf33b64d1514}} 
+\index{screen.c@{screen.c}!save\_on\_screen@{save\_on\_screen}}
+\index{save\_on\_screen@{save\_on\_screen}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{save\_on\_screen()}{save\_on\_screen()}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ save\+\_\+on\+\_\+screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1715 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_afb712ac53edc2a882d956714d6ca4b42}\label{screen_8c_afb712ac53edc2a882d956714d6ca4b42}} 
+\index{screen.c@{screen.c}!SwIns@{SwIns}}
+\index{SwIns@{SwIns}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{SwIns()}{SwIns()}}
+{\footnotesize\ttfamily void Sw\+Ins (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1559 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a255a40cadaec465091bde3d2061e91dd}\label{screen_8c_a255a40cadaec465091bde3d2061e91dd}} 
+\index{screen.c@{screen.c}!TermEkran@{TermEkran}}
+\index{TermEkran@{TermEkran}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{TermEkran()}{TermEkran()}}
+{\footnotesize\ttfamily void Term\+Ekran (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 134 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_ae337c4e9a95f09e2cf5fa51283c244ff}\label{screen_8c_ae337c4e9a95f09e2cf5fa51283c244ff}} 
+\index{screen.c@{screen.c}!wCrtica@{wCrtica}}
+\index{wCrtica@{wCrtica}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{wCrtica()}{wCrtica()}}
+{\footnotesize\ttfamily void w\+Crtica (\begin{DoxyParamCaption}\item[{W\+I\+N\+D\+OW $\ast$}]{My\+Window,  }\item[{int}]{w\+Up,  }\item[{int}]{w\+Left }\end{DoxyParamCaption})}
+
+
+
+Definition at line 547 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_ad4f7b025ff1938092af4472e9653c956}\label{screen_8c_ad4f7b025ff1938092af4472e9653c956}} 
+\index{screen.c@{screen.c}!wDelete\_Screen@{wDelete\_Screen}}
+\index{wDelete\_Screen@{wDelete\_Screen}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{wDelete\_Screen()}{wDelete\_Screen()}}
+{\footnotesize\ttfamily void w\+Delete\+\_\+\+Screen (\begin{DoxyParamCaption}\item[{W\+I\+N\+D\+OW $\ast$}]{My\+Window,  }\item[{int}]{w\+Up,  }\item[{int}]{w\+Left,  }\item[{int}]{w\+Down,  }\item[{int}]{w\+Right }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1749 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a1eb9a1f35ac1279450cb20da2a10dde0}\label{screen_8c_a1eb9a1f35ac1279450cb20da2a10dde0}} 
+\index{screen.c@{screen.c}!wKutija@{wKutija}}
+\index{wKutija@{wKutija}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{wKutija()}{wKutija()}}
+{\footnotesize\ttfamily void w\+Kutija (\begin{DoxyParamCaption}\item[{W\+I\+N\+D\+OW $\ast$}]{My\+Window,  }\item[{int}]{Rows,  }\item[{int}]{Sirina,  }\item[{\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}}}]{Delete\+\_\+\+Screen }\end{DoxyParamCaption})}
+
+
+
+Definition at line 572 of file screen.\+c.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{screen_8c_acf71b11928e738e6bf40ac3a065e508e}\label{screen_8c_acf71b11928e738e6bf40ac3a065e508e}} 
+\index{screen.c@{screen.c}!Direct\_Exit@{Direct\_Exit}}
+\index{Direct\_Exit@{Direct\_Exit}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Direct\_Exit}{Direct\_Exit}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} Direct\+\_\+\+Exit = \mbox{\hyperlink{defs_8h_a39db6982619d623273fad8a383489309af382a63cc3d6491bf26b59e66f46826d}{F}}}
+
+
+
+Definition at line 16 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_aa94d89ca531b7518b9fdd27fce2eefc5}\label{screen_8c_aa94d89ca531b7518b9fdd27fce2eefc5}} 
+\index{screen.c@{screen.c}!HowMuchW@{HowMuchW}}
+\index{HowMuchW@{HowMuchW}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{HowMuchW}{HowMuchW}}
+{\footnotesize\ttfamily int How\+MuchW}
+
+
+
+Definition at line 48 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a655da5bce337870cd493551859cd59a3}\label{screen_8c_a655da5bce337870cd493551859cd59a3}} 
+\index{screen.c@{screen.c}!InFieldPtr@{InFieldPtr}}
+\index{InFieldPtr@{InFieldPtr}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{InFieldPtr}{InFieldPtr}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_take_field}{Take\+Field}}$\ast$ In\+Field\+Ptr\mbox{[}\mbox{\hyperlink{screen_8c_aa16503abc03ce2dc57a1f1dbd8d1ae78}{Max\+Get}}\mbox{]}}
+
+
+
+Definition at line 46 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_adf96f96c368b60276c4e36bbe9b3f717}\label{screen_8c_adf96f96c368b60276c4e36bbe9b3f717}} 
+\index{screen.c@{screen.c}!InsertMod@{InsertMod}}
+\index{InsertMod@{InsertMod}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{InsertMod}{InsertMod}}
+{\footnotesize\ttfamily int Insert\+Mod}
+
+
+
+Definition at line 41 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a721781a36826e57e8e92a18465ad15df}\label{screen_8c_a721781a36826e57e8e92a18465ad15df}} 
+\index{screen.c@{screen.c}!ReadPositionW@{ReadPositionW}}
+\index{ReadPositionW@{ReadPositionW}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{ReadPositionW}{ReadPositionW}}
+{\footnotesize\ttfamily long long Read\+PositionW}
+
+
+
+Definition at line 49 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a17d3dbc7f395bb2619f169f651fcd9eb}\label{screen_8c_a17d3dbc7f395bb2619f169f651fcd9eb}} 
+\index{screen.c@{screen.c}!StartPositionW@{StartPositionW}}
+\index{StartPositionW@{StartPositionW}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{StartPositionW}{StartPositionW}}
+{\footnotesize\ttfamily int Start\+PositionW}
+
+
+
+Definition at line 48 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a1647f704f8c783587889021aa17b1ec5}\label{screen_8c_a1647f704f8c783587889021aa17b1ec5}} 
+\index{screen.c@{screen.c}!vtterm@{vtterm}}
+\index{vtterm@{vtterm}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{vtterm}{vtterm}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} vtterm = \mbox{\hyperlink{defs_8h_a39db6982619d623273fad8a383489309af382a63cc3d6491bf26b59e66f46826d}{F}}}
+
+
+
+Definition at line 15 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a533c331b5d5831558f30f7a6064e7404}\label{screen_8c_a533c331b5d5831558f30f7a6064e7404}} 
+\index{screen.c@{screen.c}!Winf@{Winf}}
+\index{Winf@{Winf}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Winf}{Winf}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ Winf}
+
+
+
+Definition at line 45 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a5962eaad63fb03f7ed2f1cecaf7328b0}\label{screen_8c_a5962eaad63fb03f7ed2f1cecaf7328b0}} 
+\index{screen.c@{screen.c}!Wkur@{Wkur}}
+\index{Wkur@{Wkur}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Wkur}{Wkur}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ Wkur}
+
+
+
+Definition at line 55 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}\label{screen_8c_a3a2fd2435cea2c8b1895005f9c528350}} 
+\index{screen.c@{screen.c}!Wsav@{Wsav}}
+\index{Wsav@{Wsav}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Wsav}{Wsav}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ Wsav = N\+U\+LL}
+
+
+
+Definition at line 17 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_af1712c042f739339248295ff976b5018}\label{screen_8c_af1712c042f739339248295ff976b5018}} 
+\index{screen.c@{screen.c}!XIns@{XIns}}
+\index{XIns@{XIns}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{XIns}{XIns}}
+{\footnotesize\ttfamily int X\+Ins}
+
+
+
+Definition at line 42 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a61ec1653a0f0da74a3fadd01aa8421aa}\label{screen_8c_a61ec1653a0f0da74a3fadd01aa8421aa}} 
+\index{screen.c@{screen.c}!YIns@{YIns}}
+\index{YIns@{YIns}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{YIns}{YIns}}
+{\footnotesize\ttfamily int Y\+Ins}
+
+
+
+Definition at line 43 of file screen.\+c.
+
+\mbox{\Hypertarget{screen_8c_a8a52bddc731967aac4bfc45918e60f72}\label{screen_8c_a8a52bddc731967aac4bfc45918e60f72}} 
+\index{screen.c@{screen.c}!Zorica@{Zorica}}
+\index{Zorica@{Zorica}!screen.c@{screen.c}}
+\doxysubsubsection{\texorpdfstring{Zorica}{Zorica}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} Zorica}
+
+
+
+Definition at line 50 of file screen.\+c.
+

@@ -1,0 +1,35 @@
+var defs_8h =
+[
+    [ "max", "defs_8h.html#ab46ebc3550f3104694574a798fd6b0a3", null ],
+    [ "MAX_STRING_LENGTH", "defs_8h.html#a6789ebc0df71a8ef76bfbb4fb5f74aad", null ],
+    [ "min", "defs_8h.html#a52d9b74f50f886b28b7583a4f2b6bae4", null ],
+    [ "Boolean", "defs_8h.html#a59ae2bccd804e9bc9dc2c8d7b4dfbeb2", null ],
+    [ "Bool", "defs_8h.html#a39db6982619d623273fad8a383489309", [
+      [ "F", "defs_8h.html#a39db6982619d623273fad8a383489309af382a63cc3d6491bf26b59e66f46826d", null ],
+      [ "T", "defs_8h.html#a39db6982619d623273fad8a383489309a21f40778b7db9343a6ca75ec2c41ccce", null ]
+    ] ],
+    [ "datplus", "defs_8h.html#aef4020a7d5ae4b6e7b35a3f572127bcc", null ],
+    [ "datrazl", "defs_8h.html#ac1e315d5737a01ddfd6609f188380b7e", null ],
+    [ "DB_Lock_Close", "defs_8h.html#a1991c25de6be36ba1b24b8caeb7f6ae5", null ],
+    [ "DB_Lock_Init", "defs_8h.html#ab8b261307f1fc3849fd49720ea64cc8e", null ],
+    [ "Destroy_SHM", "defs_8h.html#a449bef4c97acd870edd34d86d48c6297", null ],
+    [ "empty_string", "defs_8h.html#aece82e577e34ec5b1ccd23aa029e3840", null ],
+    [ "isEmpty", "defs_8h.html#aaf54c5d1b50740b6bf630dbc24ecdf90", null ],
+    [ "left", "defs_8h.html#a290a385082d156c48fb74d37df932fbf", null ],
+    [ "ltrim", "defs_8h.html#a8eb1c9dca1a7c7c8a103f6c641d93c1b", null ],
+    [ "my_date", "defs_8h.html#a9b8ab1450ff22e766b63dd78de0341a1", null ],
+    [ "my_time", "defs_8h.html#ad58450259850ca0d453a95797896d217", null ],
+    [ "okrenidat", "defs_8h.html#a7b1a14307920f75fb2c4296d9d0d099a", null ],
+    [ "ponovi", "defs_8h.html#a9804a23349e7f2086fadba74673ae118", null ],
+    [ "right", "defs_8h.html#aa81dd53e4c065bcc57ccad000e1f0b6d", null ],
+    [ "SHM_Lock", "defs_8h.html#a03facd39e9b0e0328797604db3371191", null ],
+    [ "SHM_UnLock", "defs_8h.html#ae1045ba4e13cf34fe1857129b10e8ad8", null ],
+    [ "time_and_date", "defs_8h.html#ad661fb6f7a7b8aee0b91b9c02ad4f64a", null ],
+    [ "time_difference", "defs_8h.html#a366dae69bea4bf91b8a593a1d4e5e4a6", null ],
+    [ "to_left", "defs_8h.html#a093a4f5d573ac3c48b3b252c63817e8e", null ],
+    [ "to_right", "defs_8h.html#ad3aa2daaa4c4850b2c1a2f2d92f2bd60", null ],
+    [ "trim", "defs_8h.html#a68d0adf5b084e02695502f7442eb93b0", null ],
+    [ "vrmuredi", "defs_8h.html#af60e280c78638399aa80fbd7f7887a64", null ],
+    [ "vsubstr", "defs_8h.html#a7093e1624fa5bb9107f02a6b1f6d9efa", null ],
+    [ "APP_Program_Name", "defs_8h.html#aa6be5dfb108354734ae370043951e4a3", null ]
+];

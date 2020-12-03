@@ -1,0 +1,660 @@
+****************************************************************************
+* DESCRIPTION: Theory of B+ Tree Structure.                                *
+****************************************************************************
+
+B+ TREE STRUCTURE
+
+This text provides an overview of the B+ tree structure used by Access.
+Since Access handles the creation and maintenance of B+ trees automaticaly,
+it isn't necessary for you to understand (or even read) the material in   
+this text. However, if you are an experienced programmer, a deeper 
+understanding of B+ trees will enable you to fine-tune the Access system
+for your application programs. The information in this text can also help
+you set values for the constants used by Access.
+
+A general discussion of tree structures is presented, followed by a 
+discusson of B+ trees in particular, and how they are used by the Access.
+Concepts such as roots, nodes, pages, levels, items, and keys are also
+explained.
+
+Trees: The Quickest Route Is Not Always a Stright Line
+___________________________________________________________________________
+
+Suppose you have a database consisting of customer names, telephone numbers,
+addresses, and billing status. When you ask your computer to find the
+telephone number of a customer, unless it si equipped with Access or 
+samething similar, ti will search sequentally trough each record, one at a
+time. If that customer's telephone number happens to be at the bottom of 
+the database file, it will take a good deal of time to find it.
+
+Trees provide a way to search through lengthy data files quickly without
+looking at every record in the file. A tree is simply a way to organize
+data. Each piece of data can be represented by a node in the tree. There are
+three types of nodes: a root node, internal nodes, and leaf nodes. In a
+binary tree each node can have zero, one, or two children. A child node is
+pointed to by a parent node, which is either a root node or an internal
+node. A leaf node is a node that has no children. Thus, a tree is made up
+of nodes and pointers that connect the nodes (see Figure 1).
+
+                         ------------
+ Root node ------------>|     6      |
+                         ------------
+                              /\
+                             /  \
+                            /    \
+                           /      \
+ Internal or       ----------    ----------- 
+ middle nodes --->|    2     |  |     8     |
+                   ----------    ----------- 
+                   /  \                 /  \
+                  /    \               /    \
+                 /      \             /      \
+                /        \           /        \
+      -----------  ----------   ----------   -----------
+     |     1     ||    3     | |    7     | |     9     |
+      -----------  ----------   ----------   -----------
+           |                                      |
+            -------------------------------------- 
+                              |
+                     Terminal or leaf nodes
+
+                     Figure 1: A Binary Tree
+
+To find a particular piece of data in the tree, the tree is searched one 
+node at a time, starting at the root node. At each node, there are four
+possibilities:
+
+1. The current node contains the data being sought.
+2. The data being sought is less than the current node, in which case the
+   left child is the next node to be searched.
+3. The data being sought is greater than the current node, in which case
+   the right child will be searched next.
+4. The current node does not contain the sought data, and the node is a  
+   leaf; this means that the sought data is not in binary tree.
+
+Thus, when searching a binary tree, a decision is made at each node to
+discard or retain it, thereby eliminating half of the nodes under
+consideration. This makes tree searching efficient.
+
+B+ Tree Fundamentals 
+___________________________________________________________________________
+
+Binary trees are efficient data structures for man purposes, but there are
+other, more efficient, data structures to handle large amounts of data. The
+Access systems uses one such data structure called the B+ tree. (The B
+stands for Bayer, the inovator.)
+
+The main difference between a B+ tree and a binary tree is that more than
+two children are allowed at each level.
+
+A B+ tree's pages are analogues to a binary tree's nodes: There is a root
+page, internal pages, and leaf pages. Each page can contain several items.
+Each item holds an abbervation of the data record. There are typically 16 
+items on a page.
+
+Each root page and each internal page has one child page for each item on
+the page, plus one extra child page. Leaf pages have no children.
+
+                        ------------------
+   Root page --------->| I              R |
+                        ------------------
+                       /        |         \
+                      /         |          \
+                     /          |           \
+                    /           |            \
+   Internal   ----------   -----------   ------------
+      pages  | C      F | | L       O | | U        X |
+              ----------   -----------   ------------
+             /    |    |    /   |    |   |    |      \
+           AB    DE    GH  JK  MN   PQ   ST   VW     YZ
+           |                                          |
+            ------------------------------------------ 
+                                 |
+                            Leaf pages
+
+                         Figure 2: A B+ Tree
+
+A sipmle B+ tree is shown in Figure 2. The items in the B+ tree are 
+represented by letters and arranged alphabetically. There are two items
+on each page, and each page has three children. The items on each page   
+are in alphabetical order (for example, R comes after I in the root page).
+The children are also ordered in that for each page, its first item is 
+after every item on its first child page, and its second item is after      
+every item on its second child page, but before every item on the third
+child page. (For example, C is after A and B, and F is after D and E, but
+before G and H.)
+ 
+Searching a tree ordered in this manner can be very efficant. Similar to
+a binary tree, you start at the root, proceeding down the tree by making 
+comparisons against the items wihtin each page.
+
+B+ trees are used to manage disk-stored databases too large to put in
+RAM. With Access, the data file is just one big array of records.
+Typically, there might be 5000 redords, each record 300 bytes in lenght.
+A separate file called an index file is used to organize the data into a
+B+ tree structure.
+
+Manipulating entire data items is somewhat cumbersome; thus, in the index 
+file each data record is abberviated into a key and a data reference. A
+key is usually a portion of a data record that is sufficient do determine
+the ordering of the data records. A data reference is a pointer that
+indicates where the complete data record is stored. (These concpts are
+explained more fully in later sections.)
+
+Access provides procedures for Accessing, inserting, and deleting data
+records. Becouse it uses B+ trees, each operation involves a very small
+number of disk Accesses and is very efficient.
+
+Elements of a B+ Tree
+___________________________________________________________________________
+
+Trees are most efficient if the items are distributed fairly evenly
+troughout the tree; therefore, B+ trees are defined to ensure balance.
+Access routines automatically maintain these properties of B+ trees.
+
+A B+ tree of order n is a tree that staisfies the following constrains:
+
+1. Excluding the root, all pages have at least n items.
+2. Each page has, at most, 2n items.
+3. Either a page is a leaf with no active page references, or it has one
+   page reference for each item plus one extra page reference.
+4. All leaf pages must be on the same level.
+5. Items on a page do not contain any data; they contain only keys and
+   references to other pages and data records.
+
+These constraints provide several advantages. First, they ensure tahat
+all parts of the B+ tree have a minimum information density; that is,
+at least 50 percent of the B+ tree consists of items. Second, most of the  
+items have the same search-path lenght, which is the mumber of levels in 
+the tree that a search would have to go through if it started at the root.
+The remainder of iterms have shorter paths.
+
+Adding items to or deleting items from a B+ tree may caouse the tree to
+become temporarily unbalanced. However, Access uses balancing algorithms
+to ensure that the previously described constraints are always satisfied.
+
+With a B+ tree, a very large number of items can be put in a tree with
+a vary small number of levels. If for example, you have 65,535 keys, and
+the B+ tree has order 16, then it will have, at most, four levels. Without
+the constraints on the B+ tree structure, the search path lenght would       
+depend upon history of key insertion and could become unacceptably large.
+
+Keys
+____________________________________________________________________________
+
+Each tiem of the B+ tree holds a key. Akey is a user-defined character
+string of 255 characters or less that is used to store and retrieve a
+record in a data file. A key can be formated from any word or code that is 
+relevant to the data record the key is associated with. In most cases, a
+key is chosen from a key for a customer database, the customer's first and
+last name could be concatenated to form a key of,say, lenght 25:
+
+     ------------------------------------------------------------------
+       Fields           Data Record #1               Data Record #2
+     ------------------------------------------------------------------
+       First name       'Jon'                        'George'
+       Last name        'Jones'                      'Washington'
+       Company          'Acme Supply'                'U.S. Government'
+       Etc.             ...                          ...
+
+
+
+                        0         1         2
+                        1234567890123456789012345
+     
+       Key #1          'Jones        Jon         '
+       Key #2          'Washington   George      '
+     ------------------------------------------------------------------
+
+A string uses an ordering system that makes use of the relational operators
+>, =, and <. Since each key has a relative rank (according to its lenght
+and ASCII value) in the tree, the oreder of a given set of keys is fixed.
+In the previous example, two key strings might be identical and thus have 
+the same rank. The Access system determines the rank of identical key in 
+one of two ways, depending on how the index file is created.
+
+If the index file is created with a status of no duplicate keys allowed, then
+the system will warn the user program when an attempt is being made to add
+a duplicate key. The user program can then take appropriate action.
+If the index file is created with a status of duplicate keys allowed, then
+adding two identical keys will cause the entries to be ordered by physical
+record number (which is always unique). In this case, if a attempt is made
+to delete a key, the system checks both the key itself and the record number
+associated with it to ensure that the correct key is deleted.
+
+Both the RAM space required by B+ tree procedures and the disk space used
+by index files grow increasing key lenghts. The key must be long enough
+to allow for a sufficient number of key variations to separate all entries
+in the index file. In many cases, abbreviating the original key information
+will serve the purpose.
+
+For example, Henry Smith, Plumber, could be 'PlumSmitH'.
+
+Items
+_____________________________________________________________________________
+
+The fundamental unit of a B+ tree is a record data type called an item. An
+item represents teh connection between a key string and a physical data
+record (see Figure 3.), and is made up of a key string, a data reference,
+and a page reference.
+
+The key string is used by Access to search the B+ tree, the data reference
+points to the location in the data file where the data record associated with
+key is found, and the page reference forms the link in the B+ tree by pointing
+to a page where all keys are greater than the current item's key string.
+
+The key string and the data reference are generated by the user program
+(that is, the key string from record fields, and the data erference returned
+by Tha AddRec routine). The page reference is generated internally by the
+AddKey procedure.
+
+                  -----------------------------
+                 |                             |
+                 |         Key String          |
+                  -----------------------------
+                 |   Page       |    Data      |
+                 | Reference    | Reference    |
+                  -----------------------------
+
+                         Figure 3: An Item
+
+Pages
+______________________________________________________________________________
+
+A unit or record of an index file is called a page. A page is a record 
+containing three structures: an array of items, an extra page reference, and
+a count (see Figure 4). In Access system, the array ha room for a fixed
+number of items described in the previous section. This number is called the
+page size, and is exactly twice the order of the B+ tree. It may be any 
+even number between 4 and 254.
+
+The number of items actually in a page can be anything between page size/2
+and page size items. Since this number varies, each page must keep track of
+how many items it holds using the count field, which contains the number
+of items currently on page. The count field always points to the last valid
+item in the array.
+
+Since there is one page reference for each item and the number of page
+references is one more than the number of tiems, there must be an extra page
+reference. The extra page reference is used to find keys with values that 
+are less than any key on the current page.
+
+For example, if a page contains items with keys X, Y, and Z, then the page
+reference associated with X points to a page with keys grater than X but less
+than Y. Likewise, the page reference associated with Y points to a page
+with keys grater than Y but less than Z; and the page reference associated
+with Z points to a page with keys grater than Z. The extra page reference
+points to a page with keys less than X.
+
+        ----------
+       |           |
+       |   Count   |-----------------------
+        -----------                       |
+       | Extra Page|                      |
+       | Reference |                      V
+        ------------------------//------------------//------------------
+       |           |          |    |              |    |                |
+       | Item[1]   | Item[2]  |....| Item[Count]  |....| Item[Page Size]|
+        ------------------------//------------------//------------------ 
+                                   Last Valid Item     Last Possible Item
+
+                   Figure 4: Structure of a Page in an Index File
+
+There are three distinct types of pages: the root page, the internal pages,
+and the leaf pages
+
+The first page of the B+ tree is called the root page and may contain as 
+little as one item. All other pages of the B+ tree must be at least half
+full. This means that there are, at most, page size items and at least,
+page size/2 items on all pages except the root page.
+ 
+The internal pages alwayes have between (page size +1) and (page size/2 +1)
+pointers to other pages. This keeps the B+ tree balanced.
+
+The leaf pages are at the bottom of the tree and contain no active page
+references (this is, they do not have pointers to other pages).
+
+
+HOW PAGE ARE ORGANIZED INTO B+ TREES
+
+B+ trees are constructed of pages. As shown in Figure 5, each item holds
+a possible page reference for each key. In a B+ tree, the page to which
+the page reference points contains additional items with keys. All of these
+keys are larger than the key associated with the page reference.
+
+A search for a given key in a B+ tree follows a path that starts at the
+root page and jumps to a child page by following a page reference if the
+key is not on the page. The page references on each page are orederd so
+that the appropriate child page can be found by comparing the given key to
+the other keys on the page.
+
+                   Page Number                This page's page reference.   
+         -----------------------------------
+        |                                   |
+        |            Count                  | Last valid item on this page.
+         -----------------------------------
+        |            Extra                  | Pointer to page with keys less
+        |       Page Reference              | than this page.
+         -----------------------------------
+        |                                   |
+        |          Key String               | Item number one. (Note that each
+         -----------------------------------  item contains a key string,a data
+        |   Data         |      Page        | reference, and a page reference).
+        | Reference      |   Reference      |
+         -----------------------------------
+        |                                   |
+        |          Key String               |
+         -----------------------------------  Item number two.
+        |   Data         |      Page        |
+        | Reference      |   Reference      |
+         -----------------------------------
+        |                                   |
+        |          Key String               |
+         -----------------------------------  Item number three.
+        |   Data         |      Page        |
+        | Reference      |   Reference      |
+         -----------------------------------
+        |                                   |
+        |          Key String               |
+         -----------------------------------  Item number four.
+        |   Data         |      Page        |
+        | Reference      |   Reference      |
+         -----------------------------------
+
+                    Figure 5: The Page Structure
+
+All paths in a B+ tree start at the root page, and a jump can be made to a 
+page with either larger or smaller keys. Keys are ordered in a B+ tree so
+that each page int hte tree can be reached by one-and only one-path. The
+number og jumps in a path is called the level of the page, with the root
+page being level one. The leaf pages have a level equal to the height of    
+the B+ tree. 
+
+For example, if an item contains the key M (see the root page in Figure 6),
+that item's page reference will point ot a page where all the items contain
+keys greater than M (for instance, R and V). Thus, consecutive jumps from a
+page item to that item's page reference follow a path of increasing keys.
+The path stops at hte leaf page where there are no active page references.
+These jump decisions are always made by the Access system.
+
+If a jump is made from an item's page reference, the search key must be
+larger than that item's key, but smaller than the next item's key. After
+the jump is made, the search key could be smaller than all the keys on the
+new page. In theis situation, the extra page reference is used. It points
+to another page where all the keys are smaller than that page's keys
+(for example, see pages 1 and 2 in Figure 6).
+
+Thus, you could move from one page to another in such a way that any key
+in the second page is smaller than any key in the first page. When starting
+at the root, the single path made from only extra page references will end
+at the leaf page with the smallest key in the B+ tree. In Figure 6, this
+page 1, since it contains the key A and has no extra page reference.
+
+   Root Page   Middle pages                 Leaf Pages
+                                  
+      |             |                           |              
+      |             |             -----------------------------
+      |             V             |             |             |
+      |                           |             |             |
+      |           Page 2          |             |             |
+      |           -------         |             |             V
+      |       -->|   2   |        V             V          Page 1
+      |       |   -------                                  -------
+      |       |  |   1   |------------------------------->|   2   |
+      |       |   -------                                  -------
+      |       |  |  'C'  |                   Page 9       |   0   |
+      |       |   -------                    -------       -------
+      |       |  |20 | 9 |----------------->|   4   |     |  'A'  |
+      |       |   -------                    -------       -------
+      |       |  |  'H'  |     Page 6       |   0   |     | 2 | 0 |
+      |       |   -------      -------       -------       -------
+      |       |  |11 | 6 |--->|   4   |     |  'D'  |     |  'B'  |
+      V       |   -------      -------       -------       -------
+    Page 7    |  |  ...  |    |   0   |     |24 | 0 |     | 6 | 0 |
+    -------   |   -------      -------       -------       -------
+   |   1   |  |  | 0 | 0 |    |  'I'  |     |  'E'  |     |  ...  |
+    -------   |   -------      -------       -------       -------
+   |   2   | --  |  ...  |    |21 | 0 |     |26 | 0 |     | 0 | 0 |
+    -------       -------      -------       -------       -------
+   |  'M'  |     | 0 | 0 |    |  'J'  |     |  'F'  |     |  ...  |
+    -------       -------      -------       -------       -------
+   | 1 | 8 |---               |16 | 0 |     |22 | 0 |     | 0 | 0 |
+    -------   |                -------       -------       -------
+   |  ...  |  |               |  'K'  |     |  'G'  |
+    -------   |                -------       -------
+   | 0 | 0 |  |               | 4 | 0 |     |14 | 0 |
+    -------   |                -------       -------
+   |  ...  |  |   Page 8      |  'L'  |
+    -------   |   -------      -------
+   | 0 | 0 |  -->|   2   |    | 9 | 0 |                    Page 3
+    -------       -------      -------                     -------
+   |  ...  |     |   3   |------------------------------->|   4   |
+    -------       -------                                  -------
+   | 0 | 0 |     |  'R'  |                   Page 4       |   0   |
+    -------       -------                    -------       -------
+                 | 8 | 4 |----------------->|   4   |     |  'N'  |
+                  -------                    -------       -------
+                 |  'W'  |     Page 5       |   0   |     |15 | 0 |
+                  -------      -------       -------       -------
+                 |13 | 5 |--->|   3   |     |  'S'  |     |  'O'  |
+                  -------      -------       -------       -------
+                 |  ...  |    |   0   |     |17 | 0 |     |10 | 0 |
+                  -------      -------       -------       -------
+                 | 0 | 0 |    |  'X'  |     |  'T'  |     |  'P'  |
+                  -------      -------       -------       -------
+                 |  ...  |    |17 | 0 |     |12 | 0 |     | 5 | 0 |
+                  -------      -------       -------       -------
+                 | 0 | 0 |    |  'Y'  |     |  'U'  |     |  'Q'  |
+                  -------      -------       -------       -------
+                              |19 | 0 |     |18 | 0 |     |23 | 0 |
+                               -------       -------       -------
+                              |  'Z'  |     |  'V'  |
+                               -------       -------
+                              | 3 | 0 |     |25 | 0 |
+                               -------       -------
+                              |  ...  |
+                               -------
+                              | 0 | 0 |
+                               -------
+
+                   Figure 6: Diagram of a B+ Tree of Order 2
+
+Finding the Data Reference
+_____________________________________________________________________________
+
+Access locates a data record by using a spedified key. The page with the
+data reference is found by following a path starting at the root page. If
+all keys on the page are larger than the key being sought, the next page
+to be investigated is referenced by the extra page reference. If this is
+not the case, the reference to the next page is foung int the item with the
+largest key that is less than the key being sought. Teh search continues 
+until the key si found or until a leaf page is reached with no result.
+
+The root page could be searched for a key with an ordirnary search routine.
+However, Access uses a binary search. If the item is found, the associated 
+data record can be read into memory with one disk Access. If the key is not
+found on the root, the search continues on the page pointed to by the item's
+key closest to (but less than) the search key.
+
+For example, if the root page contains the key entry M (see Figure 6) and
+the search key is N, the page search will fail after the first comparison
+becouse the count variable will termintate the search. Ath this point, the
+search will continue on the page referenced by key M (see page 8 in 
+Figure 6). Since this page contains all keys all keys greater than the
+search key, the next page to search is referenced by the extra page reference
+(see page 3 in Figure 6). Searching this page yields the desired key; thus,
+the entire B+ tree search is successful. The data record pointed to by the
+data reference in the item with key N (data record #13 in Figure &) can then
+be read into memory.
+
+            Data
+          Reference                Information
+          -----------------------------------------------------
+         |     #1   |   Information for key 'M'                |
+          -----------------------------------------------------
+         |     #2   |   Information for key 'A'                |
+          -----------------------------------------------------
+         |     #3   |   Information for key 'Z'                |
+          -----------------------------------------------------
+         |     #4   |   Information for key 'K'                |
+          -----------------------------------------------------
+         |     #5   |   Information for key 'P'                |
+          -----------------------------------------------------
+         |     #6   |   Information for key 'B'                |
+          -----------------------------------------------------
+         |     #7   |   Information for key 'S'                |
+          -----------------------------------------------------
+         |     #8   |   Information for key 'R'                |
+          -----------------------------------------------------
+         |     #9   |   Information for key 'L'                |
+          -----------------------------------------------------
+         |    #10   |   Information for key 'O'                |
+          -----------------------------------------------------
+         |    #11   |   Information for key 'H'                |
+          -----------------------------------------------------
+         |    #12   |   Information for key 'T'                |
+          -----------------------------------------------------
+         |    #13   |   Information for key 'W'                |
+          -----------------------------------------------------
+         |    #14   |   Information for key 'G'                |
+          -----------------------------------------------------
+         |    #15   |   Information for key 'N'                |
+          -----------------------------------------------------
+         |    #16   |   Information for key 'J'                |
+          -----------------------------------------------------
+         |    #17   |   Information for key 'X'                |
+          -----------------------------------------------------
+         |    #18   |   Information for key 'U'                |
+          -----------------------------------------------------
+         |    #19   |   Information for key 'Y'                |
+          -----------------------------------------------------
+         |    #20   |   Information for key 'C'                |
+          -----------------------------------------------------
+         |    #21   |   Information for key 'I'                |
+          -----------------------------------------------------
+         |    #22   |   Information for key 'F'                |
+          -----------------------------------------------------
+         |    #23   |   Information for key 'Q'                |
+          -----------------------------------------------------
+         |    #24   |   Information for key 'D'                |
+          -----------------------------------------------------
+         |    #25   |   Information for key 'V'                |
+          -----------------------------------------------------
+         |    #26   |   Information for key 'E'                |
+          -----------------------------------------------------
+
+             Figure 7: Data File Showing Order of Insertion
+
+B+ Tree Administration
+____________________________________________________________________________
+
+When data records are inserted or deleted from the data file, the 
+corresponding keys must be inserted or deleted from the index file, and the
+page items must be rearranged by the Access system. The following are
+exaples of how Access inserts and deletes keys.
+
+INSERTING KEYS
+
+When a key is presented to the B+ tree for insertion, the tree is checked to
+determine whether or not the key si already present. If the key is new or if
+duplicate keys are allowed, the search stops at a leaf page. If the leaf page
+is not full, the key is inserted into the page so that the page remains sorted.
+If the leaf page is full (that is, it already contains 2n items), an new page
+is added.
+
+This process of adding new pages is called page splitting. The 2n+1 keys are
+redistributed. The n largest items are moved to the new page, the n smallest
+items stay on the old page, and the middle item (n+1) is moved to an
+ancestral page where it si sssociated with a reference to the new page. This
+scheme preserves the oreder of items in the B+ tree.
+
+If the ancestral page is full, it must be split to accept the item moved
+from the leaf level. In this way, page splitting propagates recursively from
+the leaves all the way to the root. if the root page is split, a new root is
+created, and the B+ tree grows in height by one. Splitting the root page is
+the only way a B+ tree can grow in height.
+
+Figure 8 shows an example of how a B+ tree grows by repeated insertions. The
+B+ tree has order one in this case. Note that the properties of B+ trees and
+the ordering of items with the tree are meintained after each insertion.
+(The order of a Access B+ tree is always at least two. This example is for
+illustrative purpose only.)
+
+                          -------
+       Add M             | M |   |
+                          -------
+       ______________________________________________________________
+                          -------
+       Add J             | J | M |
+                          -------
+       ______________________________________________________________
+                          -------
+       Add P             | M |   |
+                          -------
+                          /     \
+                   -------    -------
+                  | J |   |  | P |   |
+                   -------    -------
+       ______________________________________________________________
+                          -------
+       Add Q             | M |   |
+                          -------
+                          /     \
+                   -------    -------
+                  | J |   |  | P | Q |
+                   -------    -------
+       ______________________________________________________________
+                          -------
+       Add R             | M | Q |
+                          -------
+                         /   |    \
+                 -------  -------  -------
+                | J |   || P |   || R |   |
+                 -------  -------  -------
+       ______________________________________________________________
+                          -------
+       Add K             | M | Q |
+                          -------
+                         /   |    \
+                 -------  -------  -------
+                | J | K || P |   || R |   |
+                 -------  -------  -------
+       ______________________________________________________________
+                          -------
+       Add L             | M |   |
+                          -------
+                         /        \
+                 -------           -------
+                | K |   |         | Q |   |
+                 -------           -------
+                /       \         /       \
+           -------   -------   -------   -------
+          | J |   | | L |   | | P |   | | R |   |
+           -------   -------   -------   -------
+
+                 Figure 8: How a B+ Tree Grows
+
+DELETING KEYS
+
+When a key si to be deleted, Access finds its location in the tree. If the
+key is on a leaf page, it si simply removed. If the key is situated 
+elsewhere in the tree, the proccess of eletion becomes more complicated. In
+this case, it is neccessary to replace the key with another key at the leaf
+level in the tree while keeping the page reference associated with the  
+deleted key.
+
+Fortunately, it is always possible to fine a suitable key that will not
+destroy the key order. The samllest key that is larger than the one to be
+deleted is also always on a leaf page. Likewise, the largest key that is
+smaller than the one to be deleted is also always on a leaf page. One of  
+these can be used to replace the deleted key without affecting key order.
+
+It is possible that removing a key from a leaf page will leave the page 
+with too few items (that is, less than n, where n is the order of the B+
+tree). In this case, Access uses a rebalancing method to redistribute the
+items. In simpler cases, an item is simply borrowed from an adjacent page.
+In more complicated cases, a process called page merging (analogous to
+page splitting) is used to merge pages. In an extreme case, page merging
+can propagete all the way to the root, reducing the number of levels in the
+B+ tree by one.
+****************************************************************************

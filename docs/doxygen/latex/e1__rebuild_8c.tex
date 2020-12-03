@@ -1,0 +1,429 @@
+\hypertarget{e1__rebuild_8c}{}\doxysection{e1\+\_\+rebuild.\+c File Reference}
+\label{e1__rebuild_8c}\index{e1\_rebuild.c@{e1\_rebuild.c}}
+{\ttfamily \#include \char`\"{}maccess.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}example1.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$uuid/uuid.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+Include dependency graph for e1\+\_\+rebuild.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{e1__rebuild_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{e1__rebuild_8c_abfb5605e3d493573b1e0dc4910918385}{A\+P\+P\+\_\+\+L\+O\+G\+F\+I\+LE}}~\char`\"{}example1.\+log\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{e1__rebuild_8c_a5054c36923934387c6f7605dd1a2f3c9}{sig\+\_\+handler}} (int sig)
+\item 
+int \mbox{\hyperlink{e1__rebuild_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+void \mbox{\hyperlink{e1__rebuild_8c_a50576fe98dc5e3df6832f7b355165831}{Rebuild\+Index}} ()
+\item 
+void \mbox{\hyperlink{e1__rebuild_8c_a56e10fcc3770245f4fe4db99a180aefc}{Control}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_a79ced7b9725c06a838eb8dce9d5840c6}{Dat\+F\+Name}} = \char`\"{}data1.\+dbc\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_ad31b2efc689e0eec86f046098ad1c225}{Dat\+F\+Name1}} = \char`\"{}data1.\+tmp\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_ab724973d8f6ea2b0d81f0f6c202ed18e}{Index\+F\+Name0}} = \char`\"{}client\+\_\+id.\+cdx\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_a37fb60d6507b4f368e12d0ba6b489431}{Index\+F\+Name1}} = \char`\"{}group\+\_\+id.\+cdx\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_ad1c43d331a8cda306295fee01a8e2a1c}{Index\+F\+Name2}} = \char`\"{}resource\+\_\+id.\+cdx\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_a6c35deef1dc96c9a78ffb613bdd423ea}{Index\+F\+Name3}} = \char`\"{}auth\+\_\+id.\+cdx\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{e1__rebuild_8c_a118382ffba4c269ca5fc4f3f3a5b096a}{Index\+F\+Name4}} = \char`\"{}status.\+cdx\char`\"{}
+\item 
+unsigned long long \mbox{\hyperlink{e1__rebuild_8c_abdb7ca1b1a45f86889d31bc0281fc4f0}{client\+\_\+id\+\_\+\+Len}} = 65
+\item 
+unsigned long long \mbox{\hyperlink{e1__rebuild_8c_a58722eb37cbe28bdc0d0c2391831054e}{group\+\_\+id\+\_\+\+Len}} = 65
+\item 
+unsigned long long \mbox{\hyperlink{e1__rebuild_8c_a70dc78b023ae09acbd4f371463e1bdc4}{resource\+\_\+id\+\_\+\+Len}} = 65
+\item 
+unsigned long long \mbox{\hyperlink{e1__rebuild_8c_ae80de9b956c3b18097bff25d24b80a88}{auth\+\_\+id\+\_\+\+Len}} = 65
+\item 
+unsigned long long \mbox{\hyperlink{e1__rebuild_8c_a4c6750126833aa9bb5f21c21a0406388}{status\+\_\+\+Len}} = 3
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_a2c4c358a8cce50087ff25d03d755779d}{I\+Ext\+\_\+client\+\_\+id}}
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{e1__rebuild_8c_a1707d852614e8b8305241e3d11da9362}{I\+Ptr\+\_\+client\+\_\+id}} = N\+U\+LL
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_abf21601fad1ab17027ba7a440cc1533e}{I\+Ext\+\_\+group\+\_\+id}}
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{e1__rebuild_8c_a313e1e6d4badc3db12bc3a01622717ea}{I\+Ptr\+\_\+group\+\_\+id}} = N\+U\+LL
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{e1__rebuild_8c_aea283b72dd2cd39d29252458a068ee84}{I\+Ptr\+\_\+resource\+\_\+id}} = N\+U\+LL
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_ae7147e507476864b95600cf5b59e678a}{I\+Ext\+\_\+auth\+\_\+id}}
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{e1__rebuild_8c_aaba6248b75c1f0ec998ec79188ffaf90}{I\+Ptr\+\_\+auth\+\_\+id}} = N\+U\+LL
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_a0b7b54e7d0114a8b4e18915177afb133}{I\+Ext\+\_\+status}}
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{e1__rebuild_8c_a5299b54f145405f5ba13a04107de4262}{I\+Ptr\+\_\+status}} = N\+U\+LL
+\item 
+struct \mbox{\hyperlink{struct_record}{Record}} $\ast$ \mbox{\hyperlink{e1__rebuild_8c_a7c26abe72eedf6e7408af429ec61b2d8}{info}} = N\+U\+LL
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_a3f282234c46450e1774c8d46dfa904d1}{I\+Ext}}
+\item 
+struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_ae08df3d40ef1ce19769eb9854e1b343a}{D\+Ext}}
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{e1__rebuild_8c_a9fff0f3b8b2e7e8a76c32455d97d49ce}{D\+Ptr}} = N\+U\+LL
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{e1__rebuild_8c_a98be613b8aa5674aff37d84d8db4ed87}{I\+Ext\+\_\+resource\+\_\+id}}
+\item 
+long long \mbox{\hyperlink{e1__rebuild_8c_a31d81016b5ed2a29244fdd7098d77598}{Ta\+Rec\+Num}} = 0
+\item 
+struct \mbox{\hyperlink{struct_record}{Record}} \mbox{\hyperlink{e1__rebuild_8c_ae0adaf4e4798628eb7043cfad93400d1}{My\+Record}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{e1__rebuild_8c_abfb5605e3d493573b1e0dc4910918385}\label{e1__rebuild_8c_abfb5605e3d493573b1e0dc4910918385}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!APP\_LOGFILE@{APP\_LOGFILE}}
+\index{APP\_LOGFILE@{APP\_LOGFILE}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{APP\_LOGFILE}{APP\_LOGFILE}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+L\+O\+G\+F\+I\+LE~\char`\"{}example1.\+log\char`\"{}}
+
+
+
+Definition at line 12 of file e1\+\_\+rebuild.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{e1__rebuild_8c_a56e10fcc3770245f4fe4db99a180aefc}\label{e1__rebuild_8c_a56e10fcc3770245f4fe4db99a180aefc}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!Control@{Control}}
+\index{Control@{Control}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{Control()}{Control()}}
+{\footnotesize\ttfamily void Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 177 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{e1__rebuild_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!main@{main}}
+\index{main@{main}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 68 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a50576fe98dc5e3df6832f7b355165831}\label{e1__rebuild_8c_a50576fe98dc5e3df6832f7b355165831}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!RebuildIndex@{RebuildIndex}}
+\index{RebuildIndex@{RebuildIndex}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{RebuildIndex()}{RebuildIndex()}}
+{\footnotesize\ttfamily void Rebuild\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 88 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a5054c36923934387c6f7605dd1a2f3c9}\label{e1__rebuild_8c_a5054c36923934387c6f7605dd1a2f3c9}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!sig\_handler@{sig\_handler}}
+\index{sig\_handler@{sig\_handler}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{sig\_handler()}{sig\_handler()}}
+{\footnotesize\ttfamily void sig\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Definition at line 45 of file e1\+\_\+rebuild.\+c.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{e1__rebuild_8c_ae80de9b956c3b18097bff25d24b80a88}\label{e1__rebuild_8c_ae80de9b956c3b18097bff25d24b80a88}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!auth\_id\_Len@{auth\_id\_Len}}
+\index{auth\_id\_Len@{auth\_id\_Len}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{auth\_id\_Len}{auth\_id\_Len}}
+{\footnotesize\ttfamily unsigned long long auth\+\_\+id\+\_\+\+Len = 65}
+
+
+
+Definition at line 24 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_abdb7ca1b1a45f86889d31bc0281fc4f0}\label{e1__rebuild_8c_abdb7ca1b1a45f86889d31bc0281fc4f0}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!client\_id\_Len@{client\_id\_Len}}
+\index{client\_id\_Len@{client\_id\_Len}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{client\_id\_Len}{client\_id\_Len}}
+{\footnotesize\ttfamily unsigned long long client\+\_\+id\+\_\+\+Len = 65}
+
+
+
+Definition at line 21 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a79ced7b9725c06a838eb8dce9d5840c6}\label{e1__rebuild_8c_a79ced7b9725c06a838eb8dce9d5840c6}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!DatFName@{DatFName}}
+\index{DatFName@{DatFName}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{DatFName}{DatFName}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Dat\+F\+Name = \char`\"{}data1.\+dbc\char`\"{}}
+
+
+
+Definition at line 14 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ad31b2efc689e0eec86f046098ad1c225}\label{e1__rebuild_8c_ad31b2efc689e0eec86f046098ad1c225}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!DatFName1@{DatFName1}}
+\index{DatFName1@{DatFName1}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{DatFName1}{DatFName1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Dat\+F\+Name1 = \char`\"{}data1.\+tmp\char`\"{}}
+
+
+
+Definition at line 15 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ae08df3d40ef1ce19769eb9854e1b343a}\label{e1__rebuild_8c_ae08df3d40ef1ce19769eb9854e1b343a}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!DExt@{DExt}}
+\index{DExt@{DExt}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{DExt}{DExt}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}} D\+Ext}
+
+
+
+Definition at line 38 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a9fff0f3b8b2e7e8a76c32455d97d49ce}\label{e1__rebuild_8c_a9fff0f3b8b2e7e8a76c32455d97d49ce}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!DPtr@{DPtr}}
+\index{DPtr@{DPtr}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{DPtr}{DPtr}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} D\+Ptr = N\+U\+LL}
+
+
+
+Definition at line 39 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a58722eb37cbe28bdc0d0c2391831054e}\label{e1__rebuild_8c_a58722eb37cbe28bdc0d0c2391831054e}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!group\_id\_Len@{group\_id\_Len}}
+\index{group\_id\_Len@{group\_id\_Len}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{group\_id\_Len}{group\_id\_Len}}
+{\footnotesize\ttfamily unsigned long long group\+\_\+id\+\_\+\+Len = 65}
+
+
+
+Definition at line 22 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a3f282234c46450e1774c8d46dfa904d1}\label{e1__rebuild_8c_a3f282234c46450e1774c8d46dfa904d1}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IExt@{IExt}}
+\index{IExt@{IExt}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IExt}{IExt}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext}
+
+
+
+Definition at line 37 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ae7147e507476864b95600cf5b59e678a}\label{e1__rebuild_8c_ae7147e507476864b95600cf5b59e678a}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IExt\_auth\_id@{IExt\_auth\_id}}
+\index{IExt\_auth\_id@{IExt\_auth\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IExt\_auth\_id}{IExt\_auth\_id}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext\+\_\+auth\+\_\+id}
+
+
+
+Definition at line 32 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a2c4c358a8cce50087ff25d03d755779d}\label{e1__rebuild_8c_a2c4c358a8cce50087ff25d03d755779d}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IExt\_client\_id@{IExt\_client\_id}}
+\index{IExt\_client\_id@{IExt\_client\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IExt\_client\_id}{IExt\_client\_id}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext\+\_\+client\+\_\+id}
+
+
+
+Definition at line 27 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_abf21601fad1ab17027ba7a440cc1533e}\label{e1__rebuild_8c_abf21601fad1ab17027ba7a440cc1533e}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IExt\_group\_id@{IExt\_group\_id}}
+\index{IExt\_group\_id@{IExt\_group\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IExt\_group\_id}{IExt\_group\_id}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext\+\_\+group\+\_\+id}
+
+
+
+Definition at line 29 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a98be613b8aa5674aff37d84d8db4ed87}\label{e1__rebuild_8c_a98be613b8aa5674aff37d84d8db4ed87}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IExt\_resource\_id@{IExt\_resource\_id}}
+\index{IExt\_resource\_id@{IExt\_resource\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IExt\_resource\_id}{IExt\_resource\_id}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext\+\_\+resource\+\_\+id}
+
+
+
+Definition at line 40 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a0b7b54e7d0114a8b4e18915177afb133}\label{e1__rebuild_8c_a0b7b54e7d0114a8b4e18915177afb133}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IExt\_status@{IExt\_status}}
+\index{IExt\_status@{IExt\_status}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IExt\_status}{IExt\_status}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext\+\_\+status}
+
+
+
+Definition at line 34 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ab724973d8f6ea2b0d81f0f6c202ed18e}\label{e1__rebuild_8c_ab724973d8f6ea2b0d81f0f6c202ed18e}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IndexFName0@{IndexFName0}}
+\index{IndexFName0@{IndexFName0}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IndexFName0}{IndexFName0}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Index\+F\+Name0 = \char`\"{}client\+\_\+id.\+cdx\char`\"{}}
+
+
+
+Definition at line 16 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a37fb60d6507b4f368e12d0ba6b489431}\label{e1__rebuild_8c_a37fb60d6507b4f368e12d0ba6b489431}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IndexFName1@{IndexFName1}}
+\index{IndexFName1@{IndexFName1}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IndexFName1}{IndexFName1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Index\+F\+Name1 = \char`\"{}group\+\_\+id.\+cdx\char`\"{}}
+
+
+
+Definition at line 17 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ad1c43d331a8cda306295fee01a8e2a1c}\label{e1__rebuild_8c_ad1c43d331a8cda306295fee01a8e2a1c}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IndexFName2@{IndexFName2}}
+\index{IndexFName2@{IndexFName2}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IndexFName2}{IndexFName2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Index\+F\+Name2 = \char`\"{}resource\+\_\+id.\+cdx\char`\"{}}
+
+
+
+Definition at line 18 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a6c35deef1dc96c9a78ffb613bdd423ea}\label{e1__rebuild_8c_a6c35deef1dc96c9a78ffb613bdd423ea}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IndexFName3@{IndexFName3}}
+\index{IndexFName3@{IndexFName3}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IndexFName3}{IndexFName3}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Index\+F\+Name3 = \char`\"{}auth\+\_\+id.\+cdx\char`\"{}}
+
+
+
+Definition at line 19 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a118382ffba4c269ca5fc4f3f3a5b096a}\label{e1__rebuild_8c_a118382ffba4c269ca5fc4f3f3a5b096a}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IndexFName4@{IndexFName4}}
+\index{IndexFName4@{IndexFName4}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IndexFName4}{IndexFName4}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Index\+F\+Name4 = \char`\"{}status.\+cdx\char`\"{}}
+
+
+
+Definition at line 20 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a7c26abe72eedf6e7408af429ec61b2d8}\label{e1__rebuild_8c_a7c26abe72eedf6e7408af429ec61b2d8}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!info@{info}}
+\index{info@{info}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{info}{info}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_record}{Record}}$\ast$ info = N\+U\+LL}
+
+
+
+Definition at line 36 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_aaba6248b75c1f0ec998ec79188ffaf90}\label{e1__rebuild_8c_aaba6248b75c1f0ec998ec79188ffaf90}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IPtr\_auth\_id@{IPtr\_auth\_id}}
+\index{IPtr\_auth\_id@{IPtr\_auth\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IPtr\_auth\_id}{IPtr\_auth\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} I\+Ptr\+\_\+auth\+\_\+id = N\+U\+LL}
+
+
+
+Definition at line 33 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a1707d852614e8b8305241e3d11da9362}\label{e1__rebuild_8c_a1707d852614e8b8305241e3d11da9362}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IPtr\_client\_id@{IPtr\_client\_id}}
+\index{IPtr\_client\_id@{IPtr\_client\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IPtr\_client\_id}{IPtr\_client\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} I\+Ptr\+\_\+client\+\_\+id = N\+U\+LL}
+
+
+
+Definition at line 28 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a313e1e6d4badc3db12bc3a01622717ea}\label{e1__rebuild_8c_a313e1e6d4badc3db12bc3a01622717ea}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IPtr\_group\_id@{IPtr\_group\_id}}
+\index{IPtr\_group\_id@{IPtr\_group\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IPtr\_group\_id}{IPtr\_group\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} I\+Ptr\+\_\+group\+\_\+id = N\+U\+LL}
+
+
+
+Definition at line 30 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_aea283b72dd2cd39d29252458a068ee84}\label{e1__rebuild_8c_aea283b72dd2cd39d29252458a068ee84}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IPtr\_resource\_id@{IPtr\_resource\_id}}
+\index{IPtr\_resource\_id@{IPtr\_resource\_id}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IPtr\_resource\_id}{IPtr\_resource\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} I\+Ptr\+\_\+resource\+\_\+id = N\+U\+LL}
+
+
+
+Definition at line 31 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a5299b54f145405f5ba13a04107de4262}\label{e1__rebuild_8c_a5299b54f145405f5ba13a04107de4262}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!IPtr\_status@{IPtr\_status}}
+\index{IPtr\_status@{IPtr\_status}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{IPtr\_status}{IPtr\_status}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} I\+Ptr\+\_\+status = N\+U\+LL}
+
+
+
+Definition at line 35 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_ae0adaf4e4798628eb7043cfad93400d1}\label{e1__rebuild_8c_ae0adaf4e4798628eb7043cfad93400d1}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!MyRecord@{MyRecord}}
+\index{MyRecord@{MyRecord}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{MyRecord}{MyRecord}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_record}{Record}} My\+Record}
+
+
+
+Definition at line 42 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a70dc78b023ae09acbd4f371463e1bdc4}\label{e1__rebuild_8c_a70dc78b023ae09acbd4f371463e1bdc4}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!resource\_id\_Len@{resource\_id\_Len}}
+\index{resource\_id\_Len@{resource\_id\_Len}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{resource\_id\_Len}{resource\_id\_Len}}
+{\footnotesize\ttfamily unsigned long long resource\+\_\+id\+\_\+\+Len = 65}
+
+
+
+Definition at line 23 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a4c6750126833aa9bb5f21c21a0406388}\label{e1__rebuild_8c_a4c6750126833aa9bb5f21c21a0406388}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!status\_Len@{status\_Len}}
+\index{status\_Len@{status\_Len}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{status\_Len}{status\_Len}}
+{\footnotesize\ttfamily unsigned long long status\+\_\+\+Len = 3}
+
+
+
+Definition at line 25 of file e1\+\_\+rebuild.\+c.
+
+\mbox{\Hypertarget{e1__rebuild_8c_a31d81016b5ed2a29244fdd7098d77598}\label{e1__rebuild_8c_a31d81016b5ed2a29244fdd7098d77598}} 
+\index{e1\_rebuild.c@{e1\_rebuild.c}!TaRecNum@{TaRecNum}}
+\index{TaRecNum@{TaRecNum}!e1\_rebuild.c@{e1\_rebuild.c}}
+\doxysubsubsection{\texorpdfstring{TaRecNum}{TaRecNum}}
+{\footnotesize\ttfamily long long Ta\+Rec\+Num = 0}
+
+
+
+Definition at line 41 of file e1\+\_\+rebuild.\+c.
+

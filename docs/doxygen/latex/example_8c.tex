@@ -1,0 +1,355 @@
+\hypertarget{example_8c}{}\doxysection{example.\+c File Reference}
+\label{example_8c}\index{example.c@{example.c}}
+{\ttfamily \#include \char`\"{}screen.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}maccess.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}example.\+h\char`\"{}}\newline
+Include dependency graph for example.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{example_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{example_8c_abfb5605e3d493573b1e0dc4910918385}{A\+P\+P\+\_\+\+L\+O\+G\+F\+I\+LE}}~\char`\"{}example.\+log\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{example_8c_a5054c36923934387c6f7605dd1a2f3c9}{sig\+\_\+handler}} (int sig)
+\item 
+int \mbox{\hyperlink{example_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+int \mbox{\hyperlink{example_8c_ac673cd9d2e1d2b78cf1000c60bb59538}{Loading}} ()
+\item 
+int \mbox{\hyperlink{example_8c_aa477c8a6acfd8c8b30addaff66594609}{Inserting}} ()
+\item 
+int \mbox{\hyperlink{example_8c_a02e68a26ce7e19af9d0b729af61e72d3}{Update}} ()
+\item 
+int \mbox{\hyperlink{example_8c_a3725cc4908953bb2852b7d51f2d15aac}{Delete}} ()
+\item 
+int \mbox{\hyperlink{example_8c_ad8ed255e59242981d2af5096f39539f5}{Deleting}} ()
+\item 
+int \mbox{\hyperlink{example_8c_a7145d625279458987091b707d3ae42e2}{Searching}} ()
+\item 
+int \mbox{\hyperlink{example_8c_adc52158877869116eea3f8226f2fa14b}{Find}} ()
+\item 
+int \mbox{\hyperlink{example_8c_aa7f3b6bbb3a48f6bf108c21790a4e07d}{Next}} ()
+\item 
+int \mbox{\hyperlink{example_8c_a38908bf33ba4a0049763f9c3551c7995}{Prev}} ()
+\item 
+void \mbox{\hyperlink{example_8c_a50576fe98dc5e3df6832f7b355165831}{Rebuild\+Index}} ()
+\item 
+void \mbox{\hyperlink{example_8c_a56e10fcc3770245f4fe4db99a180aefc}{Control}} ()
+\item 
+void \mbox{\hyperlink{example_8c_a9211ad7c71bbfeac350b931f74236c42}{Help}} (char $\ast$Headline)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{example_8c_a79ced7b9725c06a838eb8dce9d5840c6}{Dat\+F\+Name}} = \char`\"{}data.\+dbc\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{example_8c_a76d5e1d1dc6bca803dc10c38376e5259}{Index\+F\+Name}} = \char`\"{}data.\+cdx\char`\"{}
+\item 
+\mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} \mbox{\hyperlink{example_8c_ad31b2efc689e0eec86f046098ad1c225}{Dat\+F\+Name1}} = \char`\"{}data.\+tmp\char`\"{}
+\item 
+unsigned long long \mbox{\hyperlink{example_8c_ab09649de0c15a870c876701702954a25}{Key\+Len}} = 11
+\item 
+long long $\ast$ \mbox{\hyperlink{example_8c_af0def6d3e82d2c1b22b3fc56339e41f4}{Lock}}
+\item 
+struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} \mbox{\hyperlink{example_8c_a3f282234c46450e1774c8d46dfa904d1}{I\+Ext}}
+\item 
+struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}} \mbox{\hyperlink{example_8c_ae08df3d40ef1ce19769eb9854e1b343a}{D\+Ext}}
+\item 
+struct \mbox{\hyperlink{struct_record}{Record}} \mbox{\hyperlink{example_8c_a08b7680703919abd84b8c0a37a5c4fd9}{Our\+Record}}
+\item 
+struct \mbox{\hyperlink{struct_record}{Record}} $\ast$ \mbox{\hyperlink{example_8c_a7c26abe72eedf6e7408af429ec61b2d8}{info}} = N\+U\+LL
+\item 
+\mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} \mbox{\hyperlink{example_8c_a9fff0f3b8b2e7e8a76c32455d97d49ce}{D\+Ptr}} = N\+U\+LL
+\item 
+long long \mbox{\hyperlink{example_8c_a31d81016b5ed2a29244fdd7098d77598}{Ta\+Rec\+Num}} = 0
+\item 
+W\+I\+N\+D\+OW $\ast$ \mbox{\hyperlink{example_8c_abaa05da1401704efa9c569c8aefa116a}{scr\+\_\+save}} = N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{example_8c_abfb5605e3d493573b1e0dc4910918385}\label{example_8c_abfb5605e3d493573b1e0dc4910918385}} 
+\index{example.c@{example.c}!APP\_LOGFILE@{APP\_LOGFILE}}
+\index{APP\_LOGFILE@{APP\_LOGFILE}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{APP\_LOGFILE}{APP\_LOGFILE}}
+{\footnotesize\ttfamily \#define A\+P\+P\+\_\+\+L\+O\+G\+F\+I\+LE~\char`\"{}example.\+log\char`\"{}}
+
+
+
+Definition at line 10 of file example.\+c.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{example_8c_a56e10fcc3770245f4fe4db99a180aefc}\label{example_8c_a56e10fcc3770245f4fe4db99a180aefc}} 
+\index{example.c@{example.c}!Control@{Control}}
+\index{Control@{Control}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Control()}{Control()}}
+{\footnotesize\ttfamily void Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1202 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a3725cc4908953bb2852b7d51f2d15aac}\label{example_8c_a3725cc4908953bb2852b7d51f2d15aac}} 
+\index{example.c@{example.c}!Delete@{Delete}}
+\index{Delete@{Delete}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily int Delete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 430 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_ad8ed255e59242981d2af5096f39539f5}\label{example_8c_ad8ed255e59242981d2af5096f39539f5}} 
+\index{example.c@{example.c}!Deleting@{Deleting}}
+\index{Deleting@{Deleting}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Deleting()}{Deleting()}}
+{\footnotesize\ttfamily int Deleting (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 513 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_adc52158877869116eea3f8226f2fa14b}\label{example_8c_adc52158877869116eea3f8226f2fa14b}} 
+\index{example.c@{example.c}!Find@{Find}}
+\index{Find@{Find}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily int Find (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 629 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a9211ad7c71bbfeac350b931f74236c42}\label{example_8c_a9211ad7c71bbfeac350b931f74236c42}} 
+\index{example.c@{example.c}!Help@{Help}}
+\index{Help@{Help}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Help()}{Help()}}
+{\footnotesize\ttfamily void Help (\begin{DoxyParamCaption}\item[{char $\ast$}]{Headline }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1222 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_aa477c8a6acfd8c8b30addaff66594609}\label{example_8c_aa477c8a6acfd8c8b30addaff66594609}} 
+\index{example.c@{example.c}!Inserting@{Inserting}}
+\index{Inserting@{Inserting}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Inserting()}{Inserting()}}
+{\footnotesize\ttfamily int Inserting (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 289 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_ac673cd9d2e1d2b78cf1000c60bb59538}\label{example_8c_ac673cd9d2e1d2b78cf1000c60bb59538}} 
+\index{example.c@{example.c}!Loading@{Loading}}
+\index{Loading@{Loading}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Loading()}{Loading()}}
+{\footnotesize\ttfamily int Loading (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 211 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{example_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{example.c@{example.c}!main@{main}}
+\index{main@{main}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 57 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_aa7f3b6bbb3a48f6bf108c21790a4e07d}\label{example_8c_aa7f3b6bbb3a48f6bf108c21790a4e07d}} 
+\index{example.c@{example.c}!Next@{Next}}
+\index{Next@{Next}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Next()}{Next()}}
+{\footnotesize\ttfamily int Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 689 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a38908bf33ba4a0049763f9c3551c7995}\label{example_8c_a38908bf33ba4a0049763f9c3551c7995}} 
+\index{example.c@{example.c}!Prev@{Prev}}
+\index{Prev@{Prev}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Prev()}{Prev()}}
+{\footnotesize\ttfamily int Prev (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 909 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a50576fe98dc5e3df6832f7b355165831}\label{example_8c_a50576fe98dc5e3df6832f7b355165831}} 
+\index{example.c@{example.c}!RebuildIndex@{RebuildIndex}}
+\index{RebuildIndex@{RebuildIndex}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{RebuildIndex()}{RebuildIndex()}}
+{\footnotesize\ttfamily void Rebuild\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1129 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a7145d625279458987091b707d3ae42e2}\label{example_8c_a7145d625279458987091b707d3ae42e2}} 
+\index{example.c@{example.c}!Searching@{Searching}}
+\index{Searching@{Searching}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Searching()}{Searching()}}
+{\footnotesize\ttfamily int Searching (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 566 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a5054c36923934387c6f7605dd1a2f3c9}\label{example_8c_a5054c36923934387c6f7605dd1a2f3c9}} 
+\index{example.c@{example.c}!sig\_handler@{sig\_handler}}
+\index{sig\_handler@{sig\_handler}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{sig\_handler()}{sig\_handler()}}
+{\footnotesize\ttfamily void sig\+\_\+handler (\begin{DoxyParamCaption}\item[{int}]{sig }\end{DoxyParamCaption})}
+
+
+
+Definition at line 26 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a02e68a26ce7e19af9d0b729af61e72d3}\label{example_8c_a02e68a26ce7e19af9d0b729af61e72d3}} 
+\index{example.c@{example.c}!Update@{Update}}
+\index{Update@{Update}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily int Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 335 of file example.\+c.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{example_8c_a79ced7b9725c06a838eb8dce9d5840c6}\label{example_8c_a79ced7b9725c06a838eb8dce9d5840c6}} 
+\index{example.c@{example.c}!DatFName@{DatFName}}
+\index{DatFName@{DatFName}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{DatFName}{DatFName}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Dat\+F\+Name = \char`\"{}data.\+dbc\char`\"{}}
+
+
+
+Definition at line 12 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_ad31b2efc689e0eec86f046098ad1c225}\label{example_8c_ad31b2efc689e0eec86f046098ad1c225}} 
+\index{example.c@{example.c}!DatFName1@{DatFName1}}
+\index{DatFName1@{DatFName1}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{DatFName1}{DatFName1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Dat\+F\+Name1 = \char`\"{}data.\+tmp\char`\"{}}
+
+
+
+Definition at line 14 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_ae08df3d40ef1ce19769eb9854e1b343a}\label{example_8c_ae08df3d40ef1ce19769eb9854e1b343a}} 
+\index{example.c@{example.c}!DExt@{DExt}}
+\index{DExt@{DExt}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{DExt}{DExt}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}} D\+Ext}
+
+
+
+Definition at line 18 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a9fff0f3b8b2e7e8a76c32455d97d49ce}\label{example_8c_a9fff0f3b8b2e7e8a76c32455d97d49ce}} 
+\index{example.c@{example.c}!DPtr@{DPtr}}
+\index{DPtr@{DPtr}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{DPtr}{DPtr}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_a2c5183e150146950ab55b58c35fe5db0}{Data\+File\+Ptr}} D\+Ptr = N\+U\+LL}
+
+
+
+Definition at line 21 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a3f282234c46450e1774c8d46dfa904d1}\label{example_8c_a3f282234c46450e1774c8d46dfa904d1}} 
+\index{example.c@{example.c}!IExt@{IExt}}
+\index{IExt@{IExt}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{IExt}{IExt}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} I\+Ext}
+
+
+
+Definition at line 17 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a76d5e1d1dc6bca803dc10c38376e5259}\label{example_8c_a76d5e1d1dc6bca803dc10c38376e5259}} 
+\index{example.c@{example.c}!IndexFName@{IndexFName}}
+\index{IndexFName@{IndexFName}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{IndexFName}{IndexFName}}
+{\footnotesize\ttfamily \mbox{\hyperlink{maccess_8h_acf659157da92111218d3a0712cff7832}{File\+Name}} Index\+F\+Name = \char`\"{}data.\+cdx\char`\"{}}
+
+
+
+Definition at line 13 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a7c26abe72eedf6e7408af429ec61b2d8}\label{example_8c_a7c26abe72eedf6e7408af429ec61b2d8}} 
+\index{example.c@{example.c}!info@{info}}
+\index{info@{info}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{info}{info}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_record}{Record}}$\ast$ info = N\+U\+LL}
+
+
+
+Definition at line 20 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_ab09649de0c15a870c876701702954a25}\label{example_8c_ab09649de0c15a870c876701702954a25}} 
+\index{example.c@{example.c}!KeyLen@{KeyLen}}
+\index{KeyLen@{KeyLen}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{KeyLen}{KeyLen}}
+{\footnotesize\ttfamily unsigned long long Key\+Len = 11}
+
+
+
+Definition at line 15 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_af0def6d3e82d2c1b22b3fc56339e41f4}\label{example_8c_af0def6d3e82d2c1b22b3fc56339e41f4}} 
+\index{example.c@{example.c}!Lock@{Lock}}
+\index{Lock@{Lock}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{Lock}{Lock}}
+{\footnotesize\ttfamily long long$\ast$ Lock}
+
+
+
+Definition at line 16 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a08b7680703919abd84b8c0a37a5c4fd9}\label{example_8c_a08b7680703919abd84b8c0a37a5c4fd9}} 
+\index{example.c@{example.c}!OurRecord@{OurRecord}}
+\index{OurRecord@{OurRecord}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{OurRecord}{OurRecord}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_record}{Record}} Our\+Record}
+
+
+
+Definition at line 19 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_abaa05da1401704efa9c569c8aefa116a}\label{example_8c_abaa05da1401704efa9c569c8aefa116a}} 
+\index{example.c@{example.c}!scr\_save@{scr\_save}}
+\index{scr\_save@{scr\_save}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{scr\_save}{scr\_save}}
+{\footnotesize\ttfamily W\+I\+N\+D\+OW$\ast$ scr\+\_\+save = N\+U\+LL}
+
+
+
+Definition at line 23 of file example.\+c.
+
+\mbox{\Hypertarget{example_8c_a31d81016b5ed2a29244fdd7098d77598}\label{example_8c_a31d81016b5ed2a29244fdd7098d77598}} 
+\index{example.c@{example.c}!TaRecNum@{TaRecNum}}
+\index{TaRecNum@{TaRecNum}!example.c@{example.c}}
+\doxysubsubsection{\texorpdfstring{TaRecNum}{TaRecNum}}
+{\footnotesize\ttfamily long long Ta\+Rec\+Num = 0}
+
+
+
+Definition at line 22 of file example.\+c.
+

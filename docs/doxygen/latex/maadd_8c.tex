@@ -1,0 +1,119 @@
+\hypertarget{maadd_8c}{}\doxysection{maadd.\+c File Reference}
+\label{maadd_8c}\index{maadd.c@{maadd.c}}
+{\ttfamily \#include \char`\"{}mainter.\+h\char`\"{}}\newline
+Include dependency graph for maadd.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{maadd_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{maadd_8c_afe4ea834602c5d54be16fd8c1427800b}{Add\+Rec}} (struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$DatF, struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}} $\ast$DatE, long long $\ast$R, void $\ast$\mbox{\hyperlink{mainter_8h_af6774d85d35bd350c3e31d3d4643d527}{Buffer}})
+\item 
+void \mbox{\hyperlink{maadd_8c_a7f6047ad1befe23c165a4ccb89098622}{Add\+Key}} (struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$IdxF, struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$IdxE, long long $\ast$Data\+Rec\+Num, void $\ast$Proc\+Key)
+\item 
+void \mbox{\hyperlink{maadd_8c_a96a50480949273b764ccd3f7d9c737aa}{Search}} (long long Pr\+Pg\+Ref1, struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$IdxF, struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$IdxE, long long $\ast$Data\+Rec\+Num, void $\ast$Proc\+Key, long long R\+Br)
+\item 
+void \mbox{\hyperlink{maadd_8c_a90da313c7cc730e421cb3fc1a713d255}{Insert}} (long long Pr\+Pg\+Ref1, struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$IdxF, struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$IdxE, long long R\+Br)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} \mbox{\hyperlink{maadd_8c_aeda76bfc1e7c6282a64b627a3515ef72}{Pass\+Up}}
+\item 
+\mbox{\hyperlink{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}{Ta\+Page\+Ptr}} \mbox{\hyperlink{maadd_8c_a877d0c771e1615d23476f4c95e5c0d69}{Page\+Ptr1}}
+\item 
+\mbox{\hyperlink{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}{Ta\+Page\+Ptr}} \mbox{\hyperlink{maadd_8c_a7916e4aa6db194e252e1b8f4d26c66ec}{Page\+Ptr2}}
+\item 
+struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}} Proc\+Item1 \mbox{\hyperlink{maadd_8c_aee2b78211046a664c304c476e3c3a6d4}{Proc\+Item2}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{maadd_8c_a7f6047ad1befe23c165a4ccb89098622}\label{maadd_8c_a7f6047ad1befe23c165a4ccb89098622}} 
+\index{maadd.c@{maadd.c}!AddKey@{AddKey}}
+\index{AddKey@{AddKey}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{AddKey()}{AddKey()}}
+{\footnotesize\ttfamily void Add\+Key (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$}]{IdxF,  }\item[{struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$}]{IdxE,  }\item[{long long $\ast$}]{Data\+Rec\+Num,  }\item[{void $\ast$}]{Proc\+Key }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file maadd.\+c.
+
+\mbox{\Hypertarget{maadd_8c_afe4ea834602c5d54be16fd8c1427800b}\label{maadd_8c_afe4ea834602c5d54be16fd8c1427800b}} 
+\index{maadd.c@{maadd.c}!AddRec@{AddRec}}
+\index{AddRec@{AddRec}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{AddRec()}{AddRec()}}
+{\footnotesize\ttfamily void Add\+Rec (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$}]{DatF,  }\item[{struct \mbox{\hyperlink{struct_data_ext}{Data\+Ext}} $\ast$}]{DatE,  }\item[{long long $\ast$}]{R,  }\item[{void $\ast$}]{Buffer }\end{DoxyParamCaption})}
+
+
+
+Definition at line 13 of file maadd.\+c.
+
+\mbox{\Hypertarget{maadd_8c_a90da313c7cc730e421cb3fc1a713d255}\label{maadd_8c_a90da313c7cc730e421cb3fc1a713d255}} 
+\index{maadd.c@{maadd.c}!Insert@{Insert}}
+\index{Insert@{Insert}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{Insert()}{Insert()}}
+{\footnotesize\ttfamily void Insert (\begin{DoxyParamCaption}\item[{long long}]{Pr\+Pg\+Ref1,  }\item[{struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$}]{IdxF,  }\item[{struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$}]{IdxE,  }\item[{long long}]{R\+Br }\end{DoxyParamCaption})}
+
+
+
+Definition at line 130 of file maadd.\+c.
+
+\mbox{\Hypertarget{maadd_8c_a96a50480949273b764ccd3f7d9c737aa}\label{maadd_8c_a96a50480949273b764ccd3f7d9c737aa}} 
+\index{maadd.c@{maadd.c}!Search@{Search}}
+\index{Search@{Search}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{Search()}{Search()}}
+{\footnotesize\ttfamily void Search (\begin{DoxyParamCaption}\item[{long long}]{Pr\+Pg\+Ref1,  }\item[{struct \mbox{\hyperlink{struct_data_file}{Data\+File}} $\ast$}]{IdxF,  }\item[{struct \mbox{\hyperlink{struct_index_ext}{Index\+Ext}} $\ast$}]{IdxE,  }\item[{long long $\ast$}]{Data\+Rec\+Num,  }\item[{void $\ast$}]{Proc\+Key,  }\item[{long long}]{R\+Br }\end{DoxyParamCaption})}
+
+
+
+Definition at line 71 of file maadd.\+c.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{maadd_8c_a877d0c771e1615d23476f4c95e5c0d69}\label{maadd_8c_a877d0c771e1615d23476f4c95e5c0d69}} 
+\index{maadd.c@{maadd.c}!PagePtr1@{PagePtr1}}
+\index{PagePtr1@{PagePtr1}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{PagePtr1}{PagePtr1}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}{Ta\+Page\+Ptr}} Page\+Ptr1}
+
+
+
+Definition at line 9 of file maadd.\+c.
+
+\mbox{\Hypertarget{maadd_8c_a7916e4aa6db194e252e1b8f4d26c66ec}\label{maadd_8c_a7916e4aa6db194e252e1b8f4d26c66ec}} 
+\index{maadd.c@{maadd.c}!PagePtr2@{PagePtr2}}
+\index{PagePtr2@{PagePtr2}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{PagePtr2}{PagePtr2}}
+{\footnotesize\ttfamily \mbox{\hyperlink{mainter_8h_a72d5c9b500f8869d065995f5fa8a3cc9}{Ta\+Page\+Ptr}} Page\+Ptr2}
+
+
+
+Definition at line 9 of file maadd.\+c.
+
+\mbox{\Hypertarget{maadd_8c_aeda76bfc1e7c6282a64b627a3515ef72}\label{maadd_8c_aeda76bfc1e7c6282a64b627a3515ef72}} 
+\index{maadd.c@{maadd.c}!PassUp@{PassUp}}
+\index{PassUp@{PassUp}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{PassUp}{PassUp}}
+{\footnotesize\ttfamily \mbox{\hyperlink{defs_8h_a59ae2bccd804e9bc9dc2c8d7b4dfbeb2}{Boolean}} Pass\+Up}
+
+
+
+Definition at line 8 of file maadd.\+c.
+
+\mbox{\Hypertarget{maadd_8c_aee2b78211046a664c304c476e3c3a6d4}\label{maadd_8c_aee2b78211046a664c304c476e3c3a6d4}} 
+\index{maadd.c@{maadd.c}!ProcItem2@{ProcItem2}}
+\index{ProcItem2@{ProcItem2}!maadd.c@{maadd.c}}
+\doxysubsubsection{\texorpdfstring{ProcItem2}{ProcItem2}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_ta_item}{Ta\+Item}} Proc\+Item1 Proc\+Item2}
+
+
+
+Definition at line 10 of file maadd.\+c.
+
