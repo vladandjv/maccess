@@ -1,6 +1,5 @@
 CC= gcc 
 INCDIR = -I. -I../toolset_gc/include/
-#CFLAGS=  $(INCDIR) -Wall -Werror -pedantic -ggdb3 -fcommon -fPIC -DPIC -z execstack -D_REENTRANT -fstack-protector 
 CFLAGS=  $(INCDIR) -Wall -Werror -pedantic -ggdb3 -fPIC -DPIC -z execstack -D_REENTRANT -fstack-protector 
 TCAP = -DM_TERMINFO
 #SYSLIBS = ../toolset_gc/lib/libgc.a -lncurses -lm -luuid -lpthread
