@@ -1,6 +1,6 @@
 /**************************************************************************/
 /* PROGRAM: MAMEMORY.C                                                    */
-/* DESCRIPTION:  Initicialization and managment of memory buffers.        */
+/* DESCRIPTION: Initialization and management of memory buffers.          */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "mainter.h"
