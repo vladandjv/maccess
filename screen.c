@@ -2,7 +2,7 @@
 /* PROGRAM: SCREEN.C                                                      */
 /* DESCRIPTION:                                                           */
 /*    Low-level rutines for working with screens                          */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "conf_lib.h"
 #include "screen.h"

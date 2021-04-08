@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MAMEMORY.C                                                    */
 /* DESCRIPTION:  Initicialization and managment of memory buffers.        */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "mainter.h"
 #include <sys/types.h>

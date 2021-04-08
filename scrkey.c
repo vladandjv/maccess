@@ -9,7 +9,7 @@
  * EV_READ) RETURN -1. THAT IS WHY I USE -1 FOR RETURN WHEN NOTHING       *
  * RELEVANT IS PRESSED EVEN THOUGH THERE IS GETCH WITH NODELAY (OR.       *
  * EV_BLOCK).                                                             *
- * AUTHOR: VLADAN DJORDJEVICH                                              *
+ * AUTHOR: VLADAN DJORDJEVIC                                              *
  **************************************************************************/
 #include "scrdefs.h"
 #ifdef _HAS_MOUSE

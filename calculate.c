@@ -3,7 +3,7 @@
 /* DESCRIPTION: CALCULATES THE VALUES OF THE B + VERSION OF THE BINARY    */
 /* TREE AND DETERMINES THE NEEDED RESOURCES OF THE SYSTEM. ALSO,          */
 /* DETERMINES THE OPTIMAL EFFICIENCY - RESOURCE CONSUMPTION RATIO.        */
-/* AUTHOR: VLADAN DJORDJEVICH  		                                  */
+/* AUTHOR: VLADAN DJORDJEVIC   		                                  */
 /**************************************************************************/
 #include "screen.h"
 #include <math.h>

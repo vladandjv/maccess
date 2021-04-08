@@ -10,7 +10,6 @@
 #define realloc(m,n) GC_REALLOC(m,n) 
 #define free(n) GC_free(n) 
 #endif /* WORK_WITH_GARBAGE_COLLECTOR */
-#define UNIX
 
 /* LOCK_SHM_MEM_SIZE = sizeof(long long) */
 #define LOCK_SHM_MEM_SIZE (size_t)16 /* 8 but just in case */

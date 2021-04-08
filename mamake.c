@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MAMAKE.C                                                      */
 /* DESCRIPTION:  Creating files of database.                              */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include <string.h>
 #include <stdlib.h>

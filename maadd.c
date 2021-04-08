@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MAADD.C                                                       */
 /* DESCRIPTION:  Adding record                                            */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "mainter.h"
 

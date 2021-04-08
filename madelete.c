@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MADELETE.C                                                    */
 /* DESCRIPTION:  Deleting record functions.                               */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "mainter.h"
 

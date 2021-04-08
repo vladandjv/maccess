@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MACCESS.C                                                     */
 /* DESCRIPTION:  Basic modul; basic functions and search                  */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "defs.h"
 #include <fcntl.h>

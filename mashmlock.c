@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MASHMLOCK.C                                                   */
 /* DESCRIPTION: Locking system implementation based on shared memory      */ 
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "defs.h"
 #include <stdlib.h>

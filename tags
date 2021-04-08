@@ -596,7 +596,6 @@ TermAccess	mamemory.c	/^TermAccess (MemNum)$/;"	f
 TermEkran	key.c	/^TermEkran ()$/;"	f
 TermEkran	screen.c	/^TermEkran ()$/;"	f
 Term_Change_Symbol	scrkey.c	/^Term_Change_Symbol (Symbol)$/;"	f
-UNIX	conf_lib.h	13;"	d
 USM	mamemory.c	/^USM (shmid, MemNum)$/;"	f
 UnderFlow	madelete.c	/^UnderFlow (PrPgRef, PrPgRef2, r, IdxF, IdxE)$/;"	f
 Update	example.c	/^Update ()$/;"	f

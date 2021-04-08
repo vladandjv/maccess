@@ -1,7 +1,7 @@
 /**************************************************************************/
-/* PROGRAM: CHECK1.C                                                       */
+/* PROGRAM: CHECK1.C                                                      */
 /* DESCRIPTION: Check program for example functions.                      */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "screen.h"
 #include "maccess.h"

@@ -1,7 +1,7 @@
 /**************************************************************************/
 /* PROGRAM: MAFLUSH.C                                                     */
 /* DESCRIPTION:  Flush from memory to files on disk.                      */
-/* AUTHOR: VLADAN DJORDJEVICH                                              */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include <unistd.h>
 #include "mainter.h"
