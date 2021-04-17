@@ -175,7 +175,7 @@ Next ()
 void
 Control ()
 {
-  if (fopen (DatFName, "OrdNum") == NULL)
+  if (fopen (DatFName, "rb") == NULL)
     {
       SHM_UnLock (Lock);
       printf ("There are no files to print! Use e1_load first.\n");

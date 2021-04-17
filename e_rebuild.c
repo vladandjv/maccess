@@ -131,7 +131,7 @@ RebuildIndex ()
 void
 Control ()
 {
-  if (fopen (DatFName, "OrdNum") == NULL)
+  if (fopen (DatFName, "rb") == NULL)
     {
       printf ("There are no files to rebuild! Use e_load.\n");
       exit (1);

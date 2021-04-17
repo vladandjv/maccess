@@ -121,7 +121,7 @@ Control ()
 {
   FILE *fp = NULL;
 
-  if ((fp = fopen (DatFName, "OrdNum")) == NULL)
+  if ((fp = fopen (DatFName, "rb")) == NULL)
     {
       Destroy_SHM (MACCESS_SHM_MEM_CODE, (size_t) MACCESS_SHM_MEM_SIZE);
       InitAccess ((long long) 0, MACCESS_SHM_MEM_CODE);
