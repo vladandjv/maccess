@@ -91,13 +91,12 @@ main ()
 void
 Loading ()
 {
-  long long i;
   info = &OurRecord;
+  long long i, j=1000;
 
-  logMessage ("I am loading 100000 records");
+  logMessage ("I am loading %lld records", j);
   info->Deleted = 0;
-  //for (i = 1; i <= 10000000; i++) {
-  for (i = 1; i <= 1000000; i++)
+  for (i = 1; i < j; ++i)
     {
       sprintf (info->Key, "%010lld", i);
       prepare_str (info->Key, 10);
@@ -113,7 +112,7 @@ Loading ()
                   info->Key, info->Surname, info->Name, info->Remark);
 #endif 
     }
-  logMessage ("DONE! I have loaded 10000 records");
+  logMessage ("DONE! I have loaded %lld records", i);
 }
 /**************************************************************************/
 void
