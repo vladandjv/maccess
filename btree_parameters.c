@@ -24,8 +24,8 @@ int MaxMaxHeight; /* Needed for as result for CalculateHeight() */
 #undef MaxHeight
 
 #define FileHeaderSize (sizeof(long long)*3 + sizeof(long long)) 
-#define ItemOverhead sizeof(struct TaItem) - MaxKeyLen
-#define PageOverhead (sizeof(int)+sizeof(long long))
+#define ItemOverhead sizeof(long long) * 2
+#define PageOverhead (sizeof(long long)+sizeof(long long)) 
 /**************************************************************************/
 int
 main ()
@@ -80,24 +80,25 @@ main ()
 
   printf ("B+ tree current PARAMETERS are:\n");
   printf ("MaxKeyLen              = %d\n", MaxKeyLen);
-  printf ("FileHeaderSize         = %ld\n", ((sizeof (long long)*3 + \
+  printf ("FileHeaderSize         = %lld\n", (long long) ((sizeof (long long)*3 + \
 					sizeof (long long))));
   printf ("PageSize               = %3d - The range is from 4 to 254\n", PageSize);
   printf ("PageStackSize          = %3d - The range is from 3 to 255\n", PageStackSize);
-  printf ("ItemOverhead           = %ld\n", (sizeof (struct TaItem) -MaxKeyLen));
-  printf ("PageOverhead           = %ld\n", (sizeof (long long) + \
+  printf ("ItemOverhead           = %lld\n", (long long)(sizeof(long long)* 2) 
+);
+  printf ("PageOverhead           = %lld\n", (long long) (sizeof (long long) + \
 			  sizeof (long long)));
-  printf ("Maximum MaxDataRecSize = %ld\n", (PageOverhead + \
+  printf ("Maximum MaxDataRecSize = %lld\n", (long long) (PageOverhead + \
 				PageSize * (ItemOverhead + MaxKeyLen)));
-  printf ("Acctual MaxDataRecSize = %d\n\n", MaxDataRecSize);
+  printf ("Acctual MaxDataRecSize = %lld\n\n", (long long) MaxDataRecSize);
 
   printf ("Size of TYPES are:\n");
-  printf ("SizeOf struct DataFile = %ld\n", sizeof (struct DataFile));
-  printf ("SizeOf struct DataExt  = %ld\n", sizeof (struct DataFile));
-  printf ("SizeOf struct IndexExt = %ld\n", sizeof (struct DataFile));
-  printf ("SizeOf TaPageStack     = %ld\n", sizeof (TaPageStack));
-  printf ("SizeOf TaPageMap       = %ld\n", sizeof (TaPageMap));
-  printf ("SizeOf long long       = %ld\n\n", sizeof (long long));
+  printf ("SizeOf struct DataFile = %lld\n", (long long) sizeof (struct DataFile));
+  printf ("SizeOf struct DataExt  = %lld\n", (long long)sizeof (struct DataFile));
+  printf ("SizeOf struct IndexExt = %lld\n", (long long) sizeof (struct DataFile));
+  printf ("SizeOf TaPageStack     = %lld\n", (long long) sizeof (TaPageStack));
+  printf ("SizeOf TaPageMap       = %lld\n", (long long) sizeof (TaPageMap));
+  printf ("SizeOf long long       = %lld\n\n", (long long) sizeof (long long));
 
   printf ("RESULTS for the assumed total number of 100 milion records\nin a single datafile:\n\n");
   printf ("Size of data file:                        %15.0f bytes\n", DxSize);
@@ -113,7 +114,15 @@ main ()
   printf ("MACCESS_SHM_MEM_SIZE should be = %lld bytes\n", size);
   printf ("Order should be                = %d\n", Order);
   printf ("Height should be               = %d\n\n", MaxMaxHeight);
-  printf ("Please COMPARE this \"should be\" RESULTS with \nthe parametars in includes.h and maccess.h!!!\n");
+  printf ("  Please COMPARE this \"should be\" RESULTS with the\n\
+  parameters in defs.h/includes.h and maccess.h!!!\n\
+  You can change the parameters according to your\n\
+  requests and improve performance, but first check\n\
+  the theory in the documentation to be sure what\n\
+  the parameters mean and how they are connected.\n\
+  After changing the parameters, compile again this\n\
+  file with the new parameters, run it and compare\n\
+  again!!!\n");
 
   exit (0);
 }

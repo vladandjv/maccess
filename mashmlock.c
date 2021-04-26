@@ -44,7 +44,7 @@ void
 SHM_Lock (long long *shm_lock) /* Shared memory lock */
 {
   while (*shm_lock == 1)
-    sleep (1 / 1000);
+    sleep (1);
   *shm_lock = 1;
 }
 /**************************************************************************/

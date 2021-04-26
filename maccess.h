@@ -10,16 +10,17 @@
 /*If MaxKeyLen change, you also have to change IteOverHead and shared
  * memory segment size (in conf_lib.h). It is the best to run 
  * ./btree_parameters for calculation */
-#define MaxKeyLen  65 /* Read the above! */
-#define PageSize   250
-#define PageStackSize 250
-#define Order 125
+#define MaxKeyLen  11 /* Read the above! */
+#define PageSize   254
+#define PageStackSize 255
+#define Order 127
 #define MaxHeight 6 
 #define FileHeaderSize 32 /* (sizeof(long long)*3 + sizeof(long long))  */
 #define MinDataRecSize  FileHeaderSize
-#define ItemOverhead 23 /* sizeof(struct TaItem) - MaxKeyLen */
-#define PageOverhead 16 /* (sizeof(int)+sizeof(long long)) */
+#define ItemOverhead 16 /* sizeof(long long) * 2 */
+#define PageOverhead 16 /* (sizeof(long long)+sizeof(long long)) */
 /*Theory: MaxDataRecSize=(PageOverhead + PageSize * (ItemOverhead + MaxKeyLen)) */
+// #define MaxDataRecSize PageOverhead + PageSize * (ItemOverhead + MaxKeyLen) 
 #define MaxDataRecSize 512
 
 #define NoDuplicates      (long long)0

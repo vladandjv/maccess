@@ -1,8 +1,9 @@
 /*
  * PROGRAM: E_LOAD.C                                                        
  * DESCRIPTION: Example program for Maccess funcitons, without any other
- * libraries. It loads 10000 records in the same files with which the 
- * example program works. Use in conjunction with the example to ses results.
+ * libraries. It loads 1000000 records in the same files with which the 
+ * example program works. Use in conjunction with the example or e_print 
+ * to see results.
  * AUTHOR: VLADAN DJORDJEVIC                                               
  */
 
@@ -92,11 +93,11 @@ void
 Loading ()
 {
   info = &OurRecord;
-  long long i, j=1000;
+  long long i, j=1000000;
 
   logMessage ("I am loading %lld records", j);
   info->Deleted = 0;
-  for (i = 1; i < j; ++i)
+  for (i = 1; i <= j; ++i)
     {
       sprintf (info->Key, "%010lld", i);
       prepare_str (info->Key, 10);
@@ -107,12 +108,22 @@ Loading ()
       AddRec (DPtr, &DExt, &TaRecNum, info);
       AddKey (IPtr, &IExt, &TaRecNum, (TaKeyStr *) info->Key);
       SHM_UnLock (Lock);
+      if ((i % 100000) == 0) /* Just for testing multi user processing */
+      {
+	printf("Added %lld\n", i);
+	/* Fush it is not a necessity, but it is a good idea to flush
+	 * from time to time in case of a hardware malfunction */
+	/* FlushFile(DPtr, &DExt);
+	FlushIndex(IPtr, &IExt); */
+	sleep(2); 
+      } 
 #ifdef DEBUG_APP
       logMessage ("Key[%s] Surname[%s] Name[%s] Remark[%s]",
                   info->Key, info->Surname, info->Name, info->Remark);
 #endif 
     }
-  logMessage ("DONE! I have loaded %lld records", i);
+  i--;
+  logMessage ("DONE! I have loaded %lld records of %lld", i , j);
 }
 /**************************************************************************/
 void

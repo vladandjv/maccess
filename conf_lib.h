@@ -16,7 +16,7 @@
 /* MACCESS_SHM_MEM_SIZE = (PageSize * sizeof(struct DataFile) + 
    sizeof(TaPageStack) + sizeof(TaPageMap) + sizeof(long long))  */
 //#define MACCESS_SHM_MEM_SIZE    (size_t) 300000 /* 243728 better to be more */
-#define MACCESS_SHM_MEM_SIZE    (size_t) 5600000 /* 5532008 better to be more */
+#define MACCESS_SHM_MEM_SIZE    (size_t) 30000000 /* 5532008 better to be more */
 
 #define LOCK_SHM_MEM_CODE (key_t)121
 #define MACCESS_SHM_MEM_CODE (key_t)122   /* for example.c */
