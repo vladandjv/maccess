@@ -9,9 +9,8 @@
  *    sizeof(TaPageStack) + sizeof(TaPageMap) + sizeof(long long)); 
  */
 
-#include <stdio.h>
-#include "mainter.h"
 #include "maccess.h"
+#include <stdio.h>
 #include <math.h>
 
 int MaxMaxHeight; /* Needed for as result for CalculateHeight() */
@@ -80,26 +79,28 @@ main ()
 
   printf ("B+ tree current PARAMETERS are:\n");
   printf ("MaxKeyLen              = %d\n", MaxKeyLen);
-  printf ("FileHeaderSize         = %lld\n", (long long) ((sizeof (long long)*3 + \
-					sizeof (long long))));
   printf ("PageSize               = %3d - The range is from 4 to 254\n", PageSize);
   printf ("PageStackSize          = %3d - The range is from 3 to 255\n", PageStackSize);
-  printf ("ItemOverhead           = %lld\n", (long long)(sizeof(long long)* 2) 
-);
-  printf ("PageOverhead           = %lld\n", (long long) (sizeof (long long) + \
-			  sizeof (long long)));
-  printf ("Maximum MaxDataRecSize = %lld\n", (long long) (PageOverhead + \
+  printf ("Order                  = %d\n", Order);
+  printf ("FileHeaderSize         = %zu\n", ((sizeof (long long)*3 + \
+					sizeof (long long))));
+  printf ("MinDataRecSize         = %zu (same as FileHeaderSize)\n", \
+		                             ((sizeof (long long)*3 + \
+					sizeof (long long))));
+  printf ("ItemOverhead           = %zu\n", (sizeof(struct TaItem) - MaxKeyLen)); 
+  printf ("PageOverhead           = %zu\n", (sizeof(((struct TaPage*)0)->ItemsOnPage)\
+			                + sizeof(((struct TaPage*)0)->BckwPageRef)));
+  printf ("Maximum MaxDataRecSize = %zu\n", (PageOverhead + \
 				PageSize * (ItemOverhead + MaxKeyLen)));
-  printf ("Acctual MaxDataRecSize = %lld\n\n", (long long) MaxDataRecSize);
+  printf ("Acctual MaxDataRecSize = %d\n\n", MaxDataRecSize);
 
   printf ("Size of TYPES are:\n");
-  printf ("SizeOf struct DataFile = %lld\n", (long long) sizeof (struct DataFile));
-  printf ("SizeOf struct DataExt  = %lld\n", (long long)sizeof (struct DataFile));
-  printf ("SizeOf struct IndexExt = %lld\n", (long long) sizeof (struct DataFile));
-  printf ("SizeOf TaPageStack     = %lld\n", (long long) sizeof (TaPageStack));
-  printf ("SizeOf TaPageMap       = %lld\n", (long long) sizeof (TaPageMap));
-  printf ("SizeOf long long       = %lld\n\n", (long long) sizeof (long long));
-
+  printf ("SizeOf struct DataFile = %zu\n", sizeof (struct DataFile));
+  printf ("SizeOf struct DataExt  = %zu\n", sizeof (struct DataFile));
+  printf ("SizeOf struct IndexExt = %zu\n", sizeof (struct DataFile));
+  printf ("SizeOf TaPageStack     = %zu\n", sizeof (TaPageStack));
+  printf ("SizeOf TaPageMap       = %zu\n", sizeof (TaPageMap));
+  printf ("SizeOf long long       = %zu\n\n", sizeof (long long));
   printf ("RESULTS for the assumed total number of 100 milion records\nin a single datafile:\n\n");
   printf ("Size of data file:                        %15.0f bytes\n", DxSize);
   printf ("Size of index file:                       %15.0f bytes\n", IxSize);
@@ -112,10 +113,9 @@ main ()
   size = ((PageSize * sizeof (struct DataFile)) + sizeof (TaPageStack) + \
 			sizeof (TaPageMap) + sizeof (long long));
   printf ("MACCESS_SHM_MEM_SIZE should be = %lld bytes\n", size);
-  printf ("Order should be                = %d\n", Order);
-  printf ("Height should be               = %d\n\n", MaxMaxHeight);
+  printf ("Height SHOULD BE               = %d (!!!)\n\n", MaxMaxHeight);
   printf ("  Please COMPARE this \"should be\" RESULTS with the\n\
-  parameters in defs.h/includes.h and maccess.h!!!\n\
+  parameters in conf_lib.h and maccess.h!\n\
   You can change the parameters according to your\n\
   requests and improve performance, but first check\n\
   the theory in the documentation to be sure what\n\

@@ -1,9 +1,18 @@
 /* defs.h */
-
 #ifndef _DEFS_H
 #define _DEFS_H
 
-#include "conf_lib.h"
+#if INTPTR_MAX == INT64_MAX
+#define _FILE_OFFSET_BITS 64 /* in case lseek is used */
+#define _LARGEFILE64_SOURCE  
+#elif INTPTR_MAX == INT32_MAX
+#error This code is optimized and works only on a 64 bits machine.
+#else
+#error Unknown pointer size or missing size macros!
+#endif /* INT64_MAX or INT32_MAX */
+
+#define min(br1,br2)   ((br1 < br2) ? br1 : br2)
+#define max(br1,br2)   ((br1 > br2) ? br1 : br2) 
 
 #include <stdio.h>
 #include <ctype.h>
@@ -16,45 +25,41 @@
 #include "log.h"
 
 #define MAX_STRING_LENGTH 512
-#define min(br1,br2)   ((br1 < br2) ? br1 : br2)
-#define max(br1,br2)   ((br1 > br2) ? br1 : br2) 
 
-extern char APP_Program_Name[MAX_STRING_LENGTH];
+/* There is no memory leak - Garbage Collector is only optional */
+/* #define WORK_WITH_GARBAGE_COLLECTOR  */
+#ifdef WORK_WITH_GARBAGE_COLLECTOR
+#include "gc.h"
+#define malloc(n) GC_malloc(n)
+#define realloc(m,n) GC_REALLOC(m,n) 
+#define free(n) GC_free(n) 
+#endif /* WORK_WITH_GARBAGE_COLLECTOR */
+
+#define MAX_FILENAME_LENGHT 64  /* Can be much longer at the expense of memory */
+
+/* LOCK_SHM_MEM_SIZE = sizeof(long long) */
+#define LOCK_SHM_MEM_SIZE (size_t) 16 /* 8 but just in case */
+/* MACCESS_SHM_MEM_SIZE = (PageSize * sizeof(struct DataFile) + 
+   sizeof(TaPageStack) + sizeof(TaPageMap) + sizeof(long long))  */
+#define MACCESS_SHM_MEM_SIZE (size_t) 4000000 /* 3639360 but better to be more */
+
+#define LOCK_SHM_MEM_CODE (key_t)121
+#define MACCESS_SHM_MEM_CODE (key_t)122   
+
+#define _HAS_FLUSH  
+/* Flush on a disk after every record added to data base.
+ * It is the must in multiuser envirioment with milions of 
+ * records! */
+
+#ifdef __GNUC__
+#define VARIABLE_IS_NOT_USED __attribute__ ((unused))
+#else
+#define VARIABLE_IS_NOT_USED
+#endif
 
 enum Bool {
     F, T
 };
 typedef enum Bool Boolean;
-
-#if __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
-    char *vsubstr(char *InField, int Poc, int Vel);
-    char *left(char *InField, int Vel);
-    char *right(char *InField, int Vel);
-    char *ltrim(char *InField);
-    char *trim(char *InField);
-    char *to_right(char *InField, int Vel);
-    char *to_left(char *InField, int Vel);
-    char *empty_string(int Vel);
-    char *ponovi(char Symbol, int Vel);
-    int isEmpty(char *InField);
-    char *my_date(), *datplus(char *InField, int dani);
-    char *datrazl(char *InField1, char *InField2), *okrenidat(char *InField);
-    char *my_time(), *time_and_date();
-    char *time_difference(char *InField1, char *InField2), *vrmuredi(char *InField);
-
-    /* Shared memory functions */
-    int Destroy_SHM(key_t shm_mem_code, size_t shm_mem_size);
-    void SHM_Lock(long long *shm_lock), SHM_UnLock(long long *shm_lock);
-
-    /* Locking system functions */
-    long long *DB_Lock_Init(key_t shm_mem_code, size_t shm_mem_size);
-    void DB_Lock_Close(long long *retrna);
-
-#if __cplusplus
-};
-#endif /* __cplusplus */
 
 #endif  /* _DEFS_H */

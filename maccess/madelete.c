@@ -3,7 +3,7 @@
 /* DESCRIPTION:  Deleting record functions.                               */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
-#include "mainter.h"
+#include "maccess.h"
 
 Boolean PageTooSmall;
 TaPagePtr PagPtrAB; /* communication between DelB i DelA */
@@ -16,17 +16,17 @@ struct DataFile *DatF;
 struct DataExt *DatE;
 long long R;
 {
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   void PutFileHeader ();
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
 
-  (*TaRecBuf).I = (*DatF).Heder.FirstFree;
+  (*TaRecBuf).I = (*DatF).Header.FirstFree;
   PutRec (DatF, DatE, R, TaRecBuf); /* PutRec should lock */
-  (*DatF).Heder.FirstFree = R;
-  (*DatF).Heder.NumberFree++;
-#ifdef _IMA_FLUSH
+  (*DatF).Header.FirstFree = R;
+  (*DatF).Header.NumberFree++;
+#ifdef _HAS_FLUSH
   PutFileHeader (DatF, DatE);
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
 }
 /**************************************************************************/
 void
@@ -37,10 +37,10 @@ long long R;
 {
   void TaWriteRec ();
 
-  (*TaRecBuf).I = (*DatF).Heder.FirstFree;
+  (*TaRecBuf).I = (*DatF).Header.FirstFree;
   TaWriteRec (DatF, R, TaRecBuf);
-  (*DatF).Heder.FirstFree = R;
-  (*DatF).Heder.NumberFree++;
+  (*DatF).Header.FirstFree = R;
+  (*DatF).Header.NumberFree++;
 }
 /**************************************************************************/
 void
@@ -70,9 +70,9 @@ struct IndexExt *IdxE;
 long long *DataRecNum;
 void *ProcKey;
 {
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   void StoreIndexHeader (), PutFileHeader ();
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
   void TaGetPage (), CutString (), DelB ();
   TaPagePtr PagPtr;
   long long RBr = -1;
@@ -92,10 +92,10 @@ void *ProcKey;
         }
     }
   (*IdxE).PP = -1;
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   StoreIndexHeader (IdxF, IdxE);
   PutFileHeader (IdxF, &((*IdxE).DataE));
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
 }
 /**************************************************************************/
 void

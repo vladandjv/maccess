@@ -3,19 +3,20 @@
 /* DESCRIPTION:  Basic modul; basic functions and search                  */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
-#include "defs.h"
+#include "maccess.h"
 #include <fcntl.h>
-#include <unistd.h> 
+# if defined(__linux__) || defined (unix) || defined (__unix) || defined(__unix__)
 #include <memory.h>
-#include "mainter.h"
+#endif
 
 long long HadBits; /* It used to communicate between TaGetPage as one side 
 		    * and NextKey and PrevKey on the other side! */
 typedef char PageBlock[INT_MAX];
+/* typedef char PageBlock[LLONG_MAX]; */ /* Can do, but no need */
 typedef PageBlock *pt; /* types */
 
-TaPageStack *TaPageStk[HasMemories];
-TaPageMap *TaPgMap[HasMemories];
+TaPageStack *TaPageStk;
+TaPageMap *TaPgMap;
 long long IOStatus = -1;
 union TaRecordBuffer Buffer;
 union TaRecordBuffer *TaRecBuf;
@@ -60,7 +61,7 @@ GetRec (DatF, DatE, R, Buffer)
 
 struct DataFile *DatF;
 struct DataExt *DatE;
-long long R;
+unsigned long long R;
 void *Buffer;
 {
   TaGetRec (DatF, DatE, R, Buffer);
@@ -71,7 +72,7 @@ PutRec (DatF, DatE, R, Buffer)
 
 struct DataFile *DatF;
 struct DataExt *DatE;
-long long R;
+unsigned long long R;
 void *Buffer;
 {
   TaPutRec (DatF, DatE, R, Buffer);
@@ -82,16 +83,16 @@ TaGetRec (DatF, DatE, R, Buffer)
 
 struct DataFile *DatF;
 struct DataExt *DatE;
-long long R;
+unsigned long long R;
 void *Buffer;
 {
-  R = R * (*DatF).Heder.ItemSize;
-  if (lseek ((*DatE).FileNumber, R, 0) == -1)
+  R = R * (*DatF).Header.ItemSize;
+  if (lseek64 ((*DatE).FileNumber, R, 0) == -1)
     {
       IOStatus = ErrGetRec;
       TAIOCheck ();
     }
-  if (read ((*DatE).FileNumber, Buffer, (*DatF).Heder.ItemSize) == -1)
+  if (read ((*DatE).FileNumber, Buffer, (*DatF).Header.ItemSize) == -1)
     {
       IOStatus = ErrGetRec;
       TAIOCheck ();
@@ -103,16 +104,16 @@ TaPutRec (DatF, DatE, R, Buffer)
 
 struct DataFile *DatF;
 struct DataExt *DatE;
-long long R;
+unsigned long long R;
 void *Buffer;
 {
-  R = R * (*DatF).Heder.ItemSize;
-  if (lseek ((*DatE).FileNumber, R, 0) == -1)
+  R = R * (*DatF).Header.ItemSize;
+  if (lseek64 ((*DatE).FileNumber, R, 0) == -1)
     {
       IOStatus = ErrPutRec;
       TAIOCheck ();
     }
-  if (write ((*DatE).FileNumber, Buffer, (*DatF).Heder.ItemSize) == -1)
+  if (write ((*DatE).FileNumber, Buffer, (*DatF).Header.ItemSize) == -1)
     {
       IOStatus = ErrPutRec;
       TAIOCheck ();
@@ -125,30 +126,27 @@ ReadHeader (DatF, DatE)
 struct DataFile *DatF;
 struct DataExt *DatE;
 {
-
-  (*DatF).Heder.NumRec = lseek ((*DatE).FileNumber, (long long) 0, 2) /
-          (*DatF).Heder.ItemSize;
-  if ((*DatF).Heder.NumRec < 0)
+  (*DatF).Header.NumRec = lseek64 ((*DatE).FileNumber,  0, 2) / \
+			  (*DatF).Header.ItemSize;
+  if ((*DatF).Header.NumRec < 0)
     {
       IOStatus = ErrReadHeader;
       TAIOCheck ();
     }
-  TaGetRec (DatF, DatE, (long long) 0, TaRecBuf);
-  memcpy (&((*DatF).Heder), TaRecBuf, (size_t)FileHeaderSize);
+  TaGetRec (DatF, DatE, 0, TaRecBuf);
+  memcpy (&((*DatF).Header), TaRecBuf, (size_t)FileHeaderSize);
 }
 /**************************************************************************/
 void
-OpenFile (DatF, DatE, FName, RecLen, MemNum, FileNum)
+OpenFile (DatF, DatE, FName, RecLen, FileNum)
 
 DataFilePtr *DatF;
 struct DataExt *DatE;
 FileName FName;
 unsigned long long RecLen;
-long long MemNum;
 long long FileNum;
 {
   void ReadHeader ();
-
   (*DatE).FileNumber = open (FName, O_RDWR);
   if ((*DatE).FileNumber == -1)
     {
@@ -170,15 +168,14 @@ long long FileNum;
           IOStatus = RecTooSmall;
           TAIOCheck ();
         }
-      if (FindYourPlace (DatF, MemNum, FileNum) == 0)
+      if (FindYourPlace (DatF, FileNum) == 0)
         {
-          (**DatF).M = MemNum;
           (**DatF).FileNumber = (*DatE).FileNumber;
-          (**DatF).Heder.FirstFree = 0;
-          (**DatF).Heder.NumberFree = 0;
-          (**DatF).Heder.Int1 = 0;
-          (**DatF).Heder.ItemSize = RecLen;
-          (**DatF).Heder.NumRec = 0;
+          (**DatF).Header.FirstFree = 0;
+          (**DatF).Header.NumberFree = 0;
+          (**DatF).Header.Int1 = 0;
+          (**DatF).Header.ItemSize = RecLen;
+          (**DatF).Header.NumRec = 0;
           ReadHeader (*DatF, DatE);
         }
     }
@@ -194,8 +191,8 @@ struct DataExt *DatE;
 
   for (n = 0; n < MaxDataRecSize; n++)
     Buffer.R[n] = '\0';
-  memcpy (TaRecBuf, &((*DatF).Heder), (size_t)FileHeaderSize);
-  TaPutRec (DatF, DatE, (long long) 0, TaRecBuf);
+  memcpy (TaRecBuf, &((*DatF).Header), (size_t)FileHeaderSize);
+  TaPutRec (DatF, DatE, 0, TaRecBuf);
 }
 /*************************************************************************/
 void
@@ -220,19 +217,19 @@ void
 NewRec (DatF, R)
 
 struct DataFile *DatF;
-long long *R;
+size_t *R;
 {
 
-  if ((*DatF).Heder.FirstFree == -1)
+  if ((*DatF).Header.FirstFree == -1)
     {
-      *R = (*DatF).Heder.NumRec;
-      (*DatF).Heder.NumRec++;
+      *R = (*DatF).Header.NumRec;
+      (*DatF).Header.NumRec++;
     }
   else
     {
-      *R = (*DatF).Heder.FirstFree;
-      (*DatF).Heder.FirstFree = (*TaRecBuf).I;
-      (*DatF).Heder.NumberFree--;
+      *R = (*DatF).Header.FirstFree;
+      (*DatF).Header.FirstFree = (*TaRecBuf).I;
+      (*DatF).Header.NumberFree--;
     }
 }
 /**************************************************************************/
@@ -243,7 +240,7 @@ struct DataFile *DatF;
 {
   long long L;
 
-  L = (*DatF).Heder.NumRec;
+  L = (*DatF).Header.NumRec;
   return (L);
 }
 /**************************************************************************/
@@ -254,7 +251,7 @@ struct DataFile *DatF;
 {
   long long L;
 
-  L = (*DatF).Heder.NumRec - (*DatF).Heder.NumberFree - 1;
+  L = (*DatF).Header.NumRec - (*DatF).Header.NumberFree - 1;
   return (L);
 }
 /**************************************************************************/
@@ -274,7 +271,7 @@ unsigned long long KeyL;
     for (i = 0; i < PageSize; i++)
       {
         k = (i * j + PageOverhead);
-        memcpy ((pt) & P[k], &((*(struct TaPage *) Page).ItemArray[i]), j);
+        memcpy ((pt) & P[k], &((*(struct TaPage *) Page).ItemArray[i]), j); /* ovde */
       }
 }
 /**************************************************************************/
@@ -301,18 +298,18 @@ unsigned long long KeyL;
 }
 /**************************************************************************/
 void
-OpenIndex (IdxF, IdxE, FName, KeyLen, S, MemNum, FileNum)
+OpenIndex (IdxF, IdxE, FName, KeyLen, S, FileNum)
 
 DataFilePtr *IdxF;
 struct IndexExt *IdxE;
 FileName FName;
 unsigned long long KeyLen;
 long long S;
-long long MemNum;
 long long FileNum;
 {
   void ReadHeader ();
-  unsigned long long K, n;
+  unsigned long long K;
+  unsigned long long n;
 
   K = (KeyLen + ItemOverhead) * PageSize + PageOverhead;
   (*IdxE).DataE.FileNumber = open (FName, O_RDWR);
@@ -331,19 +328,18 @@ long long FileNum;
           IOStatus = KeyTooLarge;
           TAIOCheck ();
         }
-      if (FindYourPlace (IdxF, MemNum, FileNum) == 0)
+      if (FindYourPlace (IdxF, FileNum) == 0)
         {
-          (**IdxF).M = MemNum;
           (**IdxF).FileNumber = (*IdxE).DataE.FileNumber;
-          (**IdxF).Heder.FirstFree = 0;
-          (**IdxF).Heder.NumberFree = 0;
-          (**IdxF).Heder.Int1 = 0;
-          (**IdxF).Heder.ItemSize = K;
-          (**IdxF).Heder.NumRec = 0;
+          (**IdxF).Header.FirstFree = 0;
+          (**IdxF).Header.NumberFree = 0;
+          (**IdxF).Header.Int1 = 0;
+          (**IdxF).Header.ItemSize = K;
+          (**IdxF).Header.NumRec = 0;
           (**IdxF).RR = 0;
           (**IdxF).KeyL = KeyLen;
           ReadHeader (*IdxF, &((*IdxE).DataE));
-          (**IdxF).RR = (**IdxF).Heder.Int1;
+          (**IdxF).RR = (**IdxF).Header.Int1;
         }
       for (n = 0; n < MaxHeight; n++)
         {
@@ -368,19 +364,19 @@ struct IndexExt *IdxE;
   long long i;
 
   for (i = 0; i < PageStackSize; i++)
-    if ((*TaPageStk[(*IdxF).M])[i].IndexFPtr == IdxF)
+    if ((*TaPageStk)[i].IndexFPtr == IdxF)
       {
-        (*TaPageStk[(*IdxF).M])[i].IndexFPtr = NULL;
-        (*TaPageStk[(*IdxF).M])[i].IndexEPtr = NULL;
-        if ((*TaPageStk[(*IdxF).M])[i].Updated == T)
+        (*TaPageStk)[i].IndexFPtr = NULL;
+        (*TaPageStk)[i].IndexEPtr = NULL;
+        if ((*TaPageStk)[i].Updated == T)
           {
-            TaPack (&((*TaPageStk[(*IdxF).M])[i].Page), (*IdxF).KeyL);
-            TaPutRec (IdxF, &((*IdxE).DataE), (*TaPageStk[(*IdxF).M])[i].PageRef,
-                      &((*TaPageStk[(*IdxF).M])[i].Page));
-            (*TaPageStk[(*IdxF).M])[i].Updated = F;
+            TaPack (&((*TaPageStk)[i].Page), (*IdxF).KeyL);
+            TaPutRec (IdxF, &((*IdxE).DataE), (*TaPageStk)[i].PageRef,
+                      &((*TaPageStk)[i].Page));
+            (*TaPageStk)[i].Updated = F;
           }
       }
-  (*IdxF).Heder.Int1 = (*IdxF).RR;
+  (*IdxF).Header.Int1 = (*IdxF).RR;
 }
 /**************************************************************************/
 void
@@ -404,18 +400,17 @@ struct IndexExt *IdxE;
 }
 /**************************************************************************/
 void
-TaLast (i, MemNum)
+TaLast (i)
 
 long long i;
-long long MemNum;
 {
   long long j;
 
-  for (j = 0; ((*TaPgMap[MemNum])[j] != i) && (j < PageStackSize - 1); j++)
+  for (j = 0; ((*TaPgMap)[j] != i) && (j < PageStackSize - 1); j++)
     ;
   for (; j < PageStackSize - 1; j++)
-    (*TaPgMap[MemNum])[j] = (*TaPgMap[MemNum])[j + 1];
-  (*TaPgMap[MemNum])[PageStackSize - 1] = i;
+    (*TaPgMap)[j] = (*TaPgMap)[j + 1];
+  (*TaPgMap)[PageStackSize - 1] = i;
 }
 /**************************************************************************/
 void
@@ -423,75 +418,40 @@ TaReadPage (IdxF, IdxE, R, PagPtr)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long R;
+unsigned long long R;
 TaPagePtr *PagPtr;
 {
   void TaPack (), TaUnPack (), TaLast ();
   TaStackRecPtr TempPagPtr;
   long long i, num;
-  Boolean Found;
 
-  for (i = 0, Found = F; i < PageStackSize; i++)
+  for (i = 0; i < PageStackSize; i++)
     {
-      if ((*TaPageStk[(*IdxF).M])[i].IndexFPtr == IdxF &&
-          (*TaPageStk[(*IdxF).M])[i].PageRef == R)
-        {
-          Found = T;
+      if ((*TaPageStk)[i].IndexFPtr == IdxF &&
+          (*TaPageStk)[i].PageRef == R)
           break;
-        }
     }
-  if (Found == F)
-    {
-      TempPagPtr = (TaStackRecPtr) malloc (sizeof (struct TaStackRec));
-      TaGetRec (IdxF, &((*IdxE).DataE), R, &((*TempPagPtr).Page));
-      TaUnPack (&((*TempPagPtr).Page), (*IdxF).KeyL);
-      for (num = 0, HadBits = 0; num < (*TempPagPtr).Page.ItemsOnPage; num++)
-        HadBits += (*TempPagPtr).Page.ItemArray[num].DataRef;
-      if (HadBits == (*IdxE).Path[(long long) (*IdxE).PP].HasBits)
-        {
-          i = (*TaPgMap[(*IdxF).M])[0];
-          if ((*TaPageStk[(*IdxF).M])[i].Updated == T)
-            {
-              TaPack (&((*TaPageStk[(*IdxF).M])[i].Page),
-                      (*(*TaPageStk[(*IdxF).M])[i].IndexFPtr).KeyL);
-              TaPutRec ((*TaPageStk[(*IdxF).M])[i].IndexFPtr,
-                        &((*(*TaPageStk[(*IdxF).M])[i].IndexEPtr).DataE),
-                        (*TaPageStk[(*IdxF).M])[(*IdxF).M].PageRef,
-                        &((*TaPageStk[(*IdxF).M])[i].Page));
-            }
-          ((*TaPageStk[(*IdxF).M])[i]) = *TempPagPtr;
-          (*TaPageStk[(*IdxF).M])[i].IndexFPtr = IdxF;
-          (*TaPageStk[(*IdxF).M])[i].IndexEPtr = IdxE;
-          (*TaPageStk[(*IdxF).M])[i].PageRef = R;
-          (*TaPageStk[(*IdxF).M])[i].Updated = F;
-        }
-      else
-        return;
-    }
-  else
-    {
-      TempPagPtr = &((*TaPageStk[(*IdxF).M])[i]);
-      for (num = 0, HadBits = 0; num < (*TempPagPtr).Page.ItemsOnPage; num++)
-        HadBits += (*TempPagPtr).Page.ItemArray[num].DataRef;
-    }
-  TaLast (i, (*IdxF).M);
-  *PagPtr = (TaPagePtr) &((*TaPageStk[(*IdxF).M])[i]);
+  TempPagPtr = &((*TaPageStk)[i]);
+  for (num = 0, HadBits = 0; num < (*TempPagPtr).Page.ItemsOnPage; num++)
+      HadBits += (*TempPagPtr).Page.ItemArray[num].DataRef;
+  TaLast (i);
+  *PagPtr = (TaPagePtr) &((*TaPageStk)[i]);
 }
 /*************************************************************************/
 void
 TaWriteRec (DatF, R, Buffer)
 
 struct DataFile *DatF;
-long long R;
+size_t R;
 void *Buffer;
 {
-  R = R * (*DatF).Heder.ItemSize;
-  if (lseek ((*DatF).FileNumber, R, 0) == -1)
+  R = R * (*DatF).Header.ItemSize;
+  if (lseek64 ((*DatF).FileNumber, R, 0) == -1)
     {
       IOStatus = ErrWriteRec;
       TAIOCheck ();
     }
-  if (write ((*DatF).FileNumber, Buffer, (*DatF).Heder.ItemSize) == -1)
+  if (write ((*DatF).FileNumber, Buffer, (*DatF).Header.ItemSize) == -1)
     {
       IOStatus = ErrWriteRec;
       TAIOCheck ();
@@ -503,7 +463,7 @@ TaGetPage (IdxF, IdxE, R, PagPtr)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long R;
+size_t R;
 TaPagePtr *PagPtr;
 {
   void TaPack (), TaUnPack (), TaLast (), TaWriteRec ();
@@ -512,8 +472,8 @@ TaPagePtr *PagPtr;
 
   for (i = 0, Found = F; i < PageStackSize; i++)
     {
-      if ((*TaPageStk[(*IdxF).M])[i].IndexFPtr == IdxF &&
-          (*TaPageStk[(*IdxF).M])[i].PageRef == R)
+      if ((*TaPageStk)[i].IndexFPtr == IdxF &&
+          (*TaPageStk)[i].PageRef == R)
         {
           Found = T;
           break;
@@ -521,24 +481,24 @@ TaPagePtr *PagPtr;
     }
   if (Found == F)
     {
-      i = (*TaPgMap[(*IdxF).M])[0];
-      if ((*TaPageStk[(*IdxF).M])[i].Updated == T)
+      i = (*TaPgMap)[0];
+      if ((*TaPageStk)[i].Updated == T)
         {
-          TaPack (&((*TaPageStk[(*IdxF).M])[i].Page),
-                  (*(*TaPageStk[(*IdxF).M])[i].IndexFPtr).KeyL);
-          TaWriteRec ((*TaPageStk[(*IdxF).M])[i].IndexFPtr,
-                      (*TaPageStk[(*IdxF).M])[i].PageRef,
-                      &((*TaPageStk[(*IdxF).M])[i].Page));
+          TaPack (&((*TaPageStk)[i].Page),
+                  (*(*TaPageStk)[i].IndexFPtr).KeyL);
+          TaWriteRec ((*TaPageStk)[i].IndexFPtr,
+                      (*TaPageStk)[i].PageRef,
+                      &((*TaPageStk)[i].Page));
         }
-      TaGetRec (IdxF, &((*IdxE).DataE), R, &((*TaPageStk[(*IdxF).M])[i].Page));
-      TaUnPack (&((*TaPageStk[(*IdxF).M])[i].Page), (*IdxF).KeyL);
-      (*TaPageStk[(*IdxF).M])[i].IndexFPtr = IdxF;
-      (*TaPageStk[(*IdxF).M])[i].IndexEPtr = IdxE;
-      (*TaPageStk[(*IdxF).M])[i].PageRef = R;
-      (*TaPageStk[(*IdxF).M])[i].Updated = F;
+      TaGetRec (IdxF, &((*IdxE).DataE), R, &((*TaPageStk)[i].Page));
+      TaUnPack (&((*TaPageStk)[i].Page), (*IdxF).KeyL);
+      (*TaPageStk)[i].IndexFPtr = IdxF;
+      (*TaPageStk)[i].IndexEPtr = IdxE;
+      (*TaPageStk)[i].PageRef = R;
+      (*TaPageStk)[i].Updated = F;
     }
-  TaLast (i, (*IdxF).M);
-  *PagPtr = (TaPagePtr) &((*TaPageStk[(*IdxF).M])[i]);
+  TaLast (i);
+  *PagPtr = (TaPagePtr) &((*TaPageStk)[i]);
 }
 /**************************************************************************/
 void
@@ -546,28 +506,28 @@ TaNewPage (IdxF, IdxE, R, PagPtr)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long *R;
+size_t *R;
 TaPagePtr *PagPtr;
 {
   void TaPack (), TaLast (), NewRec (), TaWriteRec ();
   long long i;
 
-  i = (*TaPgMap[(*IdxF).M])[0];
-  if ((*TaPageStk[(*IdxF).M])[i].Updated == T)
+  i = (*TaPgMap)[0];
+  if ((*TaPageStk)[i].Updated == T)
     {
-      TaPack (&((*TaPageStk[(*IdxF).M])[i].Page),
-              (*(*TaPageStk[(*IdxF).M])[i].IndexFPtr).KeyL);
-      TaWriteRec ((*TaPageStk[(*IdxF).M])[i].IndexFPtr,
-                  (*TaPageStk[(*IdxF).M])[i].PageRef,
-                  &((*TaPageStk[(*IdxF).M])[i].Page));
+      TaPack (&((*TaPageStk)[i].Page),
+              (*(*TaPageStk)[i].IndexFPtr).KeyL);
+      TaWriteRec ((*TaPageStk)[i].IndexFPtr,
+                  (*TaPageStk)[i].PageRef,
+                  &((*TaPageStk)[i].Page));
     }
   NewRec (IdxF, R);
-  (*TaPageStk[(*IdxF).M])[i].IndexFPtr = IdxF;
-  (*TaPageStk[(*IdxF).M])[i].IndexEPtr = IdxE;
-  (*TaPageStk[(*IdxF).M])[i].PageRef = *R;
-  (*TaPageStk[(*IdxF).M])[i].Updated = F;
-  TaLast (i, (*IdxF).M);
-  *PagPtr = (TaPagePtr) &((*TaPageStk[(*IdxF).M])[i]);
+  (*TaPageStk)[i].IndexFPtr = IdxF;
+  (*TaPageStk)[i].IndexEPtr = IdxE;
+  (*TaPageStk)[i].PageRef = *R;
+  (*TaPageStk)[i].Updated = F;
+  TaLast (i);
+  *PagPtr = (TaPagePtr) &((*TaPageStk)[i]);
 }
 /**************************************************************************/
 void
@@ -583,7 +543,7 @@ TaCompKeys (K1, K2, DR1, DR2, DUP)
 
 TaKeyStr *K1;
 TaKeyStr K2;
-long long DR1, DR2;
+unsigned long long DR1, DR2;
 Boolean DUP;
 {
   if (strcmp (*K1, K2) == 0)
@@ -602,7 +562,7 @@ void
 CutString (ArrayOfSymbols, Length)
 
 char *ArrayOfSymbols;
-long unsigned int Length;
+unsigned long long Length;
 {
   if (strlen (ArrayOfSymbols) > Length)
     *(ArrayOfSymbols + Length) = '\0';
@@ -621,30 +581,30 @@ NextKey (IdxF, IdxE, DataRecNum, ProcKey)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long *DataRecNum;
+unsigned long long *DataRecNum;
 void *ProcKey;
 {
   void TaReadPage ();
-  TaKeyStr temp, provkljuc;
+  TaKeyStr temp, check_key;
   long long num;
-  long long R, provslog;
+  unsigned long long R, check_record;
   TaPagePtr PagPtr = NULL;
 
   if ((*IdxE).PP == -1)
     R = (*IdxF).RR;
   else
     {
-      TaReadPage (IdxF, IdxE, (*IdxE).Path[(long long) (*IdxE).PP].PageRef, &PagPtr);
+      TaReadPage (IdxF, IdxE, (*IdxE).Path[(*IdxE).PP].PageRef, &PagPtr);
 
-      if (HadBits != (*IdxE).Path[(long long) (*IdxE).PP].HasBits)
+      if (HadBits != (*IdxE).Path[(*IdxE).PP].HasBits)
         {
           strcpy (temp, (*IdxE).LastKey);
-          strcpy (provkljuc, (*IdxE).LastKey);
-          provslog = (*IdxE).LastRecord;
+          strcpy (check_key, (*IdxE).LastKey);
+          check_record = (*IdxE).LastRecord;
           FindKey (IdxF, IdxE, DataRecNum, temp);
           if (OKAY == T)
             {
-              while (provslog != (*IdxE).LastRecord && strcmp (temp, provkljuc) == 0)
+              while (check_record != (*IdxE).LastRecord && strcmp (temp, check_key) == 0)
                 NextKey (IdxF, IdxE, DataRecNum, temp);
               NextKey (IdxF, IdxE, DataRecNum, temp);
             }
@@ -654,43 +614,43 @@ void *ProcKey;
           return;
         }
       R = (*PagPtr).ItemArray
-              [(long long) (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex].PageRef;
+              [(*IdxE).Path[(*IdxE).PP].ItemArrIndex].PageRef;
     }
   while (R != 0)
     {
       (*IdxE).PP++;
-      (*IdxE).Path[(long long) (*IdxE).PP].PageRef = R;
-      (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex = -1;
+      (*IdxE).Path[(*IdxE).PP].PageRef = R;
+      (*IdxE).Path[(*IdxE).PP].ItemArrIndex = -1;
       TaGetPage (IdxF, IdxE, R, &PagPtr);
       R = (*PagPtr).BckwPageRef;
 
-      (*IdxE).Path[(long long) (*IdxE).PP].HasBits = 0;
+      (*IdxE).Path[(*IdxE).PP].HasBits = 0;
       for (num = 0; num < (*PagPtr).ItemsOnPage; num++)
-        (*IdxE).Path[(long long) (*IdxE).PP].HasBits +=
+        (*IdxE).Path[(*IdxE).PP].HasBits +=
               (*PagPtr).ItemArray[num].DataRef;
 
     }
   if ((*IdxE).PP != -1)
     {
       while ((*IdxE).PP > 0 &&
-             (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex ==
+             (*IdxE).Path[(*IdxE).PP].ItemArrIndex ==
              (*PagPtr).ItemsOnPage - 1)
         {
           (*IdxE).PP--;
-          TaGetPage (IdxF, IdxE, (*IdxE).Path[(long long) (*IdxE).PP].PageRef, &PagPtr);
+          TaGetPage (IdxF, IdxE, (*IdxE).Path[(*IdxE).PP].PageRef, &PagPtr);
 
           for (num = 0, HadBits = 0; num < (*PagPtr).ItemsOnPage; num++)
             HadBits += (*PagPtr).ItemArray[num].DataRef;
-          if (HadBits != (*IdxE).Path[(long long) (*IdxE).PP].HasBits)
+          if (HadBits != (*IdxE).Path[(*IdxE).PP].HasBits)
             {
               strcpy (temp, (*IdxE).LastKey);
-              strcpy (provkljuc, (*IdxE).LastKey);
-              provslog = (*IdxE).LastRecord;
+              strcpy (check_key, (*IdxE).LastKey);
+              check_record = (*IdxE).LastRecord;
               FindKey (IdxF, IdxE, DataRecNum, temp);
               if (OKAY == T)
                 {
-                  while (provslog != (*IdxE).LastRecord &&
-                         strcmp (temp, provkljuc) == 0)
+                  while (check_record != (*IdxE).LastRecord &&
+                         strcmp (temp, check_key) == 0)
                     NextKey (IdxF, IdxE, DataRecNum, temp);
                   NextKey (IdxF, IdxE, DataRecNum, temp);
                 }
@@ -700,14 +660,14 @@ void *ProcKey;
               return;
             }
         }
-      if ((*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex <
+      if ((*IdxE).Path[(*IdxE).PP].ItemArrIndex <
           (*PagPtr).ItemsOnPage - 1)
         {
-          (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex++;
+          (*IdxE).Path[(*IdxE).PP].ItemArrIndex++;
           strcpy (*(TaKeyStr *) ProcKey, (*PagPtr).ItemArray
-                  [(long long) (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex].Key);
-          *DataRecNum = (*PagPtr).ItemArray
-                  [(long long) (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex].DataRef;
+                  [(*IdxE).Path[(*IdxE).PP].ItemArrIndex].Key);
+          *DataRecNum = (*PagPtr).ItemArray \
+			[(*IdxE).Path[(*IdxE).PP].ItemArrIndex].DataRef;
 
           (*IdxE).LastRecord = *DataRecNum;
           strcpy ((*IdxE).LastKey, *(TaKeyStr *) ProcKey);
@@ -726,30 +686,31 @@ PrevKey (IdxF, IdxE, DataRecNum, ProcKey)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long *DataRecNum;
+unsigned long long *DataRecNum;
 void *ProcKey;
 {
   void TaReadPage ();
-  TaKeyStr temp, provkljuc;
-  long long num;
-  long long R, provslog;
+  TaKeyStr temp, check_key;
+  unsigned long long num;
+  unsigned long long R, check_record;
+
   TaPagePtr PagPtr = NULL;
 
   if ((*IdxE).PP == -1)
     R = (*IdxF).RR;
   else
     {
-      TaReadPage (IdxF, IdxE, (*IdxE).Path[(long long) (*IdxE).PP].PageRef, &PagPtr);
+      TaReadPage (IdxF, IdxE, (*IdxE).Path[(*IdxE).PP].PageRef, &PagPtr);
 
-      if (HadBits != (*IdxE).Path[(long long) (*IdxE).PP].HasBits)
+      if (HadBits != (*IdxE).Path[(*IdxE).PP].HasBits)
         {
           strcpy (temp, (*IdxE).LastKey);
-          strcpy (provkljuc, (*IdxE).LastKey);
-          provslog = (*IdxE).LastRecord;
+          strcpy (check_key, (*IdxE).LastKey);
+          check_record = (*IdxE).LastRecord;
           FindKey (IdxF, IdxE, DataRecNum, temp);
           if (OKAY == T)
             {
-              while (provslog != (*IdxE).LastRecord && strcmp (temp, provkljuc) == 0)
+              while (check_record != (*IdxE).LastRecord && strcmp (temp, check_key) == 0)
                 NextKey (IdxF, IdxE, DataRecNum, temp);
               PrevKey (IdxF, IdxE, DataRecNum, temp);
             }
@@ -761,46 +722,46 @@ void *ProcKey;
           strcpy (*(TaKeyStr *) ProcKey, temp);
           return;
         }
-      (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex--;
-      if ((*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex == -1)
+      (*IdxE).Path[(*IdxE).PP].ItemArrIndex--;
+      if ((*IdxE).Path[(*IdxE).PP].ItemArrIndex == -1)
         R = (*PagPtr).BckwPageRef;
       else
         R = (*PagPtr).ItemArray
-              [(long long) (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex].PageRef;
+              [(*IdxE).Path[(*IdxE).PP].ItemArrIndex].PageRef;
     }
   while (R != 0)
     {
       TaGetPage (IdxF, IdxE, R, &PagPtr);
       (*IdxE).PP++;
-      (*IdxE).Path[(long long) (*IdxE).PP].PageRef = R;
-      (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex = (*PagPtr).ItemsOnPage - 1;
+      (*IdxE).Path[(*IdxE).PP].PageRef = R;
+      (*IdxE).Path[(*IdxE).PP].ItemArrIndex = (*PagPtr).ItemsOnPage - 1;
       R = (*PagPtr).ItemArray[(*PagPtr).ItemsOnPage - 1].PageRef;
 
-      (*IdxE).Path[(long long) (*IdxE).PP].HasBits = 0;
+      (*IdxE).Path[(*IdxE).PP].HasBits = 0;
       for (num = 0; num < (*PagPtr).ItemsOnPage; num++)
-        (*IdxE).Path[(long long) (*IdxE).PP].HasBits +=
+        (*IdxE).Path[(*IdxE).PP].HasBits +=
               (*PagPtr).ItemArray[num].DataRef;
     }
   if ((*IdxE).PP != -1)
     {
       while ((*IdxE).PP > 0 &&
-             (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex == -1)
+             (*IdxE).Path[(*IdxE).PP].ItemArrIndex == -1)
         {
           (*IdxE).PP--;
-          TaGetPage (IdxF, IdxE, (*IdxE).Path[(long long) (*IdxE).PP].PageRef, &PagPtr);
+          TaGetPage (IdxF, IdxE, (*IdxE).Path[(*IdxE).PP].PageRef, &PagPtr);
 
           for (num = 0, HadBits = 0; num < (*PagPtr).ItemsOnPage; num++)
             HadBits += (*PagPtr).ItemArray[num].DataRef;
-          if (HadBits != (*IdxE).Path[(long long) (*IdxE).PP].HasBits)
+          if (HadBits != (*IdxE).Path[(*IdxE).PP].HasBits)
             {
               strcpy (temp, (*IdxE).LastKey);
-              strcpy (provkljuc, (*IdxE).LastKey);
-              provslog = (*IdxE).LastRecord;
+              strcpy (check_key, (*IdxE).LastKey);
+              check_record = (*IdxE).LastRecord;
               FindKey (IdxF, IdxE, DataRecNum, temp);
               if (OKAY == T)
                 {
-                  while (provslog != (*IdxE).LastRecord &&
-                         strcmp (temp, provkljuc) == 0)
+                  while (check_record != (*IdxE).LastRecord &&
+                         strcmp (temp, check_key) == 0)
                     NextKey (IdxF, IdxE, DataRecNum, temp);
                   PrevKey (IdxF, IdxE, DataRecNum, temp);
                 }
@@ -813,12 +774,12 @@ void *ProcKey;
               return;
             }
         }
-      if ((*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex > -1)
+      if ((*IdxE).Path[(*IdxE).PP].ItemArrIndex > -1)
         {
           strcpy (*(TaKeyStr *) ProcKey, (*PagPtr).ItemArray
-                  [(long long) (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex].Key);
+                  [(*IdxE).Path[(*IdxE).PP].ItemArrIndex].Key);
           *DataRecNum = (*PagPtr).ItemArray
-                  [(long long) (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex].DataRef;
+                  [(*IdxE).Path[(*IdxE).PP].ItemArrIndex].DataRef;
 
           (*IdxE).LastRecord = *DataRecNum;
           strcpy ((*IdxE).LastKey, *(TaKeyStr *) ProcKey);
@@ -837,7 +798,7 @@ TaFindKey (IdxF, IdxE, DataRecNum, ProcKey)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long *DataRecNum;
+unsigned long long *DataRecNum;
 void *ProcKey;
 {
   void TaGetPage (), CutString ();
@@ -855,22 +816,22 @@ void *ProcKey;
   while (PrPgRef != 0 && OKAY != T)
     {
       (*IdxE).PP++;
-      (*IdxE).Path[(long long) (*IdxE).PP].PageRef = PrPgRef;
+      (*IdxE).Path[(*IdxE).PP].PageRef = PrPgRef;
       TaGetPage (IdxF, IdxE, PrPgRef, &PagPtr);
 
-      (*IdxE).Path[(long long) (*IdxE).PP].HasBits = 0;
+      (*IdxE).Path[(*IdxE).PP].HasBits = 0;
       for (num = 0; num < (*PagPtr).ItemsOnPage; num++)
-        (*IdxE).Path[(long long) (*IdxE).PP].HasBits +=
+        (*IdxE).Path[(*IdxE).PP].HasBits +=
               (*PagPtr).ItemArray[num].DataRef;
 
       l = 0;
       r = (*PagPtr).ItemsOnPage - 1;
       do
         {
-          k = (long long) ((l + r) / 2);
+          k = ((l + r) / 2);
           c = TaCompKeys ((TaKeyStr *) ProcKey,
                           (*PagPtr).ItemArray[k].Key,
-                          (long long) 0,
+                          0,
                           (*PagPtr).ItemArray[k].DataRef,
                           (*IdxE).AllowDuplKeys);
           if (c <= 0)
@@ -893,14 +854,14 @@ void *ProcKey;
         PrPgRef = (*PagPtr).BckwPageRef;
       else
         PrPgRef = (*PagPtr).ItemArray[r].PageRef;
-      (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex = r;
+      (*IdxE).Path[(*IdxE).PP].ItemArrIndex = r;
     }
   if (OKAY != T && (*IdxE).PP > -1)
     {
       while
-        ((*IdxE).PP > 0 && (*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex == -1)
+        ((*IdxE).PP > 0 && (*IdxE).Path[(*IdxE).PP].ItemArrIndex == -1)
         (*IdxE).PP--;
-      if ((*IdxE).Path[(long long) (*IdxE).PP].ItemArrIndex == -1)
+      if ((*IdxE).Path[(*IdxE).PP].ItemArrIndex == -1)
         (*IdxE).PP = -1;
     }
 }
@@ -910,7 +871,7 @@ FindKey (IdxF, IdxE, DataRecNum, ProcKey)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long *DataRecNum;
+unsigned long long *DataRecNum;
 void *ProcKey;
 {
   void TaFindKey ();
@@ -933,7 +894,7 @@ SearchKey (IdxF, IdxE, DataRecNum, ProcKey)
 
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
-long long *DataRecNum;
+unsigned long long *DataRecNum;
 void *ProcKey;
 {
   void TaFindKey ();

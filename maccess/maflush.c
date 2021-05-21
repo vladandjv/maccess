@@ -3,8 +3,7 @@
 /* DESCRIPTION:  Flush from memory to files on disk.                      */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
-#include <unistd.h>
-#include "mainter.h"
+#include "maccess.h"
 /**************************************************************************/
 void
 FlushFile (DatF, DatE)

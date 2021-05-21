@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fcntl.h>
-#include "mainter.h"
+#include "maccess.h"
 /**************************************************************************/
 void
 WriteHeader (DatF, DatE, RecLen)
@@ -15,30 +15,28 @@ struct DataFile *DatF;
 struct DataExt *DatE;
 long long RecLen;
 {
-  long long n;
-  long long R = 0;
+  unsigned long long n;
+  unsigned long long R = 0;
 
   for (n = 0; n < MaxDataRecSize; n++)
     Buffer.R[n] = '\0';
-  (*DatF).Heder.FirstFree = -1;
-  (*DatF).Heder.ItemSize = RecLen;
-  memcpy (TaRecBuf, (&(*DatF).Heder), (size_t)FileHeaderSize);
+  (*DatF).Header.FirstFree = -1;
+  (*DatF).Header.ItemSize = RecLen;
+  memcpy (TaRecBuf, (&(*DatF).Header), (size_t)FileHeaderSize);
   TaPutRec (DatF, DatE, R, TaRecBuf);
-  (*DatF).Heder.NumRec = 1;
+  (*DatF).Header.NumRec = 1;
 }
 /**************************************************************************/
 void
-MakeFile (DatF, DatE, FName, RecLen, MemNum, FileNum)
+MakeFile (DatF, DatE, FName, RecLen, FileNum)
 
 DataFilePtr *DatF;
 struct DataExt *DatE;
 FileName FName;
-long long RecLen;
-long long MemNum;
+unsigned long long RecLen;
 long long FileNum;
 {
   void WriteHeader ();
-
   (*DatE).FileNumber = open (FName, O_CREAT | O_RDWR, 0666);
   if ((*DatE).FileNumber == -1)
     {
@@ -57,13 +55,12 @@ long long FileNum;
           IOStatus = RecTooSmall;
           TAIOCheck ();
         }
-      FindYourPlace (DatF, MemNum, FileNum);
-      (**DatF).Heder.FirstFree = 0;
-      (**DatF).Heder.NumberFree = 0;
-      (**DatF).Heder.Int1 = 0;
-      (**DatF).Heder.ItemSize = 0;
-      (**DatF).Heder.NumRec = 0;
-      (**DatF).M = MemNum;
+      FindYourPlace (DatF, FileNum);
+      (**DatF).Header.FirstFree = 0;
+      (**DatF).Header.NumberFree = 0;
+      (**DatF).Header.Int1 = 0;
+      (**DatF).Header.ItemSize = 0;
+      (**DatF).Header.NumRec = 0;
       (**DatF).FileNumber = (*DatE).FileNumber;
 
       strcpy ((*DatE).FileTitle, FName);
@@ -77,14 +74,13 @@ long long FileNum;
 }
 /**************************************************************************/
 void
-MakeIndex (IdxF, IdxE, FName, KeyLen, S, MemNum, FileNum)
+MakeIndex (IdxF, IdxE, FName, KeyLen, S, FileNum)
 
 DataFilePtr *IdxF;
 struct IndexExt *IdxE;
 FileName FName;
 unsigned long long KeyLen;
 long long S;
-long long MemNum;
 long long FileNum;
 {
   void WriteHeader ();
@@ -104,13 +100,12 @@ long long FileNum;
           IOStatus = KeyTooLarge;
           TAIOCheck ();
         }
-      FindYourPlace (IdxF, MemNum, FileNum);
-      (**IdxF).Heder.FirstFree = 0;
-      (**IdxF).Heder.NumberFree = 0;
-      (**IdxF).Heder.Int1 = 0;
-      (**IdxF).Heder.ItemSize = 0;
-      (**IdxF).Heder.NumRec = 0;
-      (**IdxF).M = MemNum;
+      FindYourPlace (IdxF, FileNum);
+      (**IdxF).Header.FirstFree = 0;
+      (**IdxF).Header.NumberFree = 0;
+      (**IdxF).Header.Int1 = 0;
+      (**IdxF).Header.ItemSize = 0;
+      (**IdxF).Header.NumRec = 0;
       (**IdxF).FileNumber = (*IdxE).DataE.FileNumber;
       (**IdxF).RR = 0;
       (**IdxF).KeyL = 0;

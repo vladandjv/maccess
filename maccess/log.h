@@ -3,9 +3,7 @@
 #ifndef _H_LOG
 #define _H_LOG
 
-#include "conf_lib.h"
-
-#include <stdio.h>
+#include "defs.h"
 
 #if __cplusplus
 extern "C" {

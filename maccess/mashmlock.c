@@ -5,7 +5,6 @@
 /**************************************************************************/
 #include "defs.h"
 #include <stdlib.h>
-#include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h> 
 
@@ -45,6 +44,7 @@ SHM_Lock (long long *shm_lock) /* Shared memory lock */
 {
   while (*shm_lock == 1)
     sleep (1);
+
   *shm_lock = 1;
 }
 /**************************************************************************/

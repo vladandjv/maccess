@@ -1,7 +1,7 @@
 /*
- * PROGRAM: E_LOAD.C                                                        
+ * PROGRAM: E_DELETE.C                                                        
  * DESCRIPTION: Example program for Maccess funcitons, without any other
- * libraries. It loads 1000000 records in the same files with which the 
+ * libraries. It deletes 999998 records in the same files with which the 
  * example program works. Use in conjunction with the example or e_print 
  * to see results.
  * AUTHOR: VLADAN DJORDJEVIC                                               
@@ -58,7 +58,7 @@ sig_handler (int sig)
 int
 main ()
 {
-  void Control (), Loading ();
+  void Control (), Deleting ();
 
   openLog (APP_LOGFILE);
   signal (SIGSEGV, sig_handler);
@@ -76,7 +76,7 @@ main ()
   ClearKey (&IExt);
 
   printf ("I am working!\n");
-  Loading ();
+  Deleting ();
   printf ("DONE!\n");
 
   SHM_Lock (Lock);
@@ -90,28 +90,34 @@ main ()
 }
 /**************************************************************************/
 void
-Loading ()
+Deleting ()
 {
-  info = &OurRecord;
-  long long i, j=1000000;
+  long long n = 0; 
+  long long z = 2; /*start */
+  long long j = 9999999; /*end */
+  //long long j = 5; /*end */
+  char temp[11];
 
-  logMessage ("I am loading %lld records", j);
-  info->Deleted = 0;
-  for (i = 1; i <= j; ++i)
+  n = j - 7;
+  logMessage ("I am deleting %lld records", n);
+  for (n=0; z < j; z++)
     {
-      sprintf (info->Key, "%010lld", i);
-      prepare_str (info->Key, 10);
-      sprintf (info->Surname, "%025lld", i);
-      sprintf (info->Name, "%020lld", i);
-      sprintf (info->Remark, "%045lld", i);
+      sprintf (temp, "%010lld", z);
+      //printf("looking for [%s]\n", temp);
       SHM_Lock (Lock);
-      AddRec (DPtr, &DExt, &TaRecNum, info);
-      AddKey (IPtr, &IExt, &TaRecNum, (TaKeyStr *) info->Key);
-      SHM_UnLock (Lock);
-      if ((i % 100000) == 0) /* Just for testing multi user processing */
+      FindKey (IPtr, &IExt, &TaRecNum, temp);
+      if (OKAY == T)
       {
-	printf("Added %lld\n", i);
-        sleep (2);
+         DeleteRec (DPtr, &DExt, TaRecNum);
+         DeleteKey (IPtr, &IExt, &TaRecNum, temp);
+	     n++;
+	     //printf("deleting    [%s]\n", temp);
+      }
+      SHM_UnLock (Lock);
+      if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
+      {
+	  printf("Deleted %lld\n", n);
+         sleep (2);
       } 
 #ifdef DEBUG_APP
       logMessage ("Key[%s] Surname[%s] Name[%s] Remark[%s]",
@@ -122,28 +128,18 @@ Loading ()
     FlushFile(DPtr, &DExt);
     FlushIndex(IPtr, &IExt); 
     SHM_UnLock (Lock);
-  i--;
-  logMessage ("DONE! I have loaded %lld records of %lld", i , j);
+  logMessage ("DONE! I have deleted %lld records.", n);
 }
 /**************************************************************************/
 void
 Control ()
 {
-  FILE *fp = NULL;
-
-  if ((fp = fopen (DatFName, "rb")) == NULL)
+  if (fopen (DatFName, "rb") == NULL)
     {
-      Destroy_SHM (MACCESS_SHM_MEM_CODE, (size_t) MACCESS_SHM_MEM_SIZE);
-      InitAccess ((long long) 0, MACCESS_SHM_MEM_CODE);
-      MakeFile (&DPtr, &DExt, DatFName, sizeof (struct Record), (long long) 0);
-      MakeIndex (&IPtr, &IExt, IndexFName, KeyLen, NoDuplicates, (long long) 1);
-      CloseFile (DPtr, &DExt);
-      CloseIndex (IPtr, &IExt);
-      TermAccess ((long long) 0);
-      Destroy_SHM (MACCESS_SHM_MEM_CODE, (size_t) MACCESS_SHM_MEM_SIZE);
+      printf ("There are no files, nothing to delete! Use e_load first.\n");
+      exit (1);
     }
-  else
-    fclose (fp);
+
 }
 /**************************************************************************/
 /* Remove empty strings and add ' ' at the end if string lenght is less

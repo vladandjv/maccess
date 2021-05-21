@@ -65,23 +65,24 @@ main ()
   if (signal (SIGTERM, sig_handler) == SIG_ERR)
     logMessage ("Can't catch SIGTERM signal");
 
+  Control (); /* Must be before InitAccess */
   Lock = DB_Lock_Init (LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
   SHM_Lock (Lock);
-  Control (); /* Must be before InitAccess */
-  InitAccess ((long long) 0, MACCESS_SHM_MEM_CODE);
-  OpenFile (&DPtr, &DExt, DatFName, sizeof (struct Record), (long long) 0, (long long) 0);
-  OpenIndex (&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long) 0, (long long) 1);
+  InitAccess (MACCESS_SHM_MEM_CODE);
+  OpenFile (&DPtr, &DExt, DatFName, sizeof (struct Record), (long long) 0);
+  OpenIndex (&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long) 1);
   SHM_UnLock (Lock);
   ClearKey (&IExt);
 
-  printf ("I am working!\n");
+  printf ("I going to start. Press any key to continue!\n");
+  getchar();
   Next ();
   printf ("DONE!\n");
 
   SHM_Lock (Lock);
   CloseFile (DPtr, &DExt);
   CloseIndex (IPtr, &IExt);
-  TermAccess ((long long) 0);
+  TermAccess ();
   SHM_UnLock (Lock);
   DB_Lock_Close (Lock);
   closeLog ();
@@ -95,7 +96,7 @@ Next ()
   char Mat[115];
   info = &OurRecord;
 
-  long i;
+  long long i;
 
   for (i = 1;; i++)
     {
@@ -112,13 +113,13 @@ Next ()
           strcat (Mat, info->Name);
           strcat (Mat, " ");
           strcat (Mat, info->Remark);
-          printf ("Mat[%10ld] = [%s]\n", i, Mat);
+          printf ("Mat[%10lld] = [%s]\n", i, Mat);
         }
       else
         {
           SHM_UnLock (Lock);
           if (i == 1)
-            printf ("The database is empty! Load it with ./e1_load\n");
+            printf ("The database is empty! Load it with ./e_load\n");
           break;
         }
     }
@@ -129,7 +130,6 @@ Control ()
 {
   if (fopen (DatFName, "rb") == NULL)
     {
-      SHM_UnLock (Lock);
       printf ("There are no files to print! Use e_load first.\n");
       exit (1);
     }

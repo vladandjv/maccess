@@ -1,17 +1,15 @@
 /* log.c */
 #include "defs.h"
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdarg.h>
-#include <unistd.h>
 
 static FILE * logfp = NULL;
 static char * Logfile = NULL;
 void
 openLog (char *path)
 {
-  if ((logfp = fopen (path, "a")) == NULL)
+ if ((logfp = fopen (path, "a")) == NULL)
     {
       logfp = stderr;
       logMessage ("Couldn't open %s, using STDERR!\n", path);

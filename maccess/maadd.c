@@ -3,7 +3,7 @@
 /* DESCRIPTION:  Adding record                                            */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
-#include "mainter.h"
+#include "maccess.h"
 
 Boolean PassUp; /* variables  */
 TaPagePtr PagePtr1, PagePtr2;
@@ -17,17 +17,17 @@ struct DataExt *DatE;
 long long *R;
 void *Buffer;
 {
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   void PutFileHeader ();
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
   void NewRec ();
 
   *R = 0;
   NewRec (DatF, R);
   PutRec (DatF, DatE, *R, Buffer);
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   PutFileHeader (DatF, DatE);
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
 }
 /**************************************************************************/
 void
@@ -38,9 +38,9 @@ struct IndexExt *IdxE;
 long long *DataRecNum;
 void *ProcKey;
 {
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   void StoreIndexHeader (), PutFileHeader ();
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
   void Search (), CutString (), TaNewPage (), TaUpdatePage ();
   long long PrPgRef1;
   long long RBr = -1;
@@ -61,10 +61,10 @@ void *ProcKey;
       TaUpdatePage (PagePtr1);
     }
   (*IdxE).PP = -1;
-#ifdef _IMA_FLUSH
+#ifdef _HAS_FLUSH
   StoreIndexHeader (IdxF, IdxE);
   PutFileHeader (IdxF, &((*IdxE).DataE));
-#endif /* _IMA_FLUSH */
+#endif /* _HAS_FLUSH */
 }
 /**************************************************************************/
 void

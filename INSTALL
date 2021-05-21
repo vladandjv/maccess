@@ -1,0 +1,5 @@
+cd cmake-build
+cmake ../
+make
+#Not necessary, but if you want to install it in /usr/local
+sudo make install 
