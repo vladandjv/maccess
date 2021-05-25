@@ -31,10 +31,7 @@ EXAMPLE PROGRAMS
 
 The program for displaying current parameters, calculating parameters 
 which are interdependent and calculating shared memory segment size  
-is called btree_parameters. Also there is the precompiled character  
-based UI interactive program called calculate which does the calculation 
-of database efficiency and resources requirements base on entered  
-parameters.
+is called btree_parameters. 
 
 The parameters obtained by using the btree_parameters program are located 
 in file maccess.h and there they can be changed.
