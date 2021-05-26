@@ -31,7 +31,10 @@ EXAMPLE PROGRAMS
 
 The program for displaying current parameters, calculating parameters 
 which are interdependent and calculating shared memory segment size  
-is called btree_parameters. 
+is called btree_parameters. Also there is the precompiled character  
+based UI interactive program called calculate-x86_64.AppImage 
+(chmod +x to make it executable) which does the calculation of database 
+efficiency and resources requirements base on entered parameters.
 
 The parameters obtained by using the btree_parameters program are located 
 in file maccess.h and there they can be changed.
@@ -42,11 +45,14 @@ simultaneously.
 Record with key used in testing programs is described in /docs as 
 Record_example.txt.
 
-example is the precompiled character based UI. It is a very simple sample 
-for using maccess. It has only one key.
+example-x86_64.AppImage (chmod +x to make it executable) is the precompiled 
+character based UI.  It is a very simple sample for using maccess. It has 
+only one key.
+
 e_load.c, e_print.c and e_delete.c - command line programs for testing  
 massive number of records, and also can be used for testing memory leak  
 with valgrind or similar tool.
+
 e_rebuild_sh - the shell script for rebuilding database.  
 
 Deleting shared memory, made specifically for the testing programs,  
