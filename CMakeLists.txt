@@ -17,7 +17,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
 #Generate the static library from the sources
 add_library(maccess STATIC ${SOURCES_maccess})
 
-install(TARGETS maccess DESTINATION /usr/local/lib)
+install(TARGETS maccess DESTINATION lib)
 
 add_executable(e_load e_load.c)
 add_executable(e_delete e_delete.c)
