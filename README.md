@@ -6,11 +6,11 @@ MACCESS - B+ tree database file system with shared memory caching
 
 Author: Vladan Djordjevic
 	vladandjv@gmail.com                 
-
+Copyright 2020 Vladan Djordjevic
 --------------------------------------------------------------------------
 DESCRIPTION
 
-MACCESS is a B+ binary tree implementation in C. It is a relation 
+MACCESS is a B+ binary tree implementation in C. It is a relational 
 database file system that can work in a multiuser environment. It uses  
 memory cashing based on a least-recently-used (LRU) strategy. Cache is  
 stored in a shared memory segment for inter process communication and  
@@ -49,15 +49,22 @@ example-x86_64.AppImage (chmod +x to make it executable) is the precompiled
 character based UI.  It is a very simple sample for using maccess. It has 
 only one key.
 
-e_load.c, e_print.c and e_delete.c - command line programs for testing  
+e_load.c, e_print.c and e_delete.c - Command line programs for testing  
 massive number of records, and also can be used for testing memory leak  
-with valgrind or similar tool.
+with valgrind or similar tool. See the headers of the source files for
+more detailes.
 
-e_rebuild_sh - the shell script for rebuilding database.  
+e_create.c -Only creates the database files. Necessary only for e_test.
+e_test.c - Shows B+ tree parameters and adds only 5 records.
 
 Deleting shared memory, made specifically for the testing programs,  
 is with e_shmrm. It deletes shared memory segments for the testing  
-programs. Their special codes are defined in defs.h.
+programs. Their special codes are defined in defs.h. 
+
+e_rebuild_sh - The shell script for rebuilding the database.  
+
+e_clean_db.sh - The shell script for deleting the database files and shared 
+                memory segments.
 
 A detailed description of the constants and the ways of their calculation 
 can be read in ./docs/maccess_cons_types_vars.txt. Detailed description  

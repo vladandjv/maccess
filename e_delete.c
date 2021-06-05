@@ -1,11 +1,11 @@
-/*
- * PROGRAM: E_DELETE.C                                                        
- * DESCRIPTION: Example program for Maccess funcitons, without any other
- * libraries. It deletes 999998 records in the same files with which the 
- * example program works. Use in conjunction with the example or e_print 
- * to see results.
- * AUTHOR: VLADAN DJORDJEVIC                                               
- */
+/*************************************************************************/
+/* PROGRAM: E_DELETE.C                                                   */
+/* DESCRIPTION: Example program for Maccess funcitons, without any other */
+/* libraries. It deletes 999998 records in the same files with which the */
+/* example program works. Use in conjunction with the example or e_print */
+/* to see results.                                                       */
+/* AUTHOR: VLADAN DJORDJEVIC                                             */
+/*************************************************************************/
 
 #include "maccess.h"
 #include "example.h"
@@ -15,7 +15,7 @@
 FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
-long long *Lock; /* locks the shared memory segment*/
+long long *Lock;                /* locks the shared memory segment*/
 struct IndexExt IExt;
 struct DataExt DExt;
 DataFilePtr IPtr = NULL;
@@ -24,152 +24,145 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 
-void prepare_str (char *str, int length);
+void prepare_str(char *str, int length);
 /**************************************************************************/
-void
-sig_handler (int sig)
+void sig_handler(int sig)
 {
 
 #ifdef DEBUG_APP
-  logMessage ("Cought signal %d in sigint_handler", sig);
+  logMessage("Cought signal %d in sigint_handler", sig);
 #endif
 
   switch (sig)
-    {
-    case SIGTERM:
-    case SIGSEGV:
-      SHM_UnLock (Lock);
-      CloseFile (DPtr, &DExt);
-      CloseIndex (IPtr, &IExt);
-      SHM_UnLock (Lock);
-      TermAccess ((long long) 0);
-      DB_Lock_Close (Lock);
-      closeLog ();
-      exit (0);
-    case SIGINT:
-      signal (sig, SIG_IGN);
-      break;
+  {
+  case SIGTERM:
+  case SIGSEGV:
+    SHM_UnLock(Lock);
+    CloseFile(DPtr, &DExt);
+    CloseIndex(IPtr, &IExt);
+    SHM_UnLock(Lock);
+    TermAccess((long long)0);
+    DB_Lock_Close(Lock);
+    closeLog();
+    exit(0);
+  case SIGINT:
+    signal(sig, SIG_IGN);
+    break;
 
-    default:
-      signal (sig, SIG_DFL);
-    }
+  default:
+    signal(sig, SIG_DFL);
+  }
 }
 /**************************************************************************/
-int
-main ()
+int main()
 {
-  void Control (), Deleting ();
+  void Control(), Deleting();
 
-  openLog (APP_LOGFILE);
-  signal (SIGSEGV, sig_handler);
-  signal (SIGINT, sig_handler);
-  if (signal (SIGTERM, sig_handler) == SIG_ERR)
-    logMessage ("Can't catch SIGTERM signal");
+  openLog(APP_LOGFILE);
+  signal(SIGSEGV, sig_handler);
+  signal(SIGINT, sig_handler);
+  if (signal(SIGTERM, sig_handler) == SIG_ERR)
+    logMessage("Can't catch SIGTERM signal");
 
-  Lock = DB_Lock_Init (LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
-  SHM_Lock (Lock);
-  Control (); /* Must be before InitAccess */
-  InitAccess (MACCESS_SHM_MEM_CODE);
-  OpenFile (&DPtr, &DExt, DatFName, sizeof (struct Record), (long long) 0);
-  OpenIndex (&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long) 1);
-  SHM_UnLock (Lock);
-  ClearKey (&IExt);
+  Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+  SHM_Lock(Lock);
+  Control(); /* Must be before InitAccess */
+  InitAccess(MACCESS_SHM_MEM_CODE);
+  OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
+  OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
+  SHM_UnLock(Lock);
+  ClearKey(&IExt);
 
-  printf ("I am working!\n");
-  Deleting ();
-  printf ("DONE!\n");
+  printf("I am working!\n");
+  Deleting();
+  printf("DONE!\n");
 
-  SHM_Lock (Lock);
-  CloseFile (DPtr, &DExt);
-  CloseIndex (IPtr, &IExt);
-  TermAccess ();
-  SHM_UnLock (Lock);
-  DB_Lock_Close (Lock);
-  closeLog ();
-  exit (0);
+  SHM_Lock(Lock);
+  CloseFile(DPtr, &DExt);
+  CloseIndex(IPtr, &IExt);
+  TermAccess();
+  SHM_UnLock(Lock);
+  DB_Lock_Close(Lock);
+  closeLog();
+  exit(0);
 }
 /**************************************************************************/
-void
-Deleting ()
+void Deleting()
 {
-  long long n = 0; 
-  long long z = 2; /*start */
+  long long n = 0;
+  long long z = 2;       /*start */
   long long j = 9999999; /*end */
   //long long j = 5; /*end */
   char temp[11];
 
   n = j - 7;
-  logMessage ("I am deleting %lld records", n);
-  for (n=0; z < j; z++)
+  logMessage("I am deleting %lld records", n);
+  for (n = 0; z < j; z++)
+  {
+    sprintf(temp, "%010lld", z);
+    //printf("looking for [%s]\n", temp);
+    SHM_Lock(Lock);
+    FindKey(IPtr, &IExt, &TaRecNum, temp);
+    if (OKAY == T)
     {
-      sprintf (temp, "%010lld", z);
-      //printf("looking for [%s]\n", temp);
-      SHM_Lock (Lock);
-      FindKey (IPtr, &IExt, &TaRecNum, temp);
-      if (OKAY == T)
-      {
-         DeleteRec (DPtr, &DExt, TaRecNum);
-         DeleteKey (IPtr, &IExt, &TaRecNum, temp);
-	     n++;
-	     //printf("deleting    [%s]\n", temp);
-      }
-      SHM_UnLock (Lock);
-      if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
-      {
-	  printf("Deleted %lld\n", n);
-         sleep (2);
-      } 
-#ifdef DEBUG_APP
-      logMessage ("Key[%s] Surname[%s] Name[%s] Remark[%s]",
-                  info->Key, info->Surname, info->Name, info->Remark);
-#endif 
+      DeleteRec(DPtr, &DExt, TaRecNum);
+      DeleteKey(IPtr, &IExt, &TaRecNum, temp);
+      n++;
+      //printf("deleting    [%s]\n", temp);
     }
-    SHM_Lock (Lock);
-    FlushFile(DPtr, &DExt);
-    FlushIndex(IPtr, &IExt); 
-    SHM_UnLock (Lock);
-  logMessage ("DONE! I have deleted %lld records.", n);
+    SHM_UnLock(Lock);
+    if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
+    {
+      printf("Deleted %lld\n", n);
+      sleep(2);
+    }
+#ifdef DEBUG_APP
+    logMessage("Key[%s] Surname[%s] Name[%s] Remark[%s]",
+               info->Key, info->Surname, info->Name, info->Remark);
+#endif
+  }
+  SHM_Lock(Lock);
+  FlushFile(DPtr, &DExt);
+  FlushIndex(IPtr, &IExt);
+  SHM_UnLock(Lock);
+  logMessage("DONE! I have deleted %lld records.", n);
 }
 /**************************************************************************/
-void
-Control ()
+void Control()
 {
-  if (fopen (DatFName, "rb") == NULL)
-    {
-      printf ("There are no files, nothing to delete! Use e_load first.\n");
-      exit (1);
-    }
-
+  if (fopen(DatFName, "rb") == NULL)
+  {
+    printf("There are no files, nothing to delete! Use e_load first.\n");
+    exit(1);
+  }
 }
 /**************************************************************************/
 /* Remove empty strings and add ' ' at the end if string lenght is less
  * then required */
-void
-prepare_str (char *str, int length)
+void prepare_str(char *str, int length)
 {
   char blank[MAX_STRING_LENGTH];
   int c, d;
 
   for (c = 0, d = 0; str[c] != '\0'; c++)
+  {
+    if (str[c] != ' ')
     {
-      if (str[c] != ' ')
-        {
-          blank[d] = str[c];
-          break;
-        }
+      blank[d] = str[c];
+      break;
     }
+  }
 
   for (; str[c] != '\0'; c++, d++)
     blank[d] = str[c];
 
   for (; d <= length; d++)
-    {
-      blank[d] = ' ';
-    }
+  {
+    blank[d] = ' ';
+  }
   blank[length] = '\0';
-  strcpy (str, blank);
+  strcpy(str, blank);
 
   return;
 }
 /**************************************************************************/
-

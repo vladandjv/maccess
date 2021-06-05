@@ -1,7 +1,9 @@
-/**************************************************************************
- *      MACCESS.H
- *	Definitions for maccess.c rutines.
- **************************************************************************/
+/**************************************************************************/
+/* MACCESS.H                                                              */
+/* Definitions for the maccess functions                                  */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
+/**************************************************************************/
+
 #ifndef _MACCESS_H
 #define _MACCESS_H
 
@@ -11,42 +13,45 @@
 /*If MaxKeyLen change, you also have to change the shared
  * memory segment size (in conf_lib.h). It is the best to run 
  * ./btree_parameters for the calculation */
-#define MaxKeyLen  35 /* Read the above! */
-#define PageSize   254
+#define MaxKeyLen 35 /* Read the above! */
+#define PageSize 254
 #define PageStackSize 255
 #define Order (long long)(PageSize / 2)
 #define MaxHeight 6 /* run ./btree_parameters for the calculation */
-#define FileHeaderSize (sizeof(long long)*3 + sizeof(long long)) 
+#define FileHeaderSize (sizeof(long long) * 3 + sizeof(long long))
 #define MinDataRecSize FileHeaderSize
-#define ItemOverhead  (sizeof(struct TaItem) - MaxKeyLen) 
+#define ItemOverhead (sizeof(struct TaItem) - MaxKeyLen)
 /* For PageOverhead see defined bellow, line 48 */
 /*Theory: (but it is not rational to be more then needed)
 #define MaxDataRecSize (PageOverhead + PageSize * (ItemOverhead + MaxKeyLen)) */
 #define MaxDataRecSize 150
 
-#define NoDuplicates      (long long)0
-#define Duplicates        (long long)1
+#define NoDuplicates (long long)0
+#define Duplicates (long long)1
 /****************************** strustures and types **********************/
 typedef char FileName[MAX_FILENAME_LENGHT];
 typedef char TaKeyStr[MaxKeyLen];
 
-struct TaItem {
+struct TaItem
+{
     long long DataRef;
     long long PageRef;
     TaKeyStr Key;
 };
 typedef struct TaItem ArrItem[PageSize];
 
-struct TaPage {
+struct TaPage
+{
     long long ItemsOnPage;
     long long BckwPageRef;
     ArrItem ItemArray;
 };
 typedef struct TaPage *TaPagePtr;
 
-#define PageOverhead (sizeof(((struct TaPage*)0)->ItemsOnPage) + sizeof(((struct TaPage*)0)->BckwPageRef))
+#define PageOverhead (sizeof(((struct TaPage *)0)->ItemsOnPage) + sizeof(((struct TaPage *)0)->BckwPageRef))
 
-struct HeaderFajla {
+struct HeaderFajla
+{
     unsigned long long FirstFree;
     long long NumberFree;
     long long Int1;
@@ -54,7 +59,8 @@ struct HeaderFajla {
     size_t NumRec;
 };
 
-struct DataFile {
+struct DataFile
+{
     struct HeaderFajla Header;
     long long FileNumber;
     long long RR;
@@ -62,21 +68,24 @@ struct DataFile {
 };
 typedef struct DataFile *DataFilePtr;
 
-struct DataExt {
+struct DataExt
+{
     long long FileNumber;
     FileName FileTitle;
     long long C;
     long long H;
 };
 
-struct TaSearchStep {
+struct TaSearchStep
+{
     long long PageRef;
     long long ItemArrIndex;
     long long HasBits;
 };
 typedef struct TaSearchStep TaPath[MaxHeight];
 
-struct IndexExt {
+struct IndexExt
+{
     struct DataExt DataE;
     Boolean AllowDuplKeys;
     long long PP;
@@ -86,7 +95,8 @@ struct IndexExt {
 };
 typedef struct IndexExt *IndexExtPtr;
 
-struct TaStackRec {
+struct TaStackRec
+{
     struct TaPage Page;
     DataFilePtr IndexFPtr;
     IndexExtPtr IndexEPtr;
@@ -97,7 +107,8 @@ typedef struct TaStackRec *TaStackRecPtr;
 typedef struct TaStackRec TaPageStack[PageStackSize];
 typedef TaPageStack *TaPageStackPtr;
 
-union TaRecordBuffer {
+union TaRecordBuffer
+{
     struct TaStackRec Page;
     char R[MaxDataRecSize]; /* byte type */
     long long I;
@@ -114,11 +125,11 @@ extern char *MemSh;
 extern Boolean OKAY;
 extern long long MemId;
 /***************************** functions **********************************/
-
 #if __cplusplus
-extern "C" {
+extern "C"
+{
 #endif /* __cplusplus */
-    
+
     void TaGetRec(), TaPutRec(), TAIOCheck(), TaReturnPage(), LeaveSM();
     long long StartSM(), ApproachSM(), FindYourPlace();
     char *USM();
@@ -144,5 +155,5 @@ extern "C" {
 };
 #endif /* __cplusplus */
 
-#endif  /* _MACCESS_H */
-/******************************* END **************************************/
+#endif /* _MACCESS_H */
+       /******************************* END **************************************/

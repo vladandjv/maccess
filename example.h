@@ -3,7 +3,8 @@
 #ifndef _EXAMPLE_H
 #define _EXAMPLE_H
 
-struct Record {
+struct Record
+{
     long long Deleted;
     char Key[11];
     char Surname[26];
@@ -22,4 +23,4 @@ extern long long TaRecNum;
 Boolean check();
 void sig_handler(int sig);
 
-#endif  /* _EXAMPLE_H */
+#endif /* _EXAMPLE_H */
