@@ -70,7 +70,7 @@ void Loading()
   info = &OurRecord;
 
   info->Deleted = 0;
-  for (i = 1; i <= 5; i++)
+  for (i = 1; i <= 10; i++)
   {
     sprintf(info->Key, "%010lld", i);
     prepare_str(info->Key, 10);

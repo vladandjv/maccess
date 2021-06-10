@@ -125,21 +125,11 @@ void Loading()
 /**************************************************************************/
 void Control()
 {
-  FILE *fp = NULL;
-
-  if ((fp = fopen(DatFName, "rb")) == NULL)
+  if (fopen(DatFName, "rb") == NULL)
   {
-    Destroy_SHM(MACCESS_SHM_MEM_CODE, (size_t)MACCESS_SHM_MEM_SIZE);
-    InitAccess((long long)0, MACCESS_SHM_MEM_CODE);
-    MakeFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
-    MakeIndex(&IPtr, &IExt, IndexFName, KeyLen, NoDuplicates, (long long)1);
-    CloseFile(DPtr, &DExt);
-    CloseIndex(IPtr, &IExt);
-    TermAccess((long long)0);
-    Destroy_SHM(MACCESS_SHM_MEM_CODE, (size_t)MACCESS_SHM_MEM_SIZE);
+    printf("There are no files! Use e_print first.\n");
+    exit(1);
   }
-  else
-    fclose(fp);
 }
 /**************************************************************************/
 /* Remove empty strings and add ' ' at the end if string lenght is less

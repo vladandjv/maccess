@@ -71,7 +71,7 @@ int main()
   SHM_UnLock(Lock);
   ClearKey(&IExt);
 
-  printf("I going to start. Press any key to continue!\n");
+  printf("I am going to start. Press any key to continue!\n");
   getchar();
   Next();
   printf("DONE!\n");
@@ -125,7 +125,8 @@ void Control()
 {
   if (fopen(DatFName, "rb") == NULL)
   {
-    printf("There are no files to print! Use e_load first.\n");
+    printf("There are no files, nothing to print!\nFirst use e_print and \
+    e_load respectively.\n");
     exit(1);
   }
 }

@@ -90,17 +90,15 @@ int main()
 void Deleting()
 {
   long long n = 0;
-  long long z = 2;       /*start */
-  long long j = 9999999; /*end */
-  //long long j = 5; /*end */
+  long long z = 2;      /*start */
+  long long j = 999999; /*end */
   char temp[11];
 
-  n = j - 7;
-  logMessage("I am deleting %lld records", n);
-  for (n = 0; z < j; z++)
+  n = j - z + 1;
+  logMessage("I am deleting %lld records, if they exist.", n);
+  for (n = 0; z <= j; ++z)
   {
     sprintf(temp, "%010lld", z);
-    //printf("looking for [%s]\n", temp);
     SHM_Lock(Lock);
     FindKey(IPtr, &IExt, &TaRecNum, temp);
     if (OKAY == T)
@@ -108,7 +106,6 @@ void Deleting()
       DeleteRec(DPtr, &DExt, TaRecNum);
       DeleteKey(IPtr, &IExt, &TaRecNum, temp);
       n++;
-      //printf("deleting    [%s]\n", temp);
     }
     SHM_UnLock(Lock);
     if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
@@ -132,7 +129,8 @@ void Control()
 {
   if (fopen(DatFName, "rb") == NULL)
   {
-    printf("There are no files, nothing to delete! Use e_load first.\n");
+    printf("There are no files, nothing to delete!\nFirst use e_create and \
+    e_load respectively.\n");
     exit(1);
   }
 }

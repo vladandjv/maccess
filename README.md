@@ -54,8 +54,8 @@ massive number of records, and also can be used for testing memory leak
 with valgrind or similar tool. See the headers of the source files for
 more detailes.
 
-e_create.c -Only creates the database files. Necessary only for e_test.
-e_test.c - Shows B+ tree parameters and adds only 5 records.
+e_create.c -Creates the database files. Must be run first!
+e_test.c - Shows B+ tree parameters and adds only 10 records.
 
 Deleting shared memory, made specifically for the testing programs,  
 is with e_shmrm. It deletes shared memory segments for the testing  
@@ -65,6 +65,10 @@ e_rebuild_sh - The shell script for rebuilding the database.
 
 e_clean_db.sh - The shell script for deleting the database files and shared 
                 memory segments.
+
+There is the log file called: example.log.
+
+Tested with GCC and Clang compilers.
 
 A detailed description of the constants and the ways of their calculation 
 can be read in ./docs/maccess_cons_types_vars.txt. Detailed description  
