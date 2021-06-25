@@ -24,7 +24,6 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 
-void prepare_str(char *str, int length);
 /**************************************************************************/
 void sig_handler(int sig)
 {
@@ -105,6 +104,8 @@ void Deleting()
     {
       DeleteRec(DPtr, &DExt, TaRecNum);
       DeleteKey(IPtr, &IExt, &TaRecNum, temp);
+      FlushFile(DPtr, &DExt);
+      FlushIndex(IPtr, &IExt);
       n++;
     }
     SHM_UnLock(Lock);
@@ -119,8 +120,28 @@ void Deleting()
 #endif
   }
   SHM_Lock(Lock);
-  FlushFile(DPtr, &DExt);
-  FlushIndex(IPtr, &IExt);
+  {
+    long long RecordNumber,
+        velic;
+    struct Record CurRec;
+
+    if (remove(IndexFName) == -1)
+      printf("Error!\n");
+
+    Destroy_SHM(MACCESS_SHM_MEM_CODE, (size_t)MACCESS_SHM_MEM_SIZE);
+    InitAccess(MACCESS_SHM_MEM_CODE);
+    MakeIndex(&IPtr, &IExt, IndexFName, KeyLen, NoDuplicates, (long long)0);
+    CloseIndex(IPtr, &IExt);
+    OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
+    OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
+    velic = FileLen(DPtr, &DExt) - 1;
+    for (RecordNumber = 1; RecordNumber <= velic; RecordNumber++)
+    {
+      GetRec(DPtr, &DExt, RecordNumber, &CurRec);
+      if (CurRec.Deleted == 0)
+        AddKey(IPtr, &IExt, &RecordNumber, (TaKeyStr *)CurRec.Key);
+    }
+  }
   SHM_UnLock(Lock);
   logMessage("DONE! I have deleted %lld records.", n);
 }
@@ -133,34 +154,5 @@ void Control()
     e_load respectively.\n");
     exit(1);
   }
-}
-/**************************************************************************/
-/* Remove empty strings and add ' ' at the end if string lenght is less
- * then required */
-void prepare_str(char *str, int length)
-{
-  char blank[MAX_STRING_LENGTH];
-  int c, d;
-
-  for (c = 0, d = 0; str[c] != '\0'; c++)
-  {
-    if (str[c] != ' ')
-    {
-      blank[d] = str[c];
-      break;
-    }
-  }
-
-  for (; str[c] != '\0'; c++, d++)
-    blank[d] = str[c];
-
-  for (; d <= length; d++)
-  {
-    blank[d] = ' ';
-  }
-  blank[length] = '\0';
-  strcpy(str, blank);
-
-  return;
 }
 /**************************************************************************/

@@ -22,7 +22,6 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 
-void prepare_str(char *str, int length);
 /**************************************************************************/
 void sig_handler(int sig)
 {
@@ -125,8 +124,7 @@ void Control()
 {
   if (fopen(DatFName, "rb") == NULL)
   {
-    printf("There are no files, nothing to print!\nFirst use e_print and \
-    e_load respectively.\n");
+    printf("There are no files, nothing to print!\nFirst use e_print and e_load respectively.\n");
     exit(1);
   }
 }

@@ -40,7 +40,10 @@ The parameters obtained by using the btree_parameters program are located
 in file maccess.h and there they can be changed.
 
 Testing programs are example, e_load, e_print, e_delete ... They can run  
-simultaneously.
+simultaneously. 
+
+It is possible to compile a single-user version and without shared memory. 
+Only uncomment: #define SINGLE_USER_NO_SHARED_MEMORY in defs.h.
 
 Record with key used in testing programs is described in /docs as 
 Record_example.txt.

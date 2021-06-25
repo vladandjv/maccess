@@ -36,6 +36,12 @@
 #define free(n) GC_free(n)
 #endif /* WORK_WITH_GARBAGE_COLLECTOR */
 
+/* In case the database engine is needed for private data of an 
+ * application, then single-user mode is desired and shared     
+ * memory is unnecessary.
+ */
+/* #define SINGLE_USER_NO_SHARED_MEMORY */
+
 #define MAX_FILENAME_LENGHT 64 /* Can be much longer at the expense of memory */
 
 /* LOCK_SHM_MEM_SIZE = sizeof(long long) */

@@ -24,7 +24,6 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 
-void prepare_str(char *str, int length);
 /**************************************************************************/
 void sig_handler(int sig)
 {
@@ -97,7 +96,6 @@ void Loading()
   for (i = 1; i <= j; ++i)
   {
     sprintf(info->Key, "%010lld", i);
-    prepare_str(info->Key, 10);
     sprintf(info->Surname, "%025lld", i);
     sprintf(info->Name, "%020lld", i);
     sprintf(info->Remark, "%045lld", i);
@@ -130,34 +128,5 @@ void Control()
     printf("There are no files! Use e_print first.\n");
     exit(1);
   }
-}
-/**************************************************************************/
-/* Remove empty strings and add ' ' at the end if string lenght is less
- * then required */
-void prepare_str(char *str, int length)
-{
-  char blank[MAX_STRING_LENGTH];
-  int c, d;
-
-  for (c = 0, d = 0; str[c] != '\0'; c++)
-  {
-    if (str[c] != ' ')
-    {
-      blank[d] = str[c];
-      break;
-    }
-  }
-
-  for (; str[c] != '\0'; c++, d++)
-    blank[d] = str[c];
-
-  for (; d <= length; d++)
-  {
-    blank[d] = ' ';
-  }
-  blank[length] = '\0';
-  strcpy(str, blank);
-
-  return;
 }
 /**************************************************************************/

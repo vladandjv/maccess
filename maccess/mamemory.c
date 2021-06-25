@@ -9,7 +9,9 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
 long long MemId;
+#endif
 char *MemSh = NULL;
 /**************************************************************************/
 void
@@ -31,6 +33,14 @@ void
 {
   long long i;
 
+#ifdef SINGLE_USER_NO_SHARED_MEMORY
+  MemSh = malloc((size_t)MACCESS_SHM_MEM_SIZE);
+  memset(MemSh, 0, PageStackSize * sizeof(struct DataFile) + sizeof(TaPageStack));
+  TaPageStk = (TaPageStackPtr)(MemSh + PageStackSize * sizeof(struct DataFile));
+  TaPgMap = (TaPageMapPtr)(MemSh + PageStackSize * sizeof(struct DataFile) + sizeof(TaPageStack));
+  for (i = 0; i < PageStackSize; i++)
+    (*TaPgMap)[i] = i;
+#else
   MemId = StartSM(MemoryCode);
   if (MemId != -1)
   {
@@ -44,14 +54,21 @@ void
     MemId = ApproachSM(MemoryCode);
     MemSh = USM(MemId);
   }
+#endif /* ELSE: SINGLE_USER_NO_SHARED_MEMORY */
   TaRecBuf = &Buffer;
 }
 /**************************************************************************/
 void TermAccess()
 
 {
+#ifdef SINGLE_USER_NO_SHARED_MEMORY
+  free(MemSh);
+#else
   LeaveSM(MemSh);
+#endif
 }
+/**************************************************************************/
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
 /**************************************************************************/
 long long
     StartSM(MemoryCode)
@@ -120,19 +137,6 @@ char *
   return (retrna);
 }
 /***************************************************************************/
-long long
-    FindYourPlace(DatF, FileNum)
-
-        DataFilePtr *DatF;
-long long FileNum;
-{
-  *DatF = (DataFilePtr)(MemSh + FileNum * (long long)sizeof(struct DataFile));
-  if ((long long)*(MemSh + FileNum * (long long)sizeof(struct DataFile) + sizeof(long long)) == 0)
-    return (0);
-  else
-    return (1);
-}
-/**************************************************************************/
 void
     LeaveSM(retrna)
 
@@ -148,9 +152,15 @@ void
   }
 }
 /**************************************************************************/
+#endif /* NOT DEFINED: SINGLE_USER_NO_SHARED_MEMORY */
+/**************************************************************************/
 long long
 Destroy_SHM(key_t shm_mem_code, size_t shm_mem_size)
 {
+#ifdef SINGLE_USER_NO_SHARED_MEMOR
+  return (0);
+#endif
+
   key_t shmid;
   struct shmid_ds *buf = NULL;
 
@@ -174,5 +184,17 @@ Destroy_SHM(key_t shm_mem_code, size_t shm_mem_size)
 
   return (0);
 }
-/**************************************************************************/
+/***************************************************************************/
+long long
+    FindYourPlace(DatF, FileNum)
 
+        DataFilePtr *DatF;
+long long FileNum;
+{
+  *DatF = (DataFilePtr)(MemSh + FileNum * (long long)sizeof(struct DataFile));
+  if ((long long)*(MemSh + FileNum * (long long)sizeof(struct DataFile) + sizeof(long long)) == 0)
+    return (0);
+  else
+    return (1);
+}
+/**************************************************************************/

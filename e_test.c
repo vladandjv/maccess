@@ -10,8 +10,6 @@
 #include "example.h"
 #include <stdint.h>
 
-#define APP_LOGFILE "example.log"
-
 FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
@@ -24,7 +22,6 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 
-void prepare_str(char *str, int length);
 int main()
 {
   void Control(), Loading();
@@ -73,7 +70,6 @@ void Loading()
   for (i = 1; i <= 10; i++)
   {
     sprintf(info->Key, "%010lld", i);
-    prepare_str(info->Key, 10);
     sprintf(info->Surname, "%025lld", i);
     sprintf(info->Name, "%020lld", i);
     sprintf(info->Remark, "%045lld", i);
@@ -82,35 +78,6 @@ void Loading()
     printf("%07lld - Key=[%s] Surname=[%s] Key_Len=%zd\n", i, info->Key,
            info->Surname, strlen(info->Key));
   }
-}
-/**************************************************************************/
-/* Remove empty strings and add ' ' at the end if string lenght is less
- * then required */
-void prepare_str(char *str, int length)
-{
-  char blank[MAX_STRING_LENGTH];
-  int c, d;
-
-  for (c = 0, d = 0; str[c] != '\0'; c++)
-  {
-    if (str[c] != ' ')
-    {
-      blank[d] = str[c];
-      break;
-    }
-  }
-
-  for (; str[c] != '\0'; c++, d++)
-    blank[d] = str[c];
-
-  for (; d <= length; d++)
-  {
-    blank[d] = ' ';
-  }
-  blank[length] = '\0';
-  strcpy(str, blank);
-
-  return;
 }
 /**************************************************************************/
 void Control()
