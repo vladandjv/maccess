@@ -41,7 +41,6 @@ int main()
   printf("INT64_MAX = %ld\n", INT64_MAX);
   printf("LONG_MAX = %ld\n", LONG_MAX);
   printf("LLONG_MAX = %lld\n", LLONG_MAX);
-  printf("Press any key to continue!\n");
 
   Control();
   Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
