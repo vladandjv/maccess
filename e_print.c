@@ -70,8 +70,6 @@ int main()
   SHM_UnLock(Lock);
   ClearKey(&IExt);
 
-  printf("I am going to start. Press any key to continue!\n");
-  getchar();
   Next();
   printf("DONE!\n");
 

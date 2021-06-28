@@ -18,10 +18,11 @@
 #define PageStackSize 255
 #define Order (long long)(PageSize / 2)
 #define MaxHeight 6 /* run ./btree_parameters for the calculation */
-#define FileHeaderSize (sizeof(long long) * 3 + sizeof(long long))
+#define FileHeaderSize (sizeof(struct FileHeader))
 #define MinDataRecSize FileHeaderSize
 #define ItemOverhead (sizeof(struct TaItem) - MaxKeyLen)
 /* For PageOverhead see defined bellow, line 48 */
+
 /*Theory: (but it is not rational to be more then needed)
 #define MaxDataRecSize (PageOverhead + PageSize * (ItemOverhead + MaxKeyLen)) */
 #define MaxDataRecSize 150
@@ -50,7 +51,7 @@ typedef struct TaPage *TaPagePtr;
 
 #define PageOverhead (sizeof(((struct TaPage *)0)->ItemsOnPage) + sizeof(((struct TaPage *)0)->BckwPageRef))
 
-struct HeaderFajla
+struct FileHeader
 {
     unsigned long long FirstFree;
     long long NumberFree;
@@ -61,7 +62,7 @@ struct HeaderFajla
 
 struct DataFile
 {
-    struct HeaderFajla Header;
+    struct FileHeader Header;
     long long FileNumber;
     long long RR;
     unsigned long long KeyL; /* byte type */

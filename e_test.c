@@ -26,7 +26,6 @@ int main()
 {
   void Control(), Loading();
 
-  printf("The singl task version! Just to check parameters and memory.\n");
   printf("MaxKeyLen       = %d\n", MaxKeyLen);
   printf("PageSize        = %d\n", PageSize);
   printf("PageStackSize   = %d\n", PageStackSize);
@@ -43,20 +42,22 @@ int main()
   printf("LONG_MAX = %ld\n", LONG_MAX);
   printf("LLONG_MAX = %lld\n", LLONG_MAX);
   printf("Press any key to continue!\n");
-  getchar();
 
   Control();
+  Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+  SHM_Lock(Lock);
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-  ClearKey(&IExt);
-  Control();
   Loading();
+  SHM_UnLock(Lock);
   printf("DONE!\n");
 
   CloseFile(DPtr, &DExt);
   CloseIndex(IPtr, &IExt);
   TermAccess();
+  SHM_UnLock(Lock);
+  DB_Lock_Close(Lock);
   exit(0);
 }
 /**************************************************************************/
@@ -73,8 +74,10 @@ void Loading()
     sprintf(info->Surname, "%025lld", i);
     sprintf(info->Name, "%020lld", i);
     sprintf(info->Remark, "%045lld", i);
+    SHM_Lock(Lock);
     AddRec(DPtr, &DExt, &TaRecNum, info);
     AddKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)info->Key);
+    SHM_UnLock(Lock);
     printf("%07lld - Key=[%s] Surname=[%s] Key_Len=%zd\n", i, info->Key,
            info->Surname, strlen(info->Key));
   }

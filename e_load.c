@@ -63,14 +63,13 @@ int main()
   if (signal(SIGTERM, sig_handler) == SIG_ERR)
     logMessage("Can't catch SIGTERM signal");
 
+  Control(); /* Must be before InitAccess */
   Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
   SHM_Lock(Lock);
-  Control(); /* Must be before InitAccess */
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
   SHM_UnLock(Lock);
-  ClearKey(&IExt);
 
   printf("I am working!\n");
   Loading();
