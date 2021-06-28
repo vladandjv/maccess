@@ -268,7 +268,7 @@ unsigned long long KeyL;
     for (i = 0; i < PageSize; i++)
     {
       k = (i * j + PageOverhead);
-      memcpy((pt)&P[k], &((*(struct TaPage *)Page).ItemArray[i]), j); /* ovde */
+      memcpy((pt)&P[k], &((*(struct TaPage *)Page).ItemArray[i]), j);
     }
 }
 /**************************************************************************/
