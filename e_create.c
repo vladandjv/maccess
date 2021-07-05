@@ -1,5 +1,5 @@
 /*
- * PROGRAM: E_LOAD.C                                                        
+ * PROGRAM: E_CREATE.C                                                        
  * DESCRIPTION: Only creates the database files.
  * AUTHOR: VLADAN DJORDJEVIC                                               
  */

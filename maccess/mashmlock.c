@@ -27,9 +27,7 @@ DB_Lock_Init(key_t shm_mem_code, size_t shm_mem_size)
     shmid = shmget((key_t)shm_mem_code, (size_t)shm_mem_size,
                    IPC_CREAT | 0600);
     if (shmid == -1)
-    {
-      printf("DB_Lock_Init: Cannot allocate a shared memory segment!\n");
-    }
+      logMessage("DB_Lock_Init: Cannot allocate a shared memory segment!");
     returna = (long long *)shmat(shmid, NULL, SHM_RND);
   }
   return (returna);
