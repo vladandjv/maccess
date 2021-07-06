@@ -112,7 +112,9 @@ void Deleting()
     if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
     {
       printf("Deleted %lld\n", n);
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
       sleep(2);
+#endif
     }
 #ifdef DEBUG_APP
     logMessage("Key[%s] Surname[%s] Name[%s] Remark[%s]",
