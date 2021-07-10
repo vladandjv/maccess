@@ -48,8 +48,8 @@ int main()
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-  Loading();
   SHM_UnLock(Lock);
+  Loading();
   printf("DONE!\n");
 
   CloseFile(DPtr, &DExt);
