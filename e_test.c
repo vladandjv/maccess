@@ -52,6 +52,7 @@ int main()
   Loading();
   printf("DONE!\n");
 
+  SHM_Lock(Lock);
   CloseFile(DPtr, &DExt);
   CloseIndex(IPtr, &IExt);
   TermAccess();
