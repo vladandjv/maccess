@@ -42,15 +42,9 @@
  */
 /* #define SINGLE_USER_NO_SHARED_MEMORY */
 
-#define MAX_FILENAME_LENGHT 64 /* Can be much longer at the expense of memory */
-
-/* LOCK_SHM_MEM_SIZE = sizeof(long long) */
-#define LOCK_SHM_MEM_SIZE (size_t)16 /* 8 but just in case */
-/* MACCESS_SHM_MEM_SIZE = (PageSize * sizeof(struct DataFile) + 
-   sizeof(TaPageStack) + sizeof(TaPageMap) + sizeof(long long))  */
-#define MACCESS_SHM_MEM_SIZE (size_t)4000000 /* 3639360 but better to be more */
-
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
 #define LOCK_SHM_MEM_CODE (key_t)121
+#endif
 #define MACCESS_SHM_MEM_CODE (key_t)122
 
 #define _HAS_FLUSH
@@ -58,12 +52,14 @@
  * It is the must in multiuser envirioment with milions of 
  * records! */
 
-enum Bool
+#define MAX_FILENAME_LENGHT 64 /* Can be much longer at the expense of memory */
+
+/* enum Bool
 {
-    F,
-    T
+    F = (long long)0,
+    T = (long long)1
 };
-typedef enum Bool Boolean;
+typedef enum Bool Boolean; */
 
 #ifdef __GNUC__
 #define VARIABLE_IS_NOT_USED __attribute__((unused))

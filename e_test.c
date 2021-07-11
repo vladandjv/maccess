@@ -27,15 +27,17 @@ int main()
   void Control(), Loading();
 
   printf("MaxKeyLen       = %d\n", MaxKeyLen);
-  printf("PageSize        = %d\n", PageSize);
-  printf("PageStackSize   = %d\n", PageStackSize);
+  printf("PageSize        = %lld\n", PageSize);
+  printf("PageStackSize   = %lld\n", PageStackSize);
   printf("Order           = %lld\n", Order);
   printf("MaxHeight       = %d\n", MaxHeight);
   printf("FileHeaderSize = %zu\n", FileHeaderSize);
   printf("MinDataRecSize = %zu\n", MinDataRecSize);
   printf("ItemOverhead   = %zu\n", ItemOverhead);
   printf("PageOverhead   = %zu\n", PageOverhead);
-  printf("MaxDataRecSize = %d\n", MaxDataRecSize);
+  printf("MaxDataRecSize = %lld\n", MaxDataRecSize);
+  printf("LOCK_SHM_MEM_SIZE=%zu\n", MACCESS_SHM_MEM_SIZE);
+  printf("MACCESS_SHM_MEM_SIZE=%zu\n", MACCESS_SHM_MEM_SIZE);
   printf("INT_MAX = %d\n", INT_MAX);
   printf("INT32_MAX = %d\n", INT32_MAX);
   printf("INT64_MAX = %ld\n", INT64_MAX);
@@ -43,7 +45,9 @@ int main()
   printf("LLONG_MAX = %lld\n", LLONG_MAX);
 
   Control();
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
   Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+#endif
   SHM_Lock(Lock);
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);

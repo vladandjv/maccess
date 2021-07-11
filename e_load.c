@@ -64,7 +64,9 @@ int main()
     logMessage("Can't catch SIGTERM signal");
 
   Control(); /* Must be before InitAccess */
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
   Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+#endif
   SHM_Lock(Lock);
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
@@ -105,6 +107,8 @@ void Loading()
     if ((i % 100000) == 0) /* Just for testing multi user processing */
     {
       printf("Added %lld\n", i);
+      FlushFile(DPtr, &DExt); /* Not necessary, but just in case. */
+      FlushIndex(IPtr, &IExt);
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
       sleep(2);
 #endif
@@ -115,8 +119,6 @@ void Loading()
 #endif
   }
   SHM_Lock(Lock);
-  FlushFile(DPtr, &DExt);
-  FlushIndex(IPtr, &IExt);
   SHM_UnLock(Lock);
   i--;
   logMessage("DONE! I have loaded %lld records of %lld", i, j);

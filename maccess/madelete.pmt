@@ -5,9 +5,10 @@
 /**************************************************************************/
 #include "maccess.h"
 
-static Boolean PageTooSmall;
-static TaPagePtr PagPtrAB; /* communication between DelB i DelA */
-static long long k;        /* communication betwen DelB i DelA */
+static Boolean PageTooSmall = F;
+static TaPagePtr PagPtrAB = NULL; /* communication between DelB i DelA */
+static long long k = 0;           /* communication betwen DelB i DelA */
+
 /**************************************************************************/
 void
     DeleteRec(DatF, DatE, R)
@@ -68,7 +69,7 @@ void
         struct DataFile *IdxF;
 struct IndexExt *IdxE;
 long long *DataRecNum;
-void *ProcKey;
+char *ProcKey;
 {
 #ifdef _HAS_FLUSH
   void StoreIndexHeader(), PutFileHeader();
@@ -77,8 +78,8 @@ void *ProcKey;
   TaPagePtr PagPtr;
   long long RBr = -1;
 
-  if (strlen(*(TaKeyStr *)ProcKey) > (*IdxF).KeyL)
-    CutString(*(TaKeyStr *)ProcKey, (*IdxF).KeyL);
+  if (strlen(ProcKey) > (*IdxF).KeyL)
+    CutString(*ProcKey, (*IdxF).KeyL);
   OKAY = T;
   DelB((*IdxF).RR, IdxF, IdxE, DataRecNum, ProcKey, RBr);
 
@@ -105,7 +106,7 @@ void
 struct DataFile *IdxF;
 struct IndexExt *IdxE;
 long long *DataRecNum;
-void *ProcKey;
+char *ProcKey;
 long long RBr;
 {
 
@@ -127,7 +128,7 @@ long long RBr;
     do
     {
       k = (long long)((l + RBr) / 2);
-      c = TaCompKeys((TaKeyStr *)ProcKey,
+      c = TaCompKeys(ProcKey,
                      (*PagPtrAB).ItemArray[k].Key,
                      *DataRecNum,
                      (*PagPtrAB).ItemArray[k].DataRef,

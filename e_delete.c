@@ -63,7 +63,9 @@ int main()
   if (signal(SIGTERM, sig_handler) == SIG_ERR)
     logMessage("Can't catch SIGTERM signal");
 
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
   Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+#endif
   SHM_Lock(Lock);
   Control(); /* Must be before InitAccess */
   InitAccess(MACCESS_SHM_MEM_CODE);
@@ -104,14 +106,14 @@ void Deleting()
     {
       DeleteRec(DPtr, &DExt, TaRecNum);
       DeleteKey(IPtr, &IExt, &TaRecNum, temp);
-      FlushFile(DPtr, &DExt);
-      FlushIndex(IPtr, &IExt);
       n++;
     }
     SHM_UnLock(Lock);
     if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
     {
       printf("Deleted %lld\n", n);
+      FlushFile(DPtr, &DExt); /* Not necessary, but just in case. */
+      FlushIndex(IPtr, &IExt);
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
       sleep(2);
 #endif
@@ -121,30 +123,6 @@ void Deleting()
                info->Key, info->Surname, info->Name, info->Remark);
 #endif
   }
-  SHM_Lock(Lock);
-  {
-    long long RecordNumber,
-        velic;
-    struct Record CurRec;
-
-    if (remove(IndexFName) == -1)
-      printf("Error!\n");
-
-    Destroy_SHM(MACCESS_SHM_MEM_CODE, (size_t)MACCESS_SHM_MEM_SIZE);
-    InitAccess(MACCESS_SHM_MEM_CODE);
-    MakeIndex(&IPtr, &IExt, IndexFName, KeyLen, NoDuplicates, (long long)0);
-    CloseIndex(IPtr, &IExt);
-    OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
-    OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-    velic = FileLen(DPtr, &DExt) - 1;
-    for (RecordNumber = 1; RecordNumber <= velic; RecordNumber++)
-    {
-      GetRec(DPtr, &DExt, RecordNumber, &CurRec);
-      if (CurRec.Deleted == 0)
-        AddKey(IPtr, &IExt, &RecordNumber, (TaKeyStr *)CurRec.Key);
-    }
-  }
-  SHM_UnLock(Lock);
   logMessage("DONE! I have deleted %lld records.", n);
 }
 /**************************************************************************/

@@ -3,10 +3,7 @@
  *    Author: Vladan Djordjevic
  *
  *    Description: Displays current parameters, calculates parameters 
- *    which are interdependent and also calculates shared memory segment 
- *    size with the formula: 
- *    MACCESS_SHM_MEM_SIZE = (PageSize * sizeof(struct DataFile) + 
- *    sizeof(TaPageStack) + sizeof(TaPageMap) + sizeof(long long)); 
+ *    which are interdependent.
  */
 
 #include "maccess.h"
@@ -39,7 +36,7 @@ int main()
 	PgSize = (long long)PageSize;
 	MaxRecs = atof("10000000"); /* Assumed total number of records in 
 					in a single datafile.*/
-	Density = atof("75") / 100;  /* Assumed completeness of files with 
+	Density = atof("75") / 100; /* Assumed completeness of files with 
 					records (optimum 75%) */
 
 	Order = (int)(PgSize / 2);
@@ -79,8 +76,8 @@ int main()
 
 	printf("B+ tree current PARAMETERS are:\n");
 	printf("MaxKeyLen              = %d\n", MaxKeyLen);
-	printf("PageSize               = %3lld - The range is from 4 to 254\n", PageSize);
-	printf("PageStackSize          = %3lld - The range is from 3 to 255\n", PageStackSize);
+	printf("PageSize               = %3lld - Must be at least 4!\n", PageSize);
+	printf("PageStackSize          = %3lld - Must be at least 3!\n", PageStackSize);
 	printf("Order                  = %d\n", Order);
 	printf("FileHeaderSize         = %zu\n", ((sizeof(long long) * 3 +
 						   sizeof(long long))));
@@ -91,7 +88,7 @@ int main()
 	printf("PageOverhead           = %zu\n", (sizeof(((struct TaPage *)0)->ItemsOnPage) +
 						  sizeof(((struct TaPage *)0)->BckwPageRef)));
 	printf("Maximum MaxDataRecSize = %llu\n", (PageOverhead + PageSize * (ItemOverhead + MaxKeyLen)));
-	printf("Acctual MaxDataRecSize = %d\n\n", MaxDataRecSize);
+	printf("Acctual MaxDataRecSize = %lld\n\n", MaxDataRecSize);
 
 	printf("Size of TYPES are:\n");
 	printf("SizeOf struct DataFile = %zu\n", sizeof(struct DataFile));
@@ -110,10 +107,10 @@ int main()
 	printf("Percentage of required disk search:      %3.2f%c\n\n", DiskSearch, '\x25');
 
 	size = ((PageSize * sizeof(struct DataFile)) + sizeof(TaPageStack) +
-		sizeof(TaPageMap) + sizeof(long long));
-	printf("MACCESS_SHM_MEM_SIZE should be = %lld bytes\n", size);
+		sizeof(TaPageMap));
+	printf("MACCESS_SHM_MEM_SIZE = %lld bytes\n", size);
 	printf("Height SHOULD BE               = %d (!!!)\n\n", MaxMaxHeight);
-	printf("Please COMPARE this \"should be\" RESULTS with the parameters in\ndefs.h and maccess.h! You can change the parameters according to\nyour requests and improve performance, but first check the theory\nin the documentation to be sure what the parameters mean and how\nthey are connected. After changing the parameters, compile again\nthis file with the new parameters, run it and compare!!!\n");
+	printf("Please COMPARE this Height result with the parameter in maccess.h!\n You can change the parameters according to your requests\n and improve performance, but first check the theory\nin the documentation to be sure what the parameters mean and how\nthey are connected. After changing the parameters, compile again\nthis file with the new parameters, run it and compare!!!\n");
 
 	exit(0);
 }

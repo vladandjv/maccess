@@ -10,14 +10,11 @@
 #include "defs.h"
 #include "maccerr.h"
 /************************** constants *************************************/
-/*If MaxKeyLen change, you also have to change the shared
- * memory segment size (in conf_lib.h). It is the best to run 
- * ./btree_parameters for the calculation */
-#define MaxKeyLen 35 /* Read the above! */
-#define PageSize 254
-#define PageStackSize 255
-#define Order (long long)(PageSize / 2)
-#define MaxHeight 6 /* run ./btree_parameters for the calculation */
+#define MaxKeyLen 35
+#define PageSize (long long)1016
+#define PageStackSize (long long)1020
+#define Order (long long)(PageSize / (long long)2)
+#define MaxHeight 5 /* run ./btree_parameters for the calculation */
 #define FileHeaderSize (sizeof(struct FileHeader))
 #define MinDataRecSize FileHeaderSize
 #define ItemOverhead (sizeof(struct TaItem) - MaxKeyLen)
@@ -25,13 +22,20 @@
 
 /*Theory: (but it is not rational to be more then needed)
 #define MaxDataRecSize (PageOverhead + PageSize * (ItemOverhead + MaxKeyLen)) */
-#define MaxDataRecSize 150
+#define MaxDataRecSize (long long)150
 
 #define NoDuplicates (long long)0
 #define Duplicates (long long)1
 /****************************** strustures and types **********************/
 typedef char FileName[MAX_FILENAME_LENGHT];
 typedef char TaKeyStr[MaxKeyLen];
+
+enum Bool
+{
+    F = (long long)0,
+    T = (long long)1
+};
+typedef enum Bool Boolean;
 
 struct TaItem
 {
@@ -53,7 +57,7 @@ typedef struct TaPage *TaPagePtr;
 
 struct FileHeader
 {
-    unsigned long long FirstFree;
+    size_t FirstFree;
     long long NumberFree;
     long long Int1;
     size_t ItemSize;
@@ -125,6 +129,11 @@ extern TaPageMap *TaPgMap;
 extern char *MemSh;
 extern Boolean OKAY;
 extern long long MemId;
+
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
+#define LOCK_SHM_MEM_SIZE (size_t)(sizeof(long long))
+#endif
+#define MACCESS_SHM_MEM_SIZE (size_t)((PageSize * sizeof(struct DataFile)) + sizeof(TaPageStack) + sizeof(TaPageMap))
 /***************************** functions **********************************/
 #if __cplusplus
 extern "C"
@@ -158,4 +167,3 @@ extern "C"
 
 #endif /* _MACCESS_H */
        /******************************* END **************************************/
-

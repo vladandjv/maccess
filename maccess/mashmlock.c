@@ -4,6 +4,7 @@
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "defs.h"
+#include "maccess.h"
 #include <stdlib.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>

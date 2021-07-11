@@ -62,7 +62,9 @@ int main()
     logMessage("Can't catch SIGTERM signal");
 
   Control(); /* Must be before InitAccess */
+#ifndef SINGLE_USER_NO_SHARED_MEMORY
   Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+#endif
   SHM_Lock(Lock);
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
