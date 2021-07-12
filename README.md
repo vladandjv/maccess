@@ -67,7 +67,7 @@ programs. Their special codes are defined in defs.h.
 e_rebuild_sh - The shell script for rebuilding the database.  
 
 e_clean_db.sh - The shell script for deleting the database files and shared 
-                memory segments.
+                memory segments. Call it with "source ./e_clean_db.sh".
 
 There is the log file called: example.log.
 
