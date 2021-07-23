@@ -1,6 +1,6 @@
 /**************************************************************************/
 /* PROGRAM: MAMAKE.C                                                      */
-/* DESCRIPTION:  Creating database files                                  */
+/* DESCRIPTION:  Creates data and index files                             */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 

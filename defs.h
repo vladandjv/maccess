@@ -1,4 +1,8 @@
-/* defs.h */
+/**************************************************************************
+ *  DEFS.H
+ *	Basic definitions for all source code
+ *	Author: Vladan Djordjevic
+ **************************************************************************/
 
 #ifndef _DEFS_H
 #define _DEFS_H
@@ -40,7 +44,7 @@
  * application, then single-user mode is desired and shared     
  * memory is unnecessary.
  */
-/* #define SINGLE_USER_NO_SHARED_MEMORY */
+#define SINGLE_USER_NO_SHARED_MEMORY
 
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
 #define LOCK_SHM_MEM_CODE (key_t)121
@@ -54,12 +58,9 @@
 
 #define MAX_FILENAME_LENGHT 64 /* Can be much longer at the expense of memory */
 
-/* enum Bool
-{
-    F = (long long)0,
-    T = (long long)1
-};
-typedef enum Bool Boolean; */
+#define APP_LOGFILE "example.log"
+
+/* #define DEBUG_APP */
 
 #ifdef __GNUC__
 #define VARIABLE_IS_NOT_USED __attribute__((unused))

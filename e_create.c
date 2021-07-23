@@ -20,8 +20,6 @@ DataFilePtr DPtr = NULL;
 /**************************************************************************/
 int main()
 {
-  void Loading();
-
   InitAccess(MACCESS_SHM_MEM_CODE);
   MakeFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   MakeIndex(&IPtr, &IExt, IndexFName, KeyLen, NoDuplicates, (long long)1);

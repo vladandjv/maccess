@@ -1,4 +1,8 @@
-/* MACCERR.H */
+/**************************************************************************/
+/* MACCERR.H                                                              */
+/* DESCRIPTION: The errors definitions.                                   */
+/* AUTHOR: VLADAN DJORDJEVIC                                              */
+/**************************************************************************/
 
 #ifndef _MACCERR_H
 #define _MACCERR_H

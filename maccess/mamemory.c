@@ -1,6 +1,6 @@
 /**************************************************************************/
 /* PROGRAM: MAMEMORY.C                                                    */
-/* DESCRIPTION: Initialization and management of memory buffers.          */
+/* DESCRIPTION: Initialization and management of cache memory.            */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "maccess.h"

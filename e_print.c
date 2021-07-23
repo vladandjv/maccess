@@ -8,8 +8,6 @@
 #include "maccess.h"
 #include "example.h"
 
-#define APP_LOGFILE "example.log"
-
 FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */

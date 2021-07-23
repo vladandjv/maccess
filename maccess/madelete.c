@@ -1,6 +1,6 @@
 /**************************************************************************/
 /* PROGRAM: MADELETE.C                                                    */
-/* DESCRIPTION:  Deleting functions.                                      */
+/* DESCRIPTION:  Deleting records and indexes                             */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "maccess.h"

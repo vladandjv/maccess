@@ -1,9 +1,10 @@
 /*
  *    Filename:  btree_parameters.c
- *    Author: Vladan Djordjevic
  *
  *    Description: Displays current parameters, calculates parameters 
  *    which are interdependent.
+ * 
+ *    Author: Vladan Djordjevic
  */
 
 #include "maccess.h"
@@ -75,7 +76,7 @@ int main()
 	}
 
 	printf("B+ tree current PARAMETERS are:\n");
-	printf("MaxKeyLen              = %d\n", MaxKeyLen);
+	printf("MaxKeyLen              = %lld\n", MaxKeyLen);
 	printf("PageSize               = %3lld - Must be at least 4!\n", PageSize);
 	printf("PageStackSize          = %3lld - Must be at least 3!\n", PageStackSize);
 	printf("Order                  = %d\n", Order);
@@ -84,7 +85,7 @@ int main()
 	printf("MinDataRecSize         = %zu (same as FileHeaderSize)\n",
 	       ((sizeof(long long) * 3 +
 		 sizeof(long long))));
-	printf("ItemOverhead           = %zu\n", (sizeof(struct TaItem) - MaxKeyLen));
+	printf("ItemOverhead           = %llu\n", (sizeof(struct TaItem) - MaxKeyLen));
 	printf("PageOverhead           = %zu\n", (sizeof(((struct TaPage *)0)->ItemsOnPage) +
 						  sizeof(((struct TaPage *)0)->BckwPageRef)));
 	printf("Maximum MaxDataRecSize = %llu\n", (PageOverhead + PageSize * (ItemOverhead + MaxKeyLen)));

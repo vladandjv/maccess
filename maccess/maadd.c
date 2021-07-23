@@ -1,6 +1,6 @@
 /**************************************************************************/
 /* PROGRAM: MAADD.C                                                       */
-/* DESCRIPTION:  Adding record                                            */
+/* DESCRIPTION:  Adding records and indexes                               */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 #include "maccess.h"

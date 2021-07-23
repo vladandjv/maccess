@@ -10,11 +10,11 @@
 #include "defs.h"
 #include "maccerr.h"
 /************************** constants *************************************/
-#define MaxKeyLen 35
+#define MaxKeyLen (unsigned long long) 35
 #define PageSize (long long)1016
 #define PageStackSize (long long)1020
 #define Order (long long)(PageSize / (long long)2)
-#define MaxHeight 5 /* run ./btree_parameters for the calculation */
+#define MaxHeight (long long) 5 /* run ./btree_parameters for the calculation */
 #define FileHeaderSize (sizeof(struct FileHeader))
 #define MinDataRecSize FileHeaderSize
 #define ItemOverhead (sizeof(struct TaItem) - MaxKeyLen)

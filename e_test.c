@@ -26,14 +26,14 @@ int main()
 {
   void Control(), Loading();
 
-  printf("MaxKeyLen       = %d\n", MaxKeyLen);
+  printf("MaxKeyLen       = %lld\n", MaxKeyLen);
   printf("PageSize        = %lld\n", PageSize);
   printf("PageStackSize   = %lld\n", PageStackSize);
   printf("Order           = %lld\n", Order);
-  printf("MaxHeight       = %d\n", MaxHeight);
+  printf("MaxHeight       = %lld\n", MaxHeight);
   printf("FileHeaderSize = %zu\n", FileHeaderSize);
   printf("MinDataRecSize = %zu\n", MinDataRecSize);
-  printf("ItemOverhead   = %zu\n", ItemOverhead);
+  printf("ItemOverhead   = %llu\n", ItemOverhead);
   printf("PageOverhead   = %zu\n", PageOverhead);
   printf("MaxDataRecSize = %lld\n", MaxDataRecSize);
   printf("LOCK_SHM_MEM_SIZE=%zu\n", MACCESS_SHM_MEM_SIZE);

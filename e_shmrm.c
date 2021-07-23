@@ -1,13 +1,15 @@
 /**************************************************************************/
 /* PROGRAM: E_SHMRM.C                                                     */
-/* DESCRIPTION: Removes shared memory segment created by example programs.*/
+/* DESCRIPTION: Deletes shared memory segment created by example programs.*/
+/* NOTE: The shared memory segment must not be attached by some process,  */
+/* otherwise kernel refueses to delete it. The same is if it is created   */
+/* by another user, and you are not root user.                            */
 /* AUTHOR: VLADAN DJORDJEVIC                                              */
 /**************************************************************************/
 
 #include "defs.h"
 #include "maccess.h"
 
-#define APP_LOGFILE "example.log"
 int main()
 {
 

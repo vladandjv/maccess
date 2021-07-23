@@ -1,5 +1,5 @@
 /*
- * PROGRAM: E_REBUILD.C                                                        
+ * PROGRAM: E_REBUILD_DATA.C                                                        
  * DESCRIPTION: Rebuilds the data file. It is called within the
  * e_rebuild.sh (bash script).
  * AUTHOR: VLADAN DJORDJEVIC                                               
@@ -7,8 +7,6 @@
 
 #include "maccess.h"
 #include "example.h"
-
-#define APP_LOGFILE "example.log"
 
 FileName DatFName = "data.dbc";
 FileName DatFName1 = "data.tmp";

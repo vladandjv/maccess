@@ -1,0 +1,12 @@
+
+CMakeLists_all.txt      - For compiling everything including auxiliaries.
+CMakeLists_db_only.txt  - For compiling the database engine only.
+CMakeLists.txt          - Same as previous, at the moment.
+[Copy CMakeLists_all.txt or CMakeLists_db_only.txt to CMakeLists.txt,
+ depending on what you want. Then folow the instractions in INSTALL.]
+
+Folders:
+docs     - Documentation
+maccess  - The databse engine source code. The only one important.
+marginal - Aauxiliary source code (screen and date manipulation etc.)
+           Needed only for the calculate and example programs.

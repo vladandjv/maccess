@@ -1,4 +1,8 @@
-/* EXAMPLE.H */
+/**************************************************************************
+ *  EXAMPLE.H
+ *	Definitions and declarations for the example.c program.
+ *	Author: Vladan Djordjevic
+ **************************************************************************/
 
 #ifndef _EXAMPLE_H
 #define _EXAMPLE_H
