@@ -92,7 +92,7 @@ void Control()
   if (fopen(DatFName, "rb") == NULL)
   {
     printf("There are no files! Use e_create first.\n");
-    exit(1);
+    exit(0);
   }
 }
 /**************************************************************************/

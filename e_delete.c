@@ -130,7 +130,7 @@ void Control()
   {
     printf("There are no files, nothing to delete!\nFirst use e_create and \
     e_load respectively.\n");
-    exit(1);
+    exit(0);
   }
 }
 /**************************************************************************/

@@ -177,7 +177,12 @@ int main()
       CloseIndex(IPtr, &IExt);
       TermAccess();
 
-      system("rm -rf data.dbc data.cdx");
+      if (system("rm -rf data.dbc data.cdx") == -1)
+      {
+        message("System call error! Can't delete file.");
+        TermEkran();
+        exit(0);
+      }
       Control();
 
       InitAccess(MACCESS_SHM_MEM_CODE);
@@ -1162,8 +1167,12 @@ void RebuildIndex()
   TermAccess();
   Destroy_SHM(MACCESS_SHM_MEM_CODE, (size_t)MACCESS_SHM_MEM_SIZE);
 
-  system("mv data.tmp data.dbc");
-  system("rm -rf data.cdx");
+  if (system("mv data.tmp data.dbc; rm -rf data.cdx") == -1)
+  {
+    message("System call error! Can't delete file.");
+    TermEkran();
+    exit(0);
+  }
 
   InitAccess(MACCESS_SHM_MEM_CODE);
   MakeIndex(&IPtr, &IExt, IndexFName, KeyLen, NoDuplicates, (long long)0);

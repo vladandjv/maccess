@@ -127,7 +127,7 @@ void Control()
   if (fopen(DatFName, "rb") == NULL)
   {
     printf("There are no files! Use e_print first.\n");
-    exit(1);
+    exit(0);
   }
 }
 /**************************************************************************/
