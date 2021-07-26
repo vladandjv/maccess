@@ -7,7 +7,6 @@ include_directories(./)
 
 #However, the file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES_maccess "./maccess/*.c")
-file(GLOB SOURCES_src "./scr/*.c")
 
 #For static libraries
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "../lib") 

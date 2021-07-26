@@ -9,7 +9,7 @@ include_directories(./marginal)
 
 #However, the file(GLOB...) allows for wildcard additions:
 file(GLOB SOURCES_maccess "./maccess/*.c")
-file(GLOB SOURCES_src "./marginal/*.c")
+file(GLOB SOURCES_marginal "./marginal/*.c")
 
 #For static libraries
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "../lib") 
@@ -17,7 +17,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin")
 
 #Generate the static library from the sources
 add_library(maccess STATIC ${SOURCES_maccess})
-add_library(marginal STATIC ${SOURCES_src})
+add_library(marginal STATIC ${SOURCES_marginal})
 
 add_executable(e_create e_create.c)
 add_executable(e_test e_test.c)
