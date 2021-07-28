@@ -4,16 +4,16 @@
 
 B+ TREE STRUCTURE
 
-This text provides an overview of the B+ tree structure used by Access.
-Since Access handles the creation and maintenance of B+ trees automaticaly,
+This text provides an overview of the B+ tree structure used by Maccess.
+Since Maccess handles the creation and maintenance of B+ trees automaticaly,
 it isn't necessary for you to understand (or even read) the material in   
 this text. However, if you are an experienced programmer, a deeper 
-understanding of B+ trees will enable you to fine-tune the Access system
+understanding of B+ trees will enable you to fine-tune the Maccess system
 for your application programs. The information in this text can also help
-you set values for the constants used by Access.
+you set values for the constants used by Maccess.
 
 A general discussion of tree structures is presented, followed by a 
-discusson of B+ trees in particular, and how they are used by the Access.
+discusson of B+ trees in particular, and how they are used by the Maccess.
 Concepts such as roots, nodes, pages, levels, items, and keys are also
 explained.
 
@@ -22,7 +22,7 @@ ___________________________________________________________________________
 
 Suppose you have a database consisting of customer names, telephone numbers,
 addresses, and billing status. When you ask your computer to find the
-telephone number of a customer, unless it si equipped with Access or 
+telephone number of a customer, unless it si equipped with Maccess or 
 samething similar, ti will search sequentally trough each record, one at a
 time. If that customer's telephone number happens to be at the bottom of 
 the database file, it will take a good deal of time to find it.
@@ -81,7 +81,7 @@ ___________________________________________________________________________
 
 Binary trees are efficient data structures for man purposes, but there are
 other, more efficient, data structures to handle large amounts of data. The
-Access systems uses one such data structure called the B+ tree. (The B
+Maccess systems uses one such data structure called the B+ tree. (The B
 stands for Bayer, the inovator.)
 
 The main difference between a B+ tree and a binary tree is that more than
@@ -129,7 +129,7 @@ a binary tree, you start at the root, proceeding down the tree by making
 comparisons against the items wihtin each page.
 
 B+ trees are used to manage disk-stored databases too large to put in
-RAM. With Access, the data file is just one big array of records.
+RAM. With Maccess, the data file is just one big array of records.
 Typically, there might be 5000 redords, each record 300 bytes in lenght.
 A separate file called an index file is used to organize the data into a
 B+ tree structure.
@@ -141,16 +141,16 @@ the ordering of the data records. A data reference is a pointer that
 indicates where the complete data record is stored. (These concpts are
 explained more fully in later sections.)
 
-Access provides procedures for Accessing, inserting, and deleting data
+Maccess provides procedures for accessing, inserting, and deleting data
 records. Becouse it uses B+ trees, each operation involves a very small
-number of disk Accesses and is very efficient.
+number of disk accesses and is very efficient.
 
 Elements of a B+ Tree
 ___________________________________________________________________________
 
 Trees are most efficient if the items are distributed fairly evenly
 troughout the tree; therefore, B+ trees are defined to ensure balance.
-Access routines automatically maintain these properties of B+ trees.
+Maccess routines automatically maintain these properties of B+ trees.
 
 A B+ tree of order n is a tree that staisfies the following constrains:
 
@@ -170,7 +170,7 @@ the tree that a search would have to go through if it started at the root.
 The remainder of iterms have shorter paths.
 
 Adding items to or deleting items from a B+ tree may caouse the tree to
-become temporarily unbalanced. However, Access uses balancing algorithms
+become temporarily unbalanced. However, Maccess uses balancing algorithms
 to ensure that the previously described constraints are always satisfied.
 
 With a B+ tree, a very large number of items can be put in a tree with
@@ -210,7 +210,7 @@ A string uses an ordering system that makes use of the relational operators
 >, =, and <. Since each key has a relative rank (according to its lenght
 and ASCII value) in the tree, the oreder of a given set of keys is fixed.
 In the previous example, two key strings might be identical and thus have 
-the same rank. The Access system determines the rank of identical key in 
+the same rank. The Maccess system determines the rank of identical key in 
 one of two ways, depending on how the index file is created.
 
 If the index file is created with a status of no duplicate keys allowed, then
@@ -238,7 +238,7 @@ item represents teh connection between a key string and a physical data
 record (see Figure 3.), and is made up of a key string, a data reference,
 and a page reference.
 
-The key string is used by Access to search the B+ tree, the data reference
+The key string is used by Maccess to search the B+ tree, the data reference
 points to the location in the data file where the data record associated with
 key is found, and the page reference forms the link in the B+ tree by pointing
 to a page where all keys are greater than the current item's key string.
@@ -263,7 +263,7 @@ ______________________________________________________________________________
 
 A unit or record of an index file is called a page. A page is a record 
 containing three structures: an array of items, an extra page reference, and
-a count (see Figure 4). In Access system, the array ha room for a fixed
+a count (see Figure 4). In Maccess system, the array ha room for a fixed
 number of items described in the previous section. This number is called the
 page size, and is exactly twice the order of the B+ tree. It may be any 
 even number between 4 and 254.
@@ -375,7 +375,7 @@ that item's page reference will point ot a page where all the items contain
 keys greater than M (for instance, R and V). Thus, consecutive jumps from a
 page item to that item's page reference follow a path of increasing keys.
 The path stops at hte leaf page where there are no active page references.
-These jump decisions are always made by the Access system.
+These jump decisions are always made by the Maccess system.
 
 If a jump is made from an item's page reference, the search key must be
 larger than that item's key, but smaller than the next item's key. After
@@ -462,7 +462,7 @@ page 1, since it contains the key A and has no extra page reference.
 Finding the Data Reference
 _____________________________________________________________________________
 
-Access locates a data record by using a spedified key. The page with the
+Maccess locates a data record by using a spedified key. The page with the
 data reference is found by following a path starting at the root page. If
 all keys on the page are larger than the key being sought, the next page
 to be investigated is referenced by the extra page reference. If this is
@@ -471,8 +471,8 @@ largest key that is less than the key being sought. Teh search continues
 until the key si found or until a leaf page is reached with no result.
 
 The root page could be searched for a key with an ordirnary search routine.
-However, Access uses a binary search. If the item is found, the associated 
-data record can be read into memory with one disk Access. If the key is not
+However, Maccess uses a binary search. If the item is found, the associated 
+data record can be read into memory with one disk Maccess. If the key is not
 found on the root, the search continues on the page pointed to by the item's
 key closest to (but less than) the search key.
 
@@ -550,8 +550,8 @@ ____________________________________________________________________________
 
 When data records are inserted or deleted from the data file, the 
 corresponding keys must be inserted or deleted from the index file, and the
-page items must be rearranged by the Access system. The following are
-exaples of how Access inserts and deletes keys.
+page items must be rearranged by the Maccess system. The following are
+exaples of how Maccess inserts and deletes keys.
 
 INSERTING KEYS
 
@@ -577,7 +577,7 @@ the only way a B+ tree can grow in height.
 Figure 8 shows an example of how a B+ tree grows by repeated insertions. The
 B+ tree has order one in this case. Note that the properties of B+ trees and
 the ordering of items with the tree are meintained after each insertion.
-(The order of a Access B+ tree is always at least two. This example is for
+(The order of a Maccess B+ tree is always at least two. This example is for
 illustrative purpose only.)
 
                           -------
@@ -636,7 +636,7 @@ illustrative purpose only.)
 
 DELETING KEYS
 
-When a key si to be deleted, Access finds its location in the tree. If the
+When a key si to be deleted, Maccess finds its location in the tree. If the
 key is on a leaf page, it si simply removed. If the key is situated 
 elsewhere in the tree, the proccess of eletion becomes more complicated. In
 this case, it is neccessary to replace the key with another key at the leaf
@@ -651,7 +651,7 @@ these can be used to replace the deleted key without affecting key order.
 
 It is possible that removing a key from a leaf page will leave the page 
 with too few items (that is, less than n, where n is the order of the B+
-tree). In this case, Access uses a rebalancing method to redistribute the
+tree). In this case, Maccess uses a rebalancing method to redistribute the
 items. In simpler cases, an item is simply borrowed from an adjacent page.
 In more complicated cases, a process called page merging (analogous to
 page splitting) is used to merge pages. In an extreme case, page merging
