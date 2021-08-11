@@ -1,0 +1,64 @@
+﻿About Garbage Collector Software
+
+Author: Vladan Djordjevic 
+email: vladandjv@gmail.com
+
+The primary purpose of Garbage Collector (GC) is to protect from memory leak, 
+and the secondary one is heap defragmentation.
+
+There are two main attitudes towards the usage of garbage collector:
+
+1. Garbage collector is a must. This attitude is endorsed by the creators, 
+maintainers and users of Java, C#, Kotlin, Python, JavaScript and other various 
+interpreters and pseudo compilers. Therefore, the GC is embedded in those 
+interpreters. It is a logical decision, because an application programmer, often 
+only a hastily trained person, has no direct access to memory anyway and he/she 
+has no opportunity to cause memory leak (he/she need not even to know what it 
+is). They are all OOP languages, but they are successful because the OOP dogma 
+is not taken too far, actually to its absurd end, for example no multiple 
+inheritance and no destructors. The above languages are mostly used in 
+applications for the ordinary people and auxiliaries like testing programs. They 
+are rarely used in a mission critical, heavy duty software that has to run 24/7. 
+So the performance is not critical, and there is no harm when GC performs heap 
+defragmentation from time to time and when there is no response from 5-20 
+seconds. On the other hand, GC must perform heap defragmentation or the software 
+will become too slow after being run for a long time. (There are various 
+techniques to optimize the process, especially to detect when software does 
+nothing even though it is up and running.) 
+
+2. Garbage collector is useless and harmful. This attitude is endorsed by the 
+creators, maintainers and users of C++ and Rust. C++ is widely used for game 
+engines. When you play a game it is crucial not to have any kind of delay for 
+obvious reasons. But you don’t play game for days without shutdown and starting 
+up the software again. So the fragmentation is not an issue. To avoid 
+programmer’s mistake they developed so called a memory management system. It is 
+unique_ptr (so called unique pointer), which is nothing else then a pointer with 
+the new operator,  both wrapped in a class. Then RAII does all for you, you 
+don’t have to think about anything. The same concept is used by Rust which 
+doesn’t even have OOP paradigm. But it simply does not work with circular 
+pointers. You must avoid circular pointers at all cost, even in case when it is 
+the best solution! So it is not reliable and you have your hands tied.
+
+As always, the truth is somewhere in between.
+
+The obvious ideal solution is that programmers, who are skilled and who know 
+what they are doing, write a software without memory leak. Then you test that 
+with various tools for memory leak detection and if everything is all right, 
+then that is it. No garbage collector and no memory leak. Perfect. But what 
+about heap fragmentation? If you run a heavy duty and 24/7 software you can’t 
+avoid it. You may try by not using heap at all, only stack, but then you will 
+not be able to keep big data structures in memory; no use of global and static 
+variables; and you must be very careful with recursions and nested functions, 
+and even that is not a guarantee that you will not end up with stack overflow. 
+Also, you may use some  tricks (yes, they are tricks, nothing more) like 
+allocating memory only in chunks of the same size or/and reuse the same chunk 
+again. In that case, you will still have internal fragmentation within the 
+chunk. Or you may use subprocesses artificially and always get a new fresh 
+memory from kernel with every new subprocess which you later close. This trick 
+might produce a slow performance, but a fast hardware can compensate that.
+
+As we have known since the beginning of time, there is no one solution for every 
+problem id est project’s requests. What I prefer is software written in C, 
+thoroughly tested for absence of memory leak, with GC which can easily be turned 
+on or off during the compile time, depending on what happens in practice, 
+considering heap fragmentation danger. But this approach also has some flaws.
