@@ -13,7 +13,6 @@
 FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
-long long *Lock;                /* locks the shared memory segment*/
 struct IndexExt IExt;
 struct DataExt DExt;
 DataFilePtr IPtr = NULL;
@@ -34,12 +33,11 @@ void sig_handler(int sig)
   {
   case SIGTERM:
   case SIGSEGV:
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     CloseFile(DPtr, &DExt);
     CloseIndex(IPtr, &IExt);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     TermAccess((long long)0);
-    DB_Lock_Close(Lock);
     closeLog();
     exit(0);
   case SIGINT:
@@ -63,24 +61,23 @@ int main()
 
   Control(); /* Must be before InitAccess */
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
-  Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+  DB_Lock_Init(SEMAPHORE_CODE);
 #endif
-  SHM_Lock(Lock);
+  SHM_Lock();
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-  SHM_UnLock(Lock);
+  SHM_UnLock();
 
   printf("I am working!\n");
   Loading();
   printf("DONE!\n");
 
-  SHM_Lock(Lock);
+  SHM_Lock();
   CloseFile(DPtr, &DExt);
   CloseIndex(IPtr, &IExt);
   TermAccess();
-  SHM_UnLock(Lock);
-  DB_Lock_Close(Lock);
+  SHM_UnLock();
   closeLog();
   exit(0);
 }
@@ -98,26 +95,23 @@ void Loading()
     sprintf(info->Surname, "%025lld", i);
     sprintf(info->Name, "%020lld", i);
     sprintf(info->Remark, "%045lld", i);
-    SHM_Lock(Lock);
+    SHM_Lock();
     AddRec(DPtr, &DExt, &TaRecNum, info);
     AddKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)info->Key);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     if ((i % 100000) == 0) /* Just for testing multi user processing */
     {
       printf("Added %lld\n", i);
+      SHM_Lock();
       FlushFile(DPtr, &DExt); /* Not necessary, but just in case. */
       FlushIndex(IPtr, &IExt);
-#ifndef SINGLE_USER_NO_SHARED_MEMORY
-      sleep(2);
-#endif
+      SHM_UnLock();
     }
 #ifdef DEBUG_APP
     logMessage("Key[%s] Surname[%s] Name[%s] Remark[%s]",
                info->Key, info->Surname, info->Name, info->Remark);
 #endif
   }
-  SHM_Lock(Lock);
-  SHM_UnLock(Lock);
   i--;
   logMessage("DONE! I have loaded %lld records of %lld", i, j);
 }

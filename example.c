@@ -12,7 +12,6 @@ FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 FileName DatFName1 = "data.tmp";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
-long long *Lock;                /* locks the shared memory segment*/
 struct IndexExt IExt;
 struct DataExt DExt;
 struct Record OurRecord;
@@ -33,13 +32,12 @@ void sig_handler(int sig)
   {
   case SIGTERM:
   case SIGSEGV:
-    SHM_Lock(Lock);
+    SHM_Lock();
     CloseFile(DPtr, &DExt);
     CloseIndex(IPtr, &IExt);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     TermAccess();
-    SHM_UnLock(Lock);
-    DB_Lock_Close(Lock);
+    SHM_UnLock();
     TermEkran();
     closeLog();
     exit(0);
@@ -71,9 +69,9 @@ int main()
 
   InitEkran();
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
-  Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+  DB_Lock_Init(SEMAPHORE_CODE);
 #endif
-  SHM_Lock(Lock);
+  SHM_Lock();
   Control(); /* Must be before InitAccess */
   InitAccess(MACCESS_SHM_MEM_CODE);
 
@@ -103,7 +101,7 @@ int main()
   info = &OurRecord;
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-  SHM_UnLock(Lock);
+  SHM_UnLock();
   ClearKey(&IExt);
   for (;;)
   {
@@ -159,7 +157,7 @@ int main()
     case 11:
       if (answer("Allowed only in singluser mode! Continue? Y/N?") == F)
         break;
-      SHM_Lock(Lock);
+      SHM_Lock();
       CloseFile(DPtr, &DExt);
       CloseIndex(IPtr, &IExt);
       TermAccess();
@@ -167,12 +165,12 @@ int main()
       InitAccess(MACCESS_SHM_MEM_CODE);
       OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
       OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       break;
     case 12:
       if (answer("Allowed only in singluser mode! Continue? Y/N?") == F)
         break;
-      SHM_Lock(Lock);
+      SHM_Lock();
       CloseFile(DPtr, &DExt);
       CloseIndex(IPtr, &IExt);
       TermAccess();
@@ -188,7 +186,7 @@ int main()
       InitAccess(MACCESS_SHM_MEM_CODE);
       OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
       OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       break;
     case -1:
     case -2:
@@ -209,11 +207,10 @@ int main()
 Exit:
   for (i = 0; i < 13; i++)
     free(Mat[i]);
-  SHM_Lock(Lock);
+  SHM_Lock();
   CloseFile(DPtr, &DExt);
   CloseIndex(IPtr, &IExt);
-  SHM_UnLock(Lock);
-  DB_Lock_Close(Lock);
+  SHM_UnLock();
   TermAccess();
   TermEkran();
   closeLog();
@@ -261,10 +258,10 @@ int Loading()
       sprintf(info->Surname, "%025lld", z);
       sprintf(info->Name, "%020lld", z);
       sprintf(info->Remark, "%045lld", z);
-      SHM_Lock(Lock);
+      SHM_Lock();
       AddRec(DPtr, &DExt, &TaRecNum, info);
       AddKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)info->Key);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       mvprintw(11, 30, "%s", info->Key);
       mvprintw(12, 30, "%s", info->Surname);
       mvprintw(13, 30, "%s", info->Name);
@@ -287,10 +284,10 @@ int Loading()
   Exit:
     mvprintw(18, 27, "End:       %s", completion);
     refresh();
-    SHM_Lock(Lock);
+    SHM_Lock();
     FlushFile(DPtr, &DExt);
     FlushIndex(IPtr, &IExt);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     message("DATA LOADED      Press any key to continue!");
   }
 }
@@ -316,10 +313,10 @@ int Inserting()
     case -1:
       if (i != 0)
       {
-        SHM_Lock(Lock);
+        SHM_Lock();
         FlushFile(DPtr, &DExt);
         FlushIndex(IPtr, &IExt);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
       }
       return (-1);
     case -2:
@@ -328,10 +325,10 @@ int Inserting()
     if (answer("Is everything correct? Y/N?") == T)
     {
       strcpy(info->Key, to_left(out, input, 10));
-      SHM_Lock(Lock);
+      SHM_Lock();
       AddRec(DPtr, &DExt, &TaRecNum, info);
       AddKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)info->Key);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       i++;
       mvprintw(11, 21, "SURNAME: %s", info->Surname);
       mvprintw(12, 21, "NAME:    %s", info->Name);
@@ -362,13 +359,13 @@ int Update()
     }
     strcpy(temp, info->Key);
     strcpy(remember, temp);
-    SHM_Lock(Lock);
+    SHM_Lock();
     FindKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     if (OKAY == T)
     {
       GetRec(DPtr, &DExt, TaRecNum, info);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       mvprintw(11, 21, "SURNAME:");
       mvprintw(12, 21, "NAME:");
       mvprintw(13, 21, "REMARK:");
@@ -380,16 +377,16 @@ int Update()
         refresh();
         if (answer("Continue with the same key? Y/N?") == F)
           break;
-        SHM_Lock(Lock);
+        SHM_Lock();
         NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
         if (OKAY == T && strcmp(temp, remember) == 0)
         {
           GetRec(DPtr, &DExt, TaRecNum, info);
-          SHM_UnLock(Lock);
+          SHM_UnLock();
         }
         else
         {
-          SHM_UnLock(Lock);
+          SHM_UnLock();
           message("No more records with the same key!");
           break;
         }
@@ -413,17 +410,17 @@ int Update()
         if (answer("Is everything correct? Y/N?") == T)
         {
           strcpy(temp, info->Key);
-          SHM_Lock(Lock);
+          SHM_Lock();
           FindKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
           if (OKAY == T)
           {
             PutRec(DPtr, &DExt, TaRecNum, info);
-            SHM_UnLock(Lock);
+            SHM_UnLock();
             i++;
           }
           else
           {
-            SHM_UnLock(Lock);
+            SHM_UnLock();
             message("The record is deleted meanwhile!");
           }
           break;
@@ -432,7 +429,7 @@ int Update()
     }
     else
     {
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       message("There is no requested key!");
     }
   }
@@ -464,12 +461,12 @@ int Delete()
     }
     strcpy(temp, to_left(out, input, 10));
     strcpy(remember, temp);
-    SHM_Lock(Lock);
+    SHM_Lock();
     FindKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
     if (OKAY == T)
     {
       GetRec(DPtr, &DExt, TaRecNum, info);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       for (;;)
       {
         mvprintw(11, 21, "SURNAME: %s", info->Surname);
@@ -478,16 +475,16 @@ int Delete()
         refresh();
         if (answer("Continue with the same key? Y/N?") == F)
           break;
-        SHM_Lock(Lock);
+        SHM_Lock();
         NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
         if (OKAY == T && strcmp(temp, remember) == 0)
         {
           GetRec(DPtr, &DExt, TaRecNum, info);
-          SHM_UnLock(Lock);
+          SHM_UnLock();
         }
         else
         {
-          SHM_UnLock(Lock);
+          SHM_UnLock();
           message("No more records with the same key!");
           break;
         }
@@ -498,7 +495,7 @@ int Delete()
       strcpy(info1->Name, info->Name);
       if (answer("Delete? Y/N?") == T)
       {
-        SHM_Lock(Lock);
+        SHM_Lock();
         FindKey(IPtr, &IExt, &TaRecNum, temp);
         if (OKAY == T)
         {
@@ -510,12 +507,12 @@ int Delete()
             i++;
           }
         }
-        SHM_UnLock(Lock);
+        SHM_UnLock();
       }
     }
     else
     {
-      SHM_Lock(Lock);
+      SHM_Lock();
       message("There is no requested key!");
     }
   }
@@ -554,7 +551,7 @@ int Deleting()
     {
       sprintf(temp, "%010lld", z);
       mvprintw(11, 35, "%s", temp);
-      SHM_Lock(Lock);
+      SHM_Lock();
       FindKey(IPtr, &IExt, &TaRecNum, temp);
       if (OKAY == T)
       {
@@ -564,13 +561,13 @@ int Deleting()
         i++;
         mvprintw(14, 54, "%ld", i);
       }
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       refresh();
     }
-    SHM_Lock(Lock);
+    SHM_Lock();
     FlushFile(DPtr, &DExt);
     FlushIndex(IPtr, &IExt);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     message("DATA DELETED     Press any key to continue!");
   }
 }
@@ -596,12 +593,12 @@ int Searching()
     strcpy(remember, temp);
     strcpy(remember, trim(out, remember));
     sl = strlen(remember);
-    SHM_Lock(Lock);
+    SHM_Lock();
     SearchKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
     if (OKAY == T && strcmp(remember, left(out, temp, sl)) == 0)
     {
       GetRec(DPtr, &DExt, TaRecNum, info);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       mvprintw(11, 21, "KEY:");
       mvprintw(12, 21, "SURNAME:");
       mvprintw(13, 21, "NAME:");
@@ -615,16 +612,16 @@ int Searching()
         refresh();
         if (answer("Continue with the same root of key? Y/N?") == F)
           break;
-        SHM_Lock(Lock);
+        SHM_Lock();
         NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
         if (OKAY == T && strcmp(remember, left(out, temp, sl)) == 0)
         {
           GetRec(DPtr, &DExt, TaRecNum, info);
-          SHM_UnLock(Lock);
+          SHM_UnLock();
         }
         else
         {
-          SHM_UnLock(Lock);
+          SHM_UnLock();
           message("No more records with the same root of key!");
           break;
         }
@@ -633,7 +630,7 @@ int Searching()
     }
     else
     {
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       message("There is no requested root of key!");
     }
   }
@@ -657,13 +654,13 @@ int Find()
     Delete_Screen(11, 21, 14, 75);
     strcpy(temp, to_left(out, input, 10));
     strcpy(remember, temp);
-    SHM_Lock(Lock);
+    SHM_Lock();
     FindKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     if (OKAY == T)
     {
       GetRec(DPtr, &DExt, TaRecNum, info);
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       mvprintw(11, 21, "KEY:");
       mvprintw(12, 21, "SURNAME:");
       mvprintw(13, 21, "NAME:");
@@ -677,16 +674,16 @@ int Find()
         refresh();
         if (answer("Continue with the same key? Y/N?") == F)
           break;
-        SHM_Lock(Lock);
+        SHM_Lock();
         NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
         if (OKAY == T && strcmp(temp, remember) == 0)
         {
-          SHM_Lock(Lock);
+          SHM_Lock();
           GetRec(DPtr, &DExt, TaRecNum, info);
         }
         else
         {
-          SHM_Lock(Lock);
+          SHM_Lock();
           message("No more records with the same key!");
           break;
         }
@@ -694,7 +691,7 @@ int Find()
     }
     else
     {
-      SHM_UnLock(Lock);
+      SHM_UnLock();
       message("There is no requested key!");
     }
   }
@@ -731,9 +728,9 @@ int Next()
       OrdNum += (LINES - 7);
       for (; remember != 2; remember--)
       {
-        SHM_Lock(Lock);
+        SHM_Lock();
         NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         if (OKAY == F)
           break;
       }
@@ -744,12 +741,12 @@ int Next()
     err = 0;
     for (i = 1, j = 1, remember = 1; j < LINES - 7; i++, OrdNum++, j++, remember++)
     {
-      SHM_Lock(Lock);
+      SHM_Lock();
       NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
       if (OKAY == T)
       {
         GetRec(DPtr, &DExt, TaRecNum, info);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         sprintf(Mat[j], "%5.0lld  ", OrdNum);
         strcat(Mat[j], info->Key);
         strcat(Mat[j], empty_string(out, 1));
@@ -761,7 +758,7 @@ int Next()
       }
       else
       {
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         err = 1;
         OrdNum--;
         if (j == 1)
@@ -887,12 +884,12 @@ int Next()
     err = 0;
     for (i = LINES - 8, j = LINES - 8, remember = 1; j > 0; i--, OrdNum--, j--, remember++)
     {
-      SHM_Lock(Lock);
+      SHM_Lock();
       PrevKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
       if (OKAY == T)
       {
         GetRec(DPtr, &DExt, TaRecNum, info);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         sprintf(Mat[j], "%5.0lld  ", OrdNum);
         strcat(Mat[j], info->Key);
         strcat(Mat[j], empty_string(out, 1));
@@ -904,7 +901,7 @@ int Next()
       }
       else
       {
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         ClearKey(&IExt);
         goto AGAIN;
       }
@@ -944,9 +941,9 @@ int Prev()
       OrdNum += (LINES - 7);
       for (; remember != 2; remember--)
       {
-        SHM_Lock(Lock);
+        SHM_Lock();
         PrevKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         if (OKAY == F)
           break;
       }
@@ -957,12 +954,12 @@ int Prev()
     err = 0;
     for (i = 1, j = 1, remember = 1; j < LINES - 7; i++, OrdNum++, j++, remember++)
     {
-      SHM_Lock(Lock);
+      SHM_Lock();
       PrevKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
       if (OKAY == T)
       {
         GetRec(DPtr, &DExt, TaRecNum, info);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         sprintf(Mat[j], "%5.0lld  ", OrdNum);
         strcat(Mat[j], info->Key);
         strcat(Mat[j], empty_string(out, 1));
@@ -974,7 +971,7 @@ int Prev()
       }
       else
       {
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         err = 1;
         OrdNum--;
         if (j == 1)
@@ -1100,12 +1097,12 @@ int Prev()
     err = 0;
     for (i = LINES - 8, j = LINES - 8, remember = 1; j > 0; i--, OrdNum--, j--, remember++)
     {
-      SHM_Lock(Lock);
+      SHM_Lock();
       NextKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)temp);
       if (OKAY == T)
       {
         GetRec(DPtr, &DExt, TaRecNum, info);
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         sprintf(Mat[j], "%5.0lld  ", OrdNum);
         strcat(Mat[j], info->Key);
         strcat(Mat[j], empty_string(out, 1));
@@ -1117,7 +1114,7 @@ int Prev()
       }
       else
       {
-        SHM_UnLock(Lock);
+        SHM_UnLock();
         ClearKey(&IExt);
         goto AGAIN;
       }

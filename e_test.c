@@ -13,7 +13,6 @@
 FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
-long long *Lock;                /* locks the shared memory segment*/
 struct IndexExt IExt;
 struct DataExt DExt;
 DataFilePtr IPtr = NULL;
@@ -46,22 +45,21 @@ int main()
 
   Control();
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
-  Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+  DB_Lock_Init(SEMAPHORE_CODE);
 #endif
-  SHM_Lock(Lock);
+  SHM_Lock();
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-  SHM_UnLock(Lock);
+  SHM_UnLock();
   Loading();
   printf("DONE!\n");
 
-  SHM_Lock(Lock);
+  SHM_Lock();
   CloseFile(DPtr, &DExt);
   CloseIndex(IPtr, &IExt);
   TermAccess();
-  SHM_UnLock(Lock);
-  DB_Lock_Close(Lock);
+  SHM_UnLock();
   exit(0);
 }
 /**************************************************************************/
@@ -72,16 +70,16 @@ void Loading()
   info = &OurRecord;
 
   info->Deleted = 0;
-  for (i = 1; i <= 10; i++)
+  for (i = 1; i <= 5; i++)
   {
     sprintf(info->Key, "%010lld", i);
     sprintf(info->Surname, "%025lld", i);
     sprintf(info->Name, "%020lld", i);
     sprintf(info->Remark, "%045lld", i);
-    SHM_Lock(Lock);
+    SHM_Lock();
     AddRec(DPtr, &DExt, &TaRecNum, info);
     AddKey(IPtr, &IExt, &TaRecNum, (TaKeyStr *)info->Key);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     printf("%07lld - Key=[%s] Surname=[%s] Key_Len=%zd\n", i, info->Key,
            info->Surname, strlen(info->Key));
   }

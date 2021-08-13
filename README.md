@@ -17,12 +17,12 @@ stored in a shared memory segment for inter process communication and
 has a high percentage of hits in RAM memory (usually over 60% on 100  
 million records), which makes it very fast.
 
-Locking system is a simple one, based on shared memory too and it doesn't 
-touch a hard disk. It is extremely fast and don't leave any possibility 
-for dead lock, so there is no need for Edsger Dijkstra's banker's  
-algorithm.
+The Locking system locks the cache memory. It is based on semaphores and 
+doesn't touch a hard disk. It is extremely fast and don't leave any 
+possibility for dead lock, so there is no need for Edsger Dijkstra's 
+banker's  algorithm.
 
-It is tested on 100 million records for the data file with its index 
+Maccess is tested on 100 million records for the data file with its index 
 file, but there is no reason why it couldn't work with billions of  
 records. The sizes of files are not limited. 
 

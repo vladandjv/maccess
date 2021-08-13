@@ -10,11 +10,11 @@
 #include "defs.h"
 #include "maccerr.h"
 /************************** constants *************************************/
-#define MaxKeyLen (unsigned long long) 35
+#define MaxKeyLen (unsigned long long)35
 #define PageSize (long long)1016
 #define PageStackSize (long long)1020
 #define Order (long long)(PageSize / (long long)2)
-#define MaxHeight (long long) 5 /* run ./btree_parameters for the calculation */
+#define MaxHeight (long long)5 /* run ./btree_parameters for the calculation */
 #define FileHeaderSize (sizeof(struct FileHeader))
 #define MinDataRecSize FileHeaderSize
 #define ItemOverhead (sizeof(struct TaItem) - MaxKeyLen)
@@ -148,18 +148,18 @@ extern "C"
     void OpenFile(), OpenIndex(), CloseFile(), CloseIndex();
     void FlushFile(), FlushIndex(), AddRec(), AddKey();
     void DeleteRec(), DeleteKey(), SearchKey(), FindKey();
-    void NextKey(), PrevKey(), ClearKey(), InitAccess();
-    void TermAccess(), EraSM();
+    void NextKey(), PrevKey(), ClearKey();
 
     long long FileLen(), UsedRecs();
 
     /* Shared memory functions */
-    long long Destroy_SHM(key_t shm_mem_code, size_t shm_mem_size);
-    void SHM_Lock(long long *shm_lock), SHM_UnLock(long long *shm_lock);
+    void InitAccess(), TermAccess();
+    long long Destroy_SHM();
 
     /* Locking system functions */
-    long long *DB_Lock_Init(key_t shm_mem_code, size_t shm_mem_size);
-    void DB_Lock_Close(long long *retrna);
+    void DB_Lock_Init(key_t semaphore_code);
+    void SHM_Lock(), SHM_UnLock();
+    long long Destroy_Semaphore();
 
 #if __cplusplus
 };

@@ -13,7 +13,6 @@
 FileName DatFName = "data.dbc";
 FileName IndexFName = "data.cdx";
 unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
-long long *Lock;                /* locks the shared memory segment*/
 struct IndexExt IExt;
 struct DataExt DExt;
 DataFilePtr IPtr = NULL;
@@ -34,12 +33,11 @@ void sig_handler(int sig)
   {
   case SIGTERM:
   case SIGSEGV:
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     CloseFile(DPtr, &DExt);
     CloseIndex(IPtr, &IExt);
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     TermAccess((long long)0);
-    DB_Lock_Close(Lock);
     closeLog();
     exit(0);
   case SIGINT:
@@ -62,26 +60,25 @@ int main()
     logMessage("Can't catch SIGTERM signal");
 
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
-  Lock = DB_Lock_Init(LOCK_SHM_MEM_CODE, LOCK_SHM_MEM_SIZE);
+  DB_Lock_Init(SEMAPHORE_CODE);
 #endif
-  SHM_Lock(Lock);
+  SHM_Lock();
   Control(); /* Must be before InitAccess */
   InitAccess(MACCESS_SHM_MEM_CODE);
   OpenFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);
   OpenIndex(&IPtr, &IExt, IndexFName, KeyLen, Duplicates, (long long)1);
-  SHM_UnLock(Lock);
+  SHM_UnLock();
   ClearKey(&IExt);
 
   printf("I am working!\n");
   Deleting();
   printf("DONE!\n");
 
-  SHM_Lock(Lock);
+  SHM_Lock();
   CloseFile(DPtr, &DExt);
   CloseIndex(IPtr, &IExt);
   TermAccess();
-  SHM_UnLock(Lock);
-  DB_Lock_Close(Lock);
+  SHM_UnLock();
   closeLog();
   exit(0);
 }
@@ -98,7 +95,7 @@ void Deleting()
   for (n = 0; z <= j; ++z)
   {
     sprintf(temp, "%010lld", z);
-    SHM_Lock(Lock);
+    SHM_Lock();
     FindKey(IPtr, &IExt, &TaRecNum, temp);
     if (OKAY == T)
     {
@@ -106,15 +103,14 @@ void Deleting()
       DeleteKey(IPtr, &IExt, &TaRecNum, temp);
       n++;
     }
-    SHM_UnLock(Lock);
+    SHM_UnLock();
     if ((n % 100000) == 0 && n != 0) /* Just for testing multi user processing */
     {
       printf("Deleted %lld\n", n);
+      SHM_Lock();
       FlushFile(DPtr, &DExt); /* Not necessary, but just in case. */
       FlushIndex(IPtr, &IExt);
-#ifndef SINGLE_USER_NO_SHARED_MEMORY
-      sleep(2);
-#endif
+      SHM_UnLock();
     }
 #ifdef DEBUG_APP
     logMessage("Key[%s] Surname[%s] Name[%s] Remark[%s]",

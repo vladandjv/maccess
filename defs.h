@@ -47,7 +47,7 @@
 /* #define SINGLE_USER_NO_SHARED_MEMORY */
 
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
-#define LOCK_SHM_MEM_CODE (key_t)121
+#define SEMAPHORE_CODE (key_t)121
 #endif
 #define MACCESS_SHM_MEM_CODE (key_t)122
 

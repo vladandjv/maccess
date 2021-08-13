@@ -32,6 +32,8 @@
 #define ErrDtSM 22
 #define ErrRmSM 23
 #define ErrMemoryCode 24
+#define ErrSemaphoreSet 25
+#define ErrSemaphoreAttach 26
 
 extern long long IOStatus; /* word type */
 
