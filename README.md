@@ -61,8 +61,8 @@ e_create.c -Creates the database files. Must be run first!
 e_test.c - Shows B+ tree parameters and adds only 10 records.
 
 Deleting shared memory, made specifically for the testing programs,  
-is with e_shmrm. It deletes shared memory segments for the testing  
-programs. Their special codes are defined in defs.h. 
+is with e_shmrm. It deletes shared memory segments and semaphores 
+for the testing programs. Their special codes are defined in defs.h. 
 
 e_rebuild_sh - The shell script for rebuilding the database.  
 
