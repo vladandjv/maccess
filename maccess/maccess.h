@@ -130,9 +130,6 @@ extern char *MemSh;
 extern Boolean OKAY;
 extern long long MemId;
 
-#ifndef SINGLE_USER_NO_SHARED_MEMORY
-#define LOCK_SHM_MEM_SIZE (size_t)(sizeof(long long))
-#endif
 #define MACCESS_SHM_MEM_SIZE (size_t)((PageSize * sizeof(struct DataFile)) + sizeof(TaPageStack) + sizeof(TaPageMap))
 /***************************** functions **********************************/
 #if __cplusplus
