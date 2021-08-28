@@ -14,8 +14,6 @@ unsigned long long KeyLen = 11; /* Should be key lenght + 1 */
 struct IndexExt IExt;
 struct DataExt DExt;
 DataFilePtr IPtr = NULL;
-struct Record OurRecord;
-struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 /**************************************************************************/
