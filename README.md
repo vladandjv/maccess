@@ -12,15 +12,14 @@ DESCRIPTION
 
 MACCESS is a B+ binary tree implementation in C. It is a relational 
 database file system that can work in a multiuser environment. It uses  
-memory cashing based on a least-recently-used (LRU) strategy. Cache is  
-stored in a shared memory segment for inter process communication and  
-has a high percentage of hits in RAM memory (usually over 60% on 100  
-million records), which makes it very fast.
+shared memory segment for inter process communication and  has a high 
+percentage of hits in RAM memory (usually over 60% on 100  million 
+records), which makes it very fast.
 
-The Locking system locks the cache memory. It is based on semaphores and 
+The Locking system locks the shared memory. It is based on semaphores and 
 doesn't touch a hard disk. It is extremely fast and don't leave any 
 possibility for dead lock, so there is no need for Edsger Dijkstra's 
-banker's  algorithm.
+banker's algorithm.
 
 Maccess is tested on 100 million records for the data file with its index 
 file, but there is no reason why it couldn't work with billions of  
