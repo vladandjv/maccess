@@ -1,6 +1,6 @@
 ﻿![Cover](https://github.com/vladandjv/maccess/blob/master/.resources/db-engine.png)
 
-MACCESS - B+ tree database file system with shared memory caching 
+MACCESS - B+ tree database file system engine
 --------------------------------------------------------------------------
 
 
