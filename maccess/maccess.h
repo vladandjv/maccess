@@ -126,9 +126,7 @@ extern union TaRecordBuffer Buffer;
 extern union TaRecordBuffer *TaRecBuf;
 extern TaPageStack *TaPageStk;
 extern TaPageMap *TaPgMap;
-extern char *MemSh;
 extern Boolean OKAY;
-extern long long MemId;
 
 #define MACCESS_SHM_MEM_SIZE (size_t)((PageSize * sizeof(struct DataFile)) + sizeof(TaPageStack) + sizeof(TaPageMap))
 /***************************** functions **********************************/

@@ -10,9 +10,9 @@
 #include <sys/shm.h>
 
 #ifndef SINGLE_USER_NO_SHARED_MEMORY
-long long MemId;
+static long long MemId;
 #endif
-char *MemSh = NULL;
+static char *MemSh = NULL;
 /**************************************************************************/
 void
     InitAccess(MemoryCode)
