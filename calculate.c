@@ -10,7 +10,7 @@
 
 int MaxMaxHeight;
 /**************************************************************************/
-int main()
+int main(void)
 {
   void CalculateHeight();
   Boolean check0(), check1(), check2(), check3(), check4();

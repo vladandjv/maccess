@@ -21,7 +21,7 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 long long TaRecNum = 0;
 
-int main()
+int main(void)
 {
   void Control(), Loading();
 

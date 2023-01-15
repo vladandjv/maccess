@@ -11,7 +11,7 @@
 #include "defs.h"
 #include "maccess.h"
 
-int main()
+int main(void)
 {
 
    openLog(APP_LOGFILE); /* Always first. */

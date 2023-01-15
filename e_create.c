@@ -18,7 +18,7 @@ struct Record *info = NULL;
 DataFilePtr DPtr = NULL;
 
 /**************************************************************************/
-int main()
+int main(void)
 {
   InitAccess(MACCESS_SHM_MEM_CODE);
   MakeFile(&DPtr, &DExt, DatFName, sizeof(struct Record), (long long)0);

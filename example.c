@@ -50,7 +50,7 @@ void sig_handler(int sig)
   }
 }
 /**************************************************************************/
-int main()
+int main(void)
 {
   int Loading(), Inserting(), Update(), Delete(), Deleting(), Searching(), Find();
   int Next(), Prev();

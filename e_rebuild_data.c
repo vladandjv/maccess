@@ -39,7 +39,7 @@ void sig_handler(int sig)
   }
 }
 /**************************************************************************/
-int main()
+int main(void)
 {
   void Control(), RebuildData();
 
