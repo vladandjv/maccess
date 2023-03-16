@@ -5,7 +5,7 @@
 #define M_TERMINFO
 #include <curses.h>
 WINDOW *Wkur;
-int main()
+int main(void)
 {
   void InitEkran(), TermEkran();
   int TakeSymbol(), evKey_pressed();

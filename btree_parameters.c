@@ -25,7 +25,7 @@ int MaxMaxHeight; /* Needed for as result for CalculateHeight() */
 #define PageOverhead (sizeof(((struct TaPage *)0)->ItemsOnPage) + sizeof(((struct TaPage *)0)->BckwPageRef))
 
 /**************************************************************************/
-int main()
+int main(void)
 {
 	void CalculateHeight();
 	long long size;
